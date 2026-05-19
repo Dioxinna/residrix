@@ -1,0 +1,24 @@
+{
+  "name": "residrix",
+  "version": "0.0.1",
+  "private": true,
+  "pnpm": {
+    "overrides": {
+      "react-native-screens": "~4.16.0"
+    }
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "web": "turbo run dev --filter=@residrix/web",
+    "mobile": "turbo run dev --filter=@residrix/mobile",
+    "build": "turbo run build",
+    "type-check": "turbo run type-check"
+  },
+  "devDependencies": {
+    "turbo": "^2.9.14"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20"
+  }
+}
