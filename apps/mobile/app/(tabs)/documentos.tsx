@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
-import { View, Text, FlatList, RefreshControl, TouchableOpacity, ActivityIndicator, Linking, Alert } from 'react-native'
+import { View, Text, FlatList, RefreshControl, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+import * as WebBrowser from 'expo-web-browser'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/auth'
 import { formatDistanceToNow } from 'date-fns'
@@ -53,10 +54,19 @@ export default function DocumentosScreen() {
     setRefreshing(false)
   }
 
-  async function openDoc(url: string, name: string) {
-    const canOpen = await Linking.canOpenURL(url)
-    if (!canOpen) { Alert.alert('Error', 'No se puede abrir el documento'); return }
-    await Linking.openURL(url)
+  async function openDoc(path: string) {
+    const { data, error } = await supabase.storage
+      .from('community-docs')
+      .createSignedUrl(path, 60)
+    if (error || !data?.signedUrl) {
+      Alert.alert('Error', 'No se pudo abrir el documento')
+      return
+    }
+    await WebBrowser.openBrowserAsync(data.signedUrl, {
+      presentationStyle: WebBrowser.WebBrowserPresentationStyle.FULL_SCREEN,
+      toolbarColor: '#09090b',
+      controlsColor: '#6366f1',
+    })
   }
 
   if (loading) {
@@ -90,7 +100,7 @@ export default function DocumentosScreen() {
           const color = categoryColor[item.category] ?? '#71717a'
           return (
             <TouchableOpacity
-              onPress={() => openDoc(item.file_url, item.name)}
+              onPress={() => openDoc(item.file_url)}
               className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 mb-3 flex-row items-center gap-4"
               activeOpacity={0.7}
             >

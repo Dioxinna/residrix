@@ -343,6 +343,14 @@ create policy "documents_insert_admin" on documents
     )
   );
 
+create policy "documents_delete_admin" on documents
+  for delete using (
+    community_id in (
+      select id from communities
+      where firm_id = public.current_user_firm_id()
+    )
+  );
+
 -- INVITATIONS: admin crea y ve; vecino solo puede leer la suya por código
 create policy "invitations_admin" on invitations
   for all using (
@@ -404,5 +412,10 @@ create policy "community_docs_upload" on storage.objects
 
 create policy "community_docs_read" on storage.objects
   for select using (
+    bucket_id = 'community-docs' and auth.role() = 'authenticated'
+  );
+
+create policy "community_docs_delete" on storage.objects
+  for delete using (
     bucket_id = 'community-docs' and auth.role() = 'authenticated'
   );
