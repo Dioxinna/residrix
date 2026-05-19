@@ -39,8 +39,32 @@ create table profiles (
   community_id uuid references communities(id) on delete set null,
   firm_id uuid references firms(id) on delete set null,
   unit_number text,
-  push_token text,
   created_at timestamptz default now()
+);
+
+-- Tokens de dispositivo para push notifications (Expo)
+create table device_tokens (
+  id uuid primary key default uuid_generate_v4(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  token text not null unique,
+  platform text not null check (platform in ('ios', 'android', 'web')),
+  last_seen_at timestamptz not null default now(),
+  created_at timestamptz not null default now()
+);
+
+create index device_tokens_user_id_idx on device_tokens(user_id);
+
+-- Preferencias de notificación por usuario (canal × evento)
+create table notification_preferences (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  push_new_incidence boolean not null default true,
+  push_status_change boolean not null default true,
+  push_new_message boolean not null default true,
+  email_new_incidence boolean not null default true,
+  email_status_change boolean not null default true,
+  email_new_message boolean not null default false,
+  email_invite_code boolean not null default true,
+  updated_at timestamptz not null default now()
 );
 
 -- FK circular communities -> profiles
@@ -104,6 +128,7 @@ create table invitations (
   id uuid primary key default uuid_generate_v4(),
   community_id uuid not null references communities(id) on delete cascade,
   unit_number text not null,
+  email text,
   code text not null unique default substr(md5(random()::text), 1, 8),
   role text not null default 'neighbor' check (role in ('neighbor', 'tenant', 'president')),
   used_by uuid references profiles(id),
@@ -111,6 +136,8 @@ create table invitations (
   expires_at timestamptz default now() + interval '30 days',
   created_at timestamptz default now()
 );
+
+create index invitations_email_idx on invitations(email) where email is not null;
 
 -- =============================================
 -- TRIGGERS
@@ -130,10 +157,16 @@ create trigger incidences_updated_at
   for each row execute function update_updated_at();
 
 -- Auto-crear perfil cuando se registra un usuario
+-- search_path explícito: supabase_auth_admin (que dispara el trigger) tiene
+-- un search_path bloqueado donde 'public' no está incluido por defecto.
 create or replace function handle_new_user()
-returns trigger as $$
+returns trigger
+language plpgsql
+security definer
+set search_path = public, auth
+as $$
 begin
-  insert into profiles (id, full_name, role)
+  insert into public.profiles (id, full_name, role)
   values (
     new.id,
     coalesce(new.raw_user_meta_data->>'full_name', 'Usuario'),
@@ -141,11 +174,67 @@ begin
   );
   return new;
 end;
-$$ language plpgsql security definer;
+$$;
 
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function handle_new_user();
+
+-- Auto-crear preferencias de notificación al crear un perfil
+create or replace function handle_new_profile_notifications()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into public.notification_preferences (user_id)
+  values (new.id)
+  on conflict (user_id) do nothing;
+  return new;
+end;
+$$;
+
+create trigger on_profile_created_notifications
+  after insert on profiles
+  for each row execute function handle_new_profile_notifications();
+
+-- =============================================
+-- HELPERS PARA RLS (SECURITY DEFINER para evitar recursión en profiles)
+-- =============================================
+-- Las policies que necesitan datos del profile actual deben usar estas
+-- funciones, no subqueries directas. Sin esto, cualquier policy con
+-- `(select X from profiles where id = auth.uid())` causa recursión infinita.
+
+create or replace function public.current_user_firm_id()
+returns uuid
+language sql
+security definer
+stable
+set search_path = public
+as $$
+  select firm_id from public.profiles where id = auth.uid();
+$$;
+
+create or replace function public.current_user_community_id()
+returns uuid
+language sql
+security definer
+stable
+set search_path = public
+as $$
+  select community_id from public.profiles where id = auth.uid();
+$$;
+
+create or replace function public.current_user_role()
+returns text
+language sql
+security definer
+stable
+set search_path = public
+as $$
+  select role from public.profiles where id = auth.uid();
+$$;
 
 -- =============================================
 -- ROW LEVEL SECURITY (RLS)
@@ -158,35 +247,35 @@ alter table incidences enable row level security;
 alter table incidence_messages enable row level security;
 alter table documents enable row level security;
 alter table invitations enable row level security;
+alter table device_tokens enable row level security;
+alter table notification_preferences enable row level security;
 
 -- FIRMS: solo el admin del despacho ve su firma
 create policy "firms_select_own" on firms
   for select using (
-    id = (select firm_id from profiles where id = auth.uid())
+    id = public.current_user_firm_id()
   );
 
 -- COMMUNITIES: admin ve las de su despacho; vecino ve la suya
 create policy "communities_select" on communities
   for select using (
-    firm_id = (select firm_id from profiles where id = auth.uid())
-    or
-    id = (select community_id from profiles where id = auth.uid())
+    firm_id = public.current_user_firm_id()
+    or id = public.current_user_community_id()
   );
 
 create policy "communities_insert_admin" on communities
   for insert with check (
-    firm_id = (select firm_id from profiles where id = auth.uid())
-    and (select role from profiles where id = auth.uid()) = 'admin'
+    firm_id = public.current_user_firm_id()
+    and public.current_user_role() = 'admin'
   );
 
 -- PROFILES: cada uno ve el suyo; admin ve los de sus comunidades
 create policy "profiles_select_own" on profiles
   for select using (
     id = auth.uid()
-    or
-    community_id in (
+    or community_id in (
       select id from communities
-      where firm_id = (select firm_id from profiles where id = auth.uid())
+      where firm_id = public.current_user_firm_id()
     )
   );
 
@@ -196,17 +285,16 @@ create policy "profiles_update_own" on profiles
 -- INCIDENCES: vecino ve las de su comunidad; admin ve las de su despacho
 create policy "incidences_select" on incidences
   for select using (
-    community_id = (select community_id from profiles where id = auth.uid())
-    or
-    community_id in (
+    community_id = public.current_user_community_id()
+    or community_id in (
       select id from communities
-      where firm_id = (select firm_id from profiles where id = auth.uid())
+      where firm_id = public.current_user_firm_id()
     )
   );
 
 create policy "incidences_insert_neighbor" on incidences
   for insert with check (
-    community_id = (select community_id from profiles where id = auth.uid())
+    community_id = public.current_user_community_id()
     and reported_by = auth.uid()
   );
 
@@ -214,7 +302,7 @@ create policy "incidences_update_admin" on incidences
   for update using (
     community_id in (
       select id from communities
-      where firm_id = (select firm_id from profiles where id = auth.uid())
+      where firm_id = public.current_user_firm_id()
     )
   );
 
@@ -224,8 +312,7 @@ create policy "messages_select" on incidence_messages
     incidence_id in (select id from incidences)
     and (
       is_internal = false
-      or
-      (select role from profiles where id = auth.uid()) in ('admin', 'president')
+      or public.current_user_role() in ('admin', 'president')
     )
   );
 
@@ -235,15 +322,16 @@ create policy "messages_insert" on incidence_messages
 -- DOCUMENTS: públicos para vecinos de la comunidad; privados solo admin/presidente
 create policy "documents_select" on documents
   for select using (
-    community_id = (select community_id from profiles where id = auth.uid())
-    and (
-      is_public = true
-      or (select role from profiles where id = auth.uid()) in ('admin', 'president')
+    (
+      community_id = public.current_user_community_id()
+      and (
+        is_public = true
+        or public.current_user_role() in ('admin', 'president')
+      )
     )
-    or
-    community_id in (
+    or community_id in (
       select id from communities
-      where firm_id = (select firm_id from profiles where id = auth.uid())
+      where firm_id = public.current_user_firm_id()
     )
   );
 
@@ -251,7 +339,7 @@ create policy "documents_insert_admin" on documents
   for insert with check (
     community_id in (
       select id from communities
-      where firm_id = (select firm_id from profiles where id = auth.uid())
+      where firm_id = public.current_user_firm_id()
     )
   );
 
@@ -260,9 +348,27 @@ create policy "invitations_admin" on invitations
   for all using (
     community_id in (
       select id from communities
-      where firm_id = (select firm_id from profiles where id = auth.uid())
+      where firm_id = public.current_user_firm_id()
     )
   );
+
+-- DEVICE_TOKENS: cada usuario gestiona los suyos
+create policy "device_tokens_select_own" on device_tokens
+  for select using (user_id = auth.uid());
+create policy "device_tokens_insert_own" on device_tokens
+  for insert with check (user_id = auth.uid());
+create policy "device_tokens_update_own" on device_tokens
+  for update using (user_id = auth.uid());
+create policy "device_tokens_delete_own" on device_tokens
+  for delete using (user_id = auth.uid());
+
+-- NOTIFICATION_PREFERENCES: cada usuario gestiona las suyas
+create policy "notification_preferences_select_own" on notification_preferences
+  for select using (user_id = auth.uid());
+create policy "notification_preferences_insert_own" on notification_preferences
+  for insert with check (user_id = auth.uid());
+create policy "notification_preferences_update_own" on notification_preferences
+  for update using (user_id = auth.uid());
 
 -- =============================================
 -- REALTIME

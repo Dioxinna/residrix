@@ -36,6 +36,13 @@ export default function TabsLayout() {
           tabBarIcon: ({ focused }) => <TabIcon symbol="📄" focused={focused} />,
         }}
       />
+      <Tabs.Screen
+        name="ajustes"
+        options={{
+          title: 'Ajustes',
+          tabBarIcon: ({ focused }) => <TabIcon symbol="⚙️" focused={focused} />,
+        }}
+      />
     </Tabs>
   )
 }

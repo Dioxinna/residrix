@@ -265,6 +265,7 @@ export type Database = {
           code: string
           community_id: string
           created_at: string | null
+          email: string | null
           expires_at: string | null
           id: string
           role: string
@@ -276,6 +277,7 @@ export type Database = {
           code?: string
           community_id: string
           created_at?: string | null
+          email?: string | null
           expires_at?: string | null
           id?: string
           role?: string
@@ -287,6 +289,7 @@ export type Database = {
           code?: string
           community_id?: string
           created_at?: string | null
+          email?: string | null
           expires_at?: string | null
           id?: string
           role?: string
@@ -311,6 +314,69 @@ export type Database = {
           },
         ]
       }
+      device_tokens: {
+        Row: {
+          created_at: string
+          id: string
+          last_seen_at: string
+          platform: string
+          token: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_seen_at?: string
+          platform: string
+          token: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_seen_at?: string
+          platform?: string
+          token?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notification_preferences: {
+        Row: {
+          email_invite_code: boolean
+          email_new_incidence: boolean
+          email_new_message: boolean
+          email_status_change: boolean
+          push_new_incidence: boolean
+          push_new_message: boolean
+          push_status_change: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          email_invite_code?: boolean
+          email_new_incidence?: boolean
+          email_new_message?: boolean
+          email_status_change?: boolean
+          push_new_incidence?: boolean
+          push_new_message?: boolean
+          push_status_change?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          email_invite_code?: boolean
+          email_new_incidence?: boolean
+          email_new_message?: boolean
+          email_status_change?: boolean
+          push_new_incidence?: boolean
+          push_new_message?: boolean
+          push_status_change?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           community_id: string | null
@@ -319,7 +385,6 @@ export type Database = {
           full_name: string
           id: string
           phone: string | null
-          push_token: string | null
           role: string
           unit_number: string | null
         }
@@ -330,7 +395,6 @@ export type Database = {
           full_name: string
           id: string
           phone?: string | null
-          push_token?: string | null
           role: string
           unit_number?: string | null
         }
@@ -341,7 +405,6 @@ export type Database = {
           full_name?: string
           id?: string
           phone?: string | null
-          push_token?: string | null
           role?: string
           unit_number?: string | null
         }

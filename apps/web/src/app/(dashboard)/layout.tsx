@@ -9,6 +9,7 @@ const navLinks = [
   { href: '/comunidades',  label: 'Comunidades',  icon: '🏢' },
   { href: '/vecinos',      label: 'Vecinos',      icon: '👥' },
   { href: '/documentos',   label: 'Documentos',   icon: '📄' },
+  { href: '/ajustes',      label: 'Ajustes',      icon: '⚙' },
 ]
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {

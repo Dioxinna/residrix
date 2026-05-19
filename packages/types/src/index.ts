@@ -2,6 +2,9 @@
 
 export type UserRole = 'admin' | 'president' | 'neighbor' | 'tenant'
 
+// Roles asignables vía invitación (admin se crea por otra vía).
+export type InvitableRole = Exclude<UserRole, 'admin'>
+
 export type IncidenceStatus =
   | 'open'
   | 'in_progress'
@@ -51,8 +54,38 @@ export interface Profile {
   community_id?: string    // null si es admin de despacho
   firm_id?: string         // null si es vecino
   unit_number?: string     // piso/puerta del vecino
-  push_token?: string      // Expo push token
   created_at: string
+}
+
+export type DevicePlatform = 'ios' | 'android' | 'web'
+
+export interface DeviceToken {
+  id: string
+  user_id: string
+  token: string
+  platform: DevicePlatform
+  last_seen_at: string
+  created_at: string
+}
+
+export type NotificationEvent =
+  | 'new_incidence'
+  | 'status_change'
+  | 'new_message'
+  | 'invite_code'
+
+export type NotificationChannel = 'push' | 'email'
+
+export interface NotificationPreferences {
+  user_id: string
+  push_new_incidence: boolean
+  push_status_change: boolean
+  push_new_message: boolean
+  email_new_incidence: boolean
+  email_status_change: boolean
+  email_new_message: boolean
+  email_invite_code: boolean
+  updated_at: string
 }
 
 export interface Incidence {
@@ -100,8 +133,9 @@ export interface Invitation {
   id: string
   community_id: string
   unit_number: string
+  email?: string
   code: string
-  role: UserRole
+  role: InvitableRole
   used_by?: string
   used_at?: string
   expires_at: string
