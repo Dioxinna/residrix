@@ -1,75 +1,125 @@
 import { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
 import { supabase } from '@/lib/supabase'
-import { useAuthStore } from '@/store/auth'
 
 export default function OnboardingScreen() {
   const router = useRouter()
-  const user = useAuthStore((s) => s.user)
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const trimmedCode = code.trim()
+  const canSubmit =
+    fullName.trim().length > 0 &&
+    email.trim().length > 0 &&
+    password.length >= 8 &&
+    trimmedCode.length === 8
+
   async function handleJoin() {
-    const trimmed = code.trim().toLowerCase()
-    if (trimmed.length !== 8) {
-      Alert.alert('Código inválido', 'El código de invitación tiene 8 caracteres')
+    if (!canSubmit) {
+      Alert.alert('Datos incompletos', 'Rellena todos los campos. La contraseña debe tener al menos 8 caracteres y el código 8 dígitos.')
       return
     }
-    if (!user) {
-      Alert.alert('Error', 'Debes iniciar sesión primero')
+
+    const apiUrl = process.env.EXPO_PUBLIC_API_URL
+    if (!apiUrl) {
+      Alert.alert('Error de configuración', 'Falta EXPO_PUBLIC_API_URL')
       return
     }
+
     setLoading(true)
+    try {
+      const res = await fetch(`${apiUrl}/api/auth/signup-with-invitation`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: trimmedCode.toLowerCase(),
+          full_name: fullName.trim(),
+          email: email.trim().toLowerCase(),
+          password,
+        }),
+      })
 
-    const { data: invitation, error } = await supabase
-      .from('invitations')
-      .select('id, community_id, role, used_by, expires_at')
-      .eq('code', trimmed)
-      .single()
+      const payload = await res.json().catch(() => ({}))
 
-    if (error || !invitation) {
+      if (!res.ok) {
+        Alert.alert('No se pudo completar el registro', payload?.error ?? 'Inténtalo de nuevo')
+        return
+      }
+
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password,
+      })
+      if (signInError) {
+        Alert.alert('Cuenta creada', 'Inicia sesión con tu email y contraseña')
+        router.replace('/(auth)/login')
+        return
+      }
+
+      router.replace('/(tabs)')
+    } catch (err) {
+      console.error('Signup failed:', err)
+      Alert.alert('Error de red', 'No se pudo conectar con el servidor')
+    } finally {
       setLoading(false)
-      Alert.alert('Código no encontrado', 'Comprueba el código e inténtalo de nuevo')
-      return
     }
-    if (invitation.used_by) {
-      setLoading(false)
-      Alert.alert('Código ya usado', 'Este código de invitación ya ha sido utilizado')
-      return
-    }
-    if (new Date(invitation.expires_at) < new Date()) {
-      setLoading(false)
-      Alert.alert('Código expirado', 'Este código de invitación ha caducado')
-      return
-    }
-
-    const [profileUpdate, invitationUpdate] = await Promise.all([
-      supabase.from('profiles').update({ community_id: invitation.community_id, role: invitation.role }).eq('id', user.id),
-      supabase.from('invitations').update({ used_by: user.id, used_at: new Date().toISOString() }).eq('id', invitation.id),
-    ])
-
-    setLoading(false)
-
-    if (profileUpdate.error || invitationUpdate.error) {
-      Alert.alert('Error', 'No se pudo procesar la invitación. Inténtalo de nuevo.')
-      return
-    }
-
-    router.replace('/(tabs)')
   }
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 bg-zinc-950">
-      <View className="flex-1 justify-center px-6">
+      <ScrollView contentContainerClassName="flex-grow justify-center px-6 py-10">
         <TouchableOpacity onPress={() => router.back()} className="mb-8">
           <Text className="text-indigo-400 text-sm">← Volver</Text>
         </TouchableOpacity>
 
-        <Text className="text-white text-2xl font-bold mb-2">Unirte a tu comunidad</Text>
-        <Text className="text-zinc-400 text-sm mb-8">Introduce el código de invitación que te ha enviado tu administrador de fincas</Text>
+        <Text className="text-white text-2xl font-bold mb-2">Únete a tu comunidad</Text>
+        <Text className="text-zinc-400 text-sm mb-8">
+          Crea tu cuenta con el código de invitación que te ha enviado tu administrador de fincas
+        </Text>
 
         <View className="mb-4">
+          <Text className="text-zinc-300 text-sm font-medium mb-2">Nombre completo</Text>
+          <TextInput
+            value={fullName}
+            onChangeText={setFullName}
+            placeholder="Ana García"
+            placeholderTextColor="#71717a"
+            autoCapitalize="words"
+            className="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3.5 text-white text-sm"
+          />
+        </View>
+
+        <View className="mb-4">
+          <Text className="text-zinc-300 text-sm font-medium mb-2">Email</Text>
+          <TextInput
+            value={email}
+            onChangeText={setEmail}
+            placeholder="vecino@comunidad.es"
+            placeholderTextColor="#71717a"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            className="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3.5 text-white text-sm"
+          />
+        </View>
+
+        <View className="mb-4">
+          <Text className="text-zinc-300 text-sm font-medium mb-2">Contraseña</Text>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Mínimo 8 caracteres"
+            placeholderTextColor="#71717a"
+            secureTextEntry
+            className="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3.5 text-white text-sm"
+          />
+        </View>
+
+        <View className="mb-6">
           <Text className="text-zinc-300 text-sm font-medium mb-2">Código de invitación</Text>
           <TextInput
             value={code}
@@ -85,14 +135,14 @@ export default function OnboardingScreen() {
 
         <TouchableOpacity
           onPress={handleJoin}
-          disabled={loading || code.trim().length !== 8}
+          disabled={loading || !canSubmit}
           className="bg-indigo-600 rounded-xl py-4 items-center disabled:opacity-50"
         >
           <Text className="text-white font-semibold text-base">
-            {loading ? 'Verificando...' : 'Unirme a mi comunidad'}
+            {loading ? 'Creando cuenta...' : 'Crear cuenta y unirme'}
           </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   )
 }
