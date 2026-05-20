@@ -291,6 +291,18 @@ create policy "communities_insert_admin" on communities
     and public.current_user_role() = 'admin'
   );
 
+create policy "communities_update_admin" on communities
+  for update using (
+    firm_id = public.current_user_firm_id()
+    and public.current_user_role() = 'admin'
+  );
+
+create policy "communities_delete_admin" on communities
+  for delete using (
+    firm_id = public.current_user_firm_id()
+    and public.current_user_role() = 'admin'
+  );
+
 -- PROFILES: cada uno ve el suyo; admin ve los de sus comunidades
 create policy "profiles_select_own" on profiles
   for select using (
