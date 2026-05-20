@@ -9,9 +9,11 @@ type PrefKey =
   | 'push_new_incidence'
   | 'push_status_change'
   | 'push_new_message'
+  | 'push_new_announcement'
   | 'email_new_incidence'
   | 'email_status_change'
   | 'email_new_message'
+  | 'email_new_announcement'
 
 type Prefs = Record<PrefKey, boolean>
 
@@ -19,21 +21,25 @@ const DEFAULTS: Prefs = {
   push_new_incidence: true,
   push_status_change: true,
   push_new_message: true,
+  push_new_announcement: true,
   email_new_incidence: true,
   email_status_change: true,
   email_new_message: false,
+  email_new_announcement: true,
 }
 
 const PUSH_ROWS: { key: PrefKey; label: string }[] = [
   { key: 'push_new_incidence', label: 'Nuevas incidencias' },
   { key: 'push_status_change', label: 'Cambios de estado' },
   { key: 'push_new_message', label: 'Nuevos mensajes' },
+  { key: 'push_new_announcement', label: 'Comunicados' },
 ]
 
 const EMAIL_ROWS: { key: PrefKey; label: string }[] = [
   { key: 'email_new_incidence', label: 'Nuevas incidencias' },
   { key: 'email_status_change', label: 'Cambios de estado' },
   { key: 'email_new_message', label: 'Nuevos mensajes' },
+  { key: 'email_new_announcement', label: 'Comunicados' },
 ]
 
 export default function AjustesScreen() {
@@ -60,9 +66,11 @@ export default function AjustesScreen() {
             push_new_incidence: data.push_new_incidence,
             push_status_change: data.push_status_change,
             push_new_message: data.push_new_message,
+            push_new_announcement: data.push_new_announcement,
             email_new_incidence: data.email_new_incidence,
             email_status_change: data.email_status_change,
             email_new_message: data.email_new_message,
+            email_new_announcement: data.email_new_announcement,
           })
         }
         setLoading(false)

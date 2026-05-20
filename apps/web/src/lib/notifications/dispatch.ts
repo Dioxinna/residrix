@@ -8,12 +8,14 @@ import { sendExpoPush, findInvalidTokens, type ExpoPushMessage } from './expo-pu
 import { NewIncidenceEmail, type NewIncidenceEmailProps } from './emails/NewIncidence'
 import { StatusChangeEmail, type StatusChangeEmailProps } from './emails/StatusChange'
 import { NewMessageEmail, type NewMessageEmailProps } from './emails/NewMessage'
+import { NewAnnouncementEmail, type NewAnnouncementEmailProps } from './emails/NewAnnouncement'
 import { InviteCodeEmail, type InviteCodeEmailProps } from './emails/InviteCode'
 
 type DispatchInput =
   | { event: 'new_incidence'; recipientUserId: string; payload: NewIncidenceEmailProps & { pushTitle: string; pushBody: string } }
   | { event: 'status_change'; recipientUserId: string; payload: StatusChangeEmailProps & { pushTitle: string; pushBody: string } }
   | { event: 'new_message'; recipientUserId: string; payload: NewMessageEmailProps & { pushTitle: string; pushBody: string } }
+  | { event: 'new_announcement'; recipientUserId: string; payload: NewAnnouncementEmailProps & { pushTitle: string; pushBody: string } }
   | { event: 'invite_code'; recipientEmail: string; payload: InviteCodeEmailProps }
 
 interface DispatchResult {
@@ -25,12 +27,14 @@ const PUSH_PREF_KEY: Record<Exclude<NotificationEvent, 'invite_code'>, keyof Pre
   new_incidence: 'push_new_incidence',
   status_change: 'push_status_change',
   new_message: 'push_new_message',
+  new_announcement: 'push_new_announcement',
 }
 
 const EMAIL_PREF_KEY: Record<Exclude<NotificationEvent, 'invite_code'>, keyof PrefsRow> = {
   new_incidence: 'email_new_incidence',
   status_change: 'email_status_change',
   new_message: 'email_new_message',
+  new_announcement: 'email_new_announcement',
 }
 
 type PrefsRow = Database['public']['Tables']['notification_preferences']['Row']
@@ -79,9 +83,11 @@ async function loadPrefs(
     push_new_incidence: true,
     push_status_change: true,
     push_new_message: true,
+    push_new_announcement: true,
     email_new_incidence: true,
     email_status_change: true,
     email_new_message: false,
+    email_new_announcement: true,
     email_invite_code: true,
     updated_at: new Date().toISOString(),
   }
@@ -173,6 +179,15 @@ async function renderEmail(
       const el = StatusChangeEmail(input.payload)
       return {
         subject: `Cambio de estado: ${input.payload.title}`,
+        html: await render(el),
+        text: await render(el, { plainText: true }),
+      }
+    }
+    case 'new_announcement': {
+      const el = NewAnnouncementEmail(input.payload)
+      const severityPrefix = input.payload.severity === 'urgent' ? '🚨 ' : input.payload.severity === 'warning' ? '⚠️ ' : ''
+      return {
+        subject: `${severityPrefix}${input.payload.communityName}: ${input.payload.title}`,
         html: await render(el),
         text: await render(el, { plainText: true }),
       }

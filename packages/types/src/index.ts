@@ -72,6 +72,7 @@ export type NotificationEvent =
   | 'new_incidence'
   | 'status_change'
   | 'new_message'
+  | 'new_announcement'
   | 'invite_code'
 
 export type NotificationChannel = 'push' | 'email'
@@ -81,10 +82,25 @@ export interface NotificationPreferences {
   push_new_incidence: boolean
   push_status_change: boolean
   push_new_message: boolean
+  push_new_announcement: boolean
   email_new_incidence: boolean
   email_status_change: boolean
   email_new_message: boolean
+  email_new_announcement: boolean
   email_invite_code: boolean
+  updated_at: string
+}
+
+export type AnnouncementSeverity = 'info' | 'warning' | 'urgent'
+
+export interface Announcement {
+  id: string
+  community_id: string
+  author_id: string
+  title: string
+  body: string
+  severity: AnnouncementSeverity
+  created_at: string
   updated_at: string
 }
 

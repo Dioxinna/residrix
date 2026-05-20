@@ -18,9 +18,11 @@ export default async function AjustesPage() {
     push_new_incidence: true,
     push_status_change: true,
     push_new_message: true,
+    push_new_announcement: true,
     email_new_incidence: true,
     email_status_change: true,
     email_new_message: false,
+    email_new_announcement: true,
     email_invite_code: true,
     updated_at: new Date().toISOString(),
   }

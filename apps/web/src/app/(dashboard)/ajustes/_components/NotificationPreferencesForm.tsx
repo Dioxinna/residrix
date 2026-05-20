@@ -11,12 +11,14 @@ const PUSH_ROWS: { key: PrefKey; label: string; description: string }[] = [
   { key: 'push_new_incidence', label: 'Nuevas incidencias', description: 'Cuando un vecino reporta una incidencia.' },
   { key: 'push_status_change', label: 'Cambios de estado', description: 'Cuando una incidencia cambia de estado.' },
   { key: 'push_new_message', label: 'Nuevos mensajes', description: 'Cuando hay un mensaje nuevo en el chat de una incidencia.' },
+  { key: 'push_new_announcement', label: 'Comunicados', description: 'Cuando se publica un comunicado en una de tus comunidades.' },
 ]
 
 const EMAIL_ROWS: { key: PrefKey; label: string; description: string }[] = [
   { key: 'email_new_incidence', label: 'Nuevas incidencias', description: 'Resumen por email al recibir una incidencia.' },
   { key: 'email_status_change', label: 'Cambios de estado', description: 'Email cuando cambia el estado de una incidencia tuya.' },
   { key: 'email_new_message', label: 'Nuevos mensajes', description: 'Email por cada mensaje nuevo (desactivado por defecto).' },
+  { key: 'email_new_announcement', label: 'Comunicados', description: 'Email cuando se publica un comunicado.' },
 ]
 
 export function NotificationPreferencesForm({ initial }: { initial: NotificationPreferences }) {

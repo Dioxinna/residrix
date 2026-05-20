@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          author_id: string
+          body: string
+          community_id: string
+          created_at: string
+          id: string
+          severity: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          community_id: string
+          created_at?: string
+          id?: string
+          severity?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          community_id?: string
+          created_at?: string
+          id?: string
+          severity?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcements_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "announcements_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       communities: {
         Row: {
           address: string
@@ -344,9 +392,11 @@ export type Database = {
       notification_preferences: {
         Row: {
           email_invite_code: boolean
+          email_new_announcement: boolean
           email_new_incidence: boolean
           email_new_message: boolean
           email_status_change: boolean
+          push_new_announcement: boolean
           push_new_incidence: boolean
           push_new_message: boolean
           push_status_change: boolean
@@ -355,9 +405,11 @@ export type Database = {
         }
         Insert: {
           email_invite_code?: boolean
+          email_new_announcement?: boolean
           email_new_incidence?: boolean
           email_new_message?: boolean
           email_status_change?: boolean
+          push_new_announcement?: boolean
           push_new_incidence?: boolean
           push_new_message?: boolean
           push_status_change?: boolean
@@ -366,9 +418,11 @@ export type Database = {
         }
         Update: {
           email_invite_code?: boolean
+          email_new_announcement?: boolean
           email_new_incidence?: boolean
           email_new_message?: boolean
           email_status_change?: boolean
+          push_new_announcement?: boolean
           push_new_incidence?: boolean
           push_new_message?: boolean
           push_status_change?: boolean

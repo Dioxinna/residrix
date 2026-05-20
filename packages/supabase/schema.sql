@@ -60,9 +60,11 @@ create table notification_preferences (
   push_new_incidence boolean not null default true,
   push_status_change boolean not null default true,
   push_new_message boolean not null default true,
+  push_new_announcement boolean not null default true,
   email_new_incidence boolean not null default true,
   email_status_change boolean not null default true,
   email_new_message boolean not null default false,
+  email_new_announcement boolean not null default true,
   email_invite_code boolean not null default true,
   updated_at timestamptz not null default now()
 );
@@ -105,6 +107,21 @@ create table incidence_messages (
   is_internal boolean not null default false,
   created_at timestamptz default now()
 );
+
+-- Comunicados / anuncios del administrador a la comunidad
+create table announcements (
+  id uuid primary key default uuid_generate_v4(),
+  community_id uuid not null references communities(id) on delete cascade,
+  author_id uuid not null references profiles(id),
+  title text not null,
+  body text not null,
+  severity text not null default 'info' check (severity in ('info', 'warning', 'urgent')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index announcements_community_id_idx on announcements(community_id);
+create index announcements_created_at_idx on announcements(created_at desc);
 
 -- Documentos de la comunidad
 create table documents (
@@ -154,6 +171,10 @@ $$ language plpgsql;
 
 create trigger incidences_updated_at
   before update on incidences
+  for each row execute function update_updated_at();
+
+create trigger announcements_updated_at
+  before update on announcements
   for each row execute function update_updated_at();
 
 -- Auto-crear perfil cuando se registra un usuario
@@ -245,6 +266,7 @@ alter table communities enable row level security;
 alter table profiles enable row level security;
 alter table incidences enable row level security;
 alter table incidence_messages enable row level security;
+alter table announcements enable row level security;
 alter table documents enable row level security;
 alter table invitations enable row level security;
 alter table device_tokens enable row level security;
@@ -319,6 +341,38 @@ create policy "messages_select" on incidence_messages
 create policy "messages_insert" on incidence_messages
   for insert with check (sender_id = auth.uid());
 
+-- ANNOUNCEMENTS: vecino ve los de su comunidad; admin CRUD los de su firma
+create policy "announcements_select" on announcements
+  for select using (
+    community_id = public.current_user_community_id()
+    or community_id in (
+      select id from communities
+      where firm_id = public.current_user_firm_id()
+    )
+  );
+
+create policy "announcements_insert_admin" on announcements
+  for insert with check (
+    community_id in (
+      select id from communities where firm_id = public.current_user_firm_id()
+    )
+    and author_id = auth.uid()
+  );
+
+create policy "announcements_update_admin" on announcements
+  for update using (
+    community_id in (
+      select id from communities where firm_id = public.current_user_firm_id()
+    )
+  );
+
+create policy "announcements_delete_admin" on announcements
+  for delete using (
+    community_id in (
+      select id from communities where firm_id = public.current_user_firm_id()
+    )
+  );
+
 -- DOCUMENTS: públicos para vecinos de la comunidad; privados solo admin/presidente
 create policy "documents_select" on documents
   for select using (
@@ -384,6 +438,7 @@ create policy "notification_preferences_update_own" on notification_preferences
 
 alter publication supabase_realtime add table incidences;
 alter publication supabase_realtime add table incidence_messages;
+alter publication supabase_realtime add table announcements;
 
 -- =============================================
 -- STORAGE BUCKETS

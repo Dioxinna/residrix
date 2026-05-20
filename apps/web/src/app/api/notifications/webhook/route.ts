@@ -10,11 +10,13 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 
 type Incidence = Database['public']['Tables']['incidences']['Row']
 type IncidenceMessage = Database['public']['Tables']['incidence_messages']['Row']
+type Announcement = Database['public']['Tables']['announcements']['Row']
 
 type WebhookPayload =
   | { type: 'INSERT'; table: 'incidences'; record: Incidence; old_record: null }
   | { type: 'UPDATE'; table: 'incidences'; record: Incidence; old_record: Incidence }
   | { type: 'INSERT'; table: 'incidence_messages'; record: IncidenceMessage; old_record: null }
+  | { type: 'INSERT'; table: 'announcements'; record: Announcement; old_record: null }
 
 const STATUS_LABEL: Record<string, string> = {
   open: 'Abierta',
@@ -72,6 +74,8 @@ export async function POST(request: Request) {
       await handleStatusChange(payload.record, payload.old_record.status)
     } else if (payload.table === 'incidence_messages' && payload.type === 'INSERT') {
       await handleNewMessage(payload.record)
+    } else if (payload.table === 'announcements' && payload.type === 'INSERT') {
+      await handleNewAnnouncement(payload.record)
     } else {
       console.warn(`webhook: unhandled ${payload.type} on ${payload.table}`)
     }
@@ -240,4 +244,47 @@ async function resolveMessageRecipients(
     .select('id, full_name')
     .eq('id', inc.reported_by)
   return (data ?? []).filter((r) => r.id !== senderId)
+}
+
+async function handleNewAnnouncement(ann: Announcement) {
+  const supabase = createSupabaseServiceClient()
+
+  const { data: community } = await supabase
+    .from('communities')
+    .select('name')
+    .eq('id', ann.community_id)
+    .single()
+  if (!community) return
+
+  const { data: recipients } = await supabase
+    .from('profiles')
+    .select('id, full_name')
+    .eq('community_id', ann.community_id)
+    .neq('id', ann.author_id)
+
+  if (!recipients || recipients.length === 0) return
+
+  const url = `${APP_URL}/incidencias` // mobile-only entity; web link is best-effort
+  const preview = ann.body.length > 140 ? ann.body.slice(0, 140) + '…' : ann.body
+  const severity = (ann.severity as 'info' | 'warning' | 'urgent') ?? 'info'
+  const sevTag = severity === 'urgent' ? '🚨 ' : severity === 'warning' ? '⚠️ ' : ''
+
+  await Promise.allSettled(
+    recipients.map((r) =>
+      dispatch({
+        event: 'new_announcement',
+        recipientUserId: r.id,
+        payload: {
+          recipientName: r.full_name,
+          communityName: community.name,
+          title: ann.title,
+          body: ann.body,
+          severity,
+          announcementUrl: url,
+          pushTitle: `${sevTag}${community.name}`,
+          pushBody: `${ann.title} — ${preview}`,
+        },
+      }),
+    ),
+  )
 }
