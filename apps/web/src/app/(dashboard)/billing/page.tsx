@@ -1,8 +1,13 @@
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { TIERS, TIER_ORDER, type TierKey } from '@/lib/stripe'
+import { FEATURE_LABEL, FEATURE_MIN_TIER, TIER_NAME, type FeatureKey } from '@/lib/features'
 import { TierCards } from './_components/TierCards'
 import { PortalButton } from './_components/PortalButton'
+
+function isFeatureKey(value: string | undefined): value is FeatureKey {
+  return !!value && value in FEATURE_LABEL
+}
 
 const STATUS_LABEL: Record<string, { label: string; tone: string }> = {
   active: { label: 'Activa', tone: 'text-emerald-400 bg-emerald-500/10' },
@@ -16,7 +21,7 @@ const STATUS_LABEL: Record<string, { label: string; tone: string }> = {
 }
 
 interface PageProps {
-  searchParams: Promise<{ status?: string }>
+  searchParams: Promise<{ status?: string; upgrade?: string }>
 }
 
 export default async function BillingPage({ searchParams }: PageProps) {
@@ -61,6 +66,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
 
   const statusBadge = status ? STATUS_LABEL[status] : null
   const suggestedQuantity = Math.max(1, used + (isActive ? 0 : 1))
+  const upgradeFeature = isFeatureKey(params.upgrade) ? params.upgrade : null
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
@@ -69,6 +75,12 @@ export default async function BillingPage({ searchParams }: PageProps) {
         Tu primera comunidad es gratis. Elige plan cuando quieras añadir más.
       </p>
 
+      {upgradeFeature && (
+        <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-indigo-200">
+          <strong className="text-white">{FEATURE_LABEL[upgradeFeature]}</strong> está incluida en el plan{' '}
+          <strong className="text-white">{TIER_NAME[FEATURE_MIN_TIER[upgradeFeature]]}</strong>. Súbete para usarla.
+        </div>
+      )}
       {params.status === 'success' && (
         <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-emerald-300">
           Pago completado. Si los datos no aparecen aún, recarga en unos segundos.

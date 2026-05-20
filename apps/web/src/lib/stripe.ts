@@ -43,49 +43,46 @@ export interface Tier {
   features: string[]
 }
 
+export const TIER_ORDER: TierKey[] = ['base', 'pro', 'total']
+
+import { FEATURE_LABEL, FEATURE_MIN_TIER, TIER_NAME, type FeatureKey } from './features'
+
+function featuresUpTo(tier: TierKey): string[] {
+  const previousIndex = TIER_ORDER.indexOf(tier) - 1
+  const previous = previousIndex >= 0 ? TIER_ORDER[previousIndex] : null
+  const ownKeys = (Object.keys(FEATURE_MIN_TIER) as FeatureKey[]).filter(
+    (k) => FEATURE_MIN_TIER[k] === tier,
+  )
+  const ownLabels = ownKeys.map((k) => FEATURE_LABEL[k])
+  return previous ? [`Todo lo de ${TIER_NAME[previous]}`, ...ownLabels] : ownLabels
+}
+
 export const TIERS: Record<TierKey, Tier> = {
   base: {
     key: 'base',
-    name: 'Base',
+    name: TIER_NAME.base,
     pricePerCommunity: 12,
     priceId: process.env.STRIPE_PRICE_ID_BASE ?? '',
     tagline: 'Para despachos que empiezan',
-    features: [
-      'Gestión de incidencias',
-      'Documentación compartida',
-      'App para vecinos',
-      'Gastos básicos',
-    ],
+    features: featuresUpTo('base'),
   },
   pro: {
     key: 'pro',
-    name: 'Pro',
+    name: TIER_NAME.pro,
     pricePerCommunity: 25,
     priceId: process.env.STRIPE_PRICE_ID_PRO ?? '',
     tagline: 'La mayoría del mercado',
-    features: [
-      'Todo lo de Base',
-      'Agente IA de incidencias',
-      'Gestión de proveedores',
-      'Liquidaciones',
-    ],
+    features: featuresUpTo('pro'),
   },
   total: {
     key: 'total',
-    name: 'Total',
+    name: TIER_NAME.total,
     pricePerCommunity: 40,
     priceId: process.env.STRIPE_PRICE_ID_TOTAL ?? '',
     tagline: 'Despachos grandes y exigentes',
-    features: [
-      'Todo lo de Pro',
-      'Transcripción de juntas',
-      'Informes automáticos',
-      'Soporte prioritario',
-    ],
+    features: featuresUpTo('total'),
   },
 }
-
-export const TIER_ORDER: TierKey[] = ['base', 'pro', 'total']
 
 export function tierForPriceId(priceId: string | null | undefined): TierKey | null {
   if (!priceId) return null

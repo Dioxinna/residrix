@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { getCurrentFirmTier } from '@/lib/auth/feature-gate'
 import { LogoutButton } from './_components/LogoutButton'
 import { Sidebar } from './_components/Sidebar'
 
@@ -8,6 +9,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
+
+  const tierState = await getCurrentFirmTier()
+  const tier = tierState?.tier ?? 'base'
 
   return (
     <div className="flex h-screen bg-zinc-950 overflow-hidden">
@@ -21,7 +25,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
           </Link>
         </div>
 
-        <Sidebar />
+        <Sidebar tier={tier} />
 
         <div className="px-3 py-4 border-t border-zinc-800">
           <div className="px-3 py-2 mb-1">
