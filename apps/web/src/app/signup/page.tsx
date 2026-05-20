@@ -1,0 +1,162 @@
+'use client'
+
+import Link from 'next/link'
+import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+
+export default function SignupPage() {
+  const router = useRouter()
+  const [pending, startTransition] = useTransition()
+  const [firmName, setFirmName] = useState('')
+  const [firmPhone, setFirmPhone] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (password.length < 8) {
+      toast.error('La contraseña debe tener al menos 8 caracteres')
+      return
+    }
+
+    startTransition(async () => {
+      const res = await fetch('/api/auth/signup-firm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firm_name: firmName,
+          firm_phone: firmPhone || undefined,
+          full_name: fullName,
+          email,
+          password,
+        }),
+      })
+      const body = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        toast.error(body.error ?? 'No se pudo completar el registro')
+        return
+      }
+
+      const supabase = createSupabaseBrowserClient()
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+      if (signInError) {
+        toast.success('Cuenta creada. Inicia sesión con tu email y contraseña.')
+        router.replace('/login')
+        return
+      }
+      toast.success('¡Bienvenido a Residrix!')
+      router.replace('/')
+    })
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4 py-10">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-600 mb-4">
+            <span className="text-white font-bold text-xl">R</span>
+          </div>
+          <h1 className="text-2xl font-bold text-white">Residrix</h1>
+          <p className="text-zinc-400 text-sm mt-1">Crea tu cuenta de despacho</p>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 space-y-4"
+        >
+          <Section title="Tu despacho">
+            <Field label="Nombre del despacho">
+              <input
+                type="text"
+                required
+                value={firmName}
+                onChange={(e) => setFirmName(e.target.value)}
+                placeholder="Administraciones García"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              />
+            </Field>
+            <Field label="Teléfono (opcional)">
+              <input
+                type="tel"
+                value={firmPhone}
+                onChange={(e) => setFirmPhone(e.target.value)}
+                placeholder="+34 600 000 000"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              />
+            </Field>
+          </Section>
+
+          <Section title="Tu cuenta de administrador">
+            <Field label="Tu nombre">
+              <input
+                type="text"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Ana García"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              />
+            </Field>
+            <Field label="Email">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@despacho.es"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              />
+            </Field>
+            <Field label="Contraseña (mínimo 8 caracteres)">
+              <input
+                type="password"
+                required
+                minLength={8}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              />
+            </Field>
+          </Section>
+
+          <button
+            type="submit"
+            disabled={pending}
+            className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-lg py-2.5 text-sm transition-colors"
+          >
+            {pending ? 'Creando cuenta…' : 'Crear cuenta'}
+          </button>
+
+          <p className="text-center text-xs text-zinc-500">
+            ¿Ya tienes cuenta?{' '}
+            <Link href="/login" className="text-indigo-400 hover:text-indigo-300">
+              Inicia sesión
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="space-y-3">
+      <h2 className="text-xs text-zinc-500 uppercase tracking-wide font-medium">{title}</h2>
+      {children}
+    </div>
+  )
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="block text-sm font-medium text-zinc-300 mb-1.5">{label}</span>
+      {children}
+    </label>
+  )
+}

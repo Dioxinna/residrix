@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
@@ -66,6 +67,13 @@ export default function LoginPage() {
           >
             {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
           </button>
+
+          <p className="text-center text-xs text-zinc-500">
+            ¿Aún no tienes cuenta?{' '}
+            <Link href="/signup" className="text-indigo-400 hover:text-indigo-300">
+              Regístrate
+            </Link>
+          </p>
         </form>
       </div>
     </div>
