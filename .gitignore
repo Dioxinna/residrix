@@ -54,3 +54,4 @@ supabase/.branches/
 
 # Claude / local agent state
 .claude/
+.vercel
