@@ -4,16 +4,27 @@ import { StatusBadge, UrgencyBadge } from '@/components/ui/badges'
 import { formatDistanceToNow } from 'date-fns'
 import { es } from 'date-fns/locale'
 import type { IncidenceUrgency, IncidenceStatus } from '@residrix/types'
+import { OnboardingChecklist } from './_components/OnboardingChecklist'
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient()
 
-  const [openResult, criticalResult, communitiesResult, recentResult, resolvedResult] = await Promise.all([
+  const [
+    openResult,
+    criticalResult,
+    communitiesResult,
+    recentResult,
+    resolvedResult,
+    invitationsResult,
+    announcementsResult,
+  ] = await Promise.all([
     supabase.from('incidences').select('id', { count: 'exact', head: true }).in('status', ['open', 'in_progress']),
     supabase.from('incidences').select('id', { count: 'exact', head: true }).eq('urgency', 'critical').neq('status', 'closed'),
     supabase.from('communities').select('id', { count: 'exact', head: true }),
     supabase.from('incidences').select('id, title, status, urgency, created_at, communities(name)').order('created_at', { ascending: false }).limit(5),
     supabase.from('incidences').select('id', { count: 'exact', head: true }).eq('status', 'resolved').gte('resolved_at', new Date(new Date().setDate(1)).toISOString()),
+    supabase.from('invitations').select('id', { count: 'exact', head: true }),
+    supabase.from('announcements').select('id', { count: 'exact', head: true }),
   ])
 
   const stats = [
@@ -25,12 +36,22 @@ export default async function DashboardPage() {
 
   const recent = recentResult.data ?? []
 
+  const hasCommunity = (communitiesResult.count ?? 0) > 0
+  const hasInvitation = (invitationsResult.count ?? 0) > 0
+  const hasAnnouncement = (announcementsResult.count ?? 0) > 0
+
   return (
     <div className="p-8">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white">Dashboard</h1>
         <p className="text-zinc-400 text-sm mt-1">Resumen de actividad de tus comunidades</p>
       </div>
+
+      <OnboardingChecklist
+        hasCommunity={hasCommunity}
+        hasInvitation={hasInvitation}
+        hasAnnouncement={hasAnnouncement}
+      />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map(({ label, value, color }) => (
