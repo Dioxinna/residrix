@@ -4,7 +4,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { LogoutButton } from './_components/LogoutButton'
 
 const navLinks = [
-  { href: '/',             label: 'Dashboard',    icon: '◈' },
+  { href: '/dashboard',    label: 'Dashboard',    icon: '◈' },
   { href: '/incidencias',  label: 'Incidencias',  icon: '⚠' },
   { href: '/comunicados',  label: 'Comunicados',  icon: '📢' },
   { href: '/comunidades',  label: 'Comunidades',  icon: '🏢' },
