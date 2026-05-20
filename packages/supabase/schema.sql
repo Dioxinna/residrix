@@ -220,6 +220,35 @@ create trigger on_profile_created_notifications
   after insert on profiles
   for each row execute function handle_new_profile_notifications();
 
+-- Anti-escalation: usuario no puede cambiar su propio role/firm_id/community_id
+-- desde el cliente. Endpoints server-side con service client no se ven
+-- afectados (auth.uid() es null en ese contexto).
+create or replace function prevent_profile_escalation()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if auth.uid() is not null and auth.uid() = new.id then
+    if old.role is distinct from new.role then
+      raise exception 'No puedes cambiar tu propio rol';
+    end if;
+    if old.firm_id is distinct from new.firm_id then
+      raise exception 'No puedes cambiar tu propia firma';
+    end if;
+    if old.community_id is distinct from new.community_id then
+      raise exception 'No puedes cambiar tu propia comunidad';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+create trigger profiles_prevent_escalation
+  before update on profiles
+  for each row execute function prevent_profile_escalation();
+
 -- =============================================
 -- HELPERS PARA RLS (SECURITY DEFINER para evitar recursión en profiles)
 -- =============================================
@@ -462,9 +491,11 @@ values ('incidence-photos', 'incidence-photos', false);
 insert into storage.buckets (id, name, public)
 values ('community-docs', 'community-docs', false);
 
+-- incidence-photos: paths son `{user_id}/...`. Subida solo a tu propia carpeta.
 create policy "incidence_photos_upload" on storage.objects
   for insert with check (
-    bucket_id = 'incidence-photos' and auth.role() = 'authenticated'
+    bucket_id = 'incidence-photos'
+    and (string_to_array(name, '/'))[1]::uuid = auth.uid()
   );
 
 create policy "incidence_photos_read" on storage.objects
@@ -472,17 +503,30 @@ create policy "incidence_photos_read" on storage.objects
     bucket_id = 'incidence-photos' and auth.role() = 'authenticated'
   );
 
+-- community-docs: paths son `{community_id}/...`. Restricción por comunidad+firma.
 create policy "community_docs_upload" on storage.objects
   for insert with check (
-    bucket_id = 'community-docs' and auth.role() = 'authenticated'
+    bucket_id = 'community-docs'
+    and (string_to_array(name, '/'))[1]::uuid in (
+      select id from communities where firm_id = public.current_user_firm_id()
+    )
   );
 
 create policy "community_docs_read" on storage.objects
   for select using (
-    bucket_id = 'community-docs' and auth.role() = 'authenticated'
+    bucket_id = 'community-docs'
+    and (
+      (string_to_array(name, '/'))[1]::uuid = public.current_user_community_id()
+      or (string_to_array(name, '/'))[1]::uuid in (
+        select id from communities where firm_id = public.current_user_firm_id()
+      )
+    )
   );
 
 create policy "community_docs_delete" on storage.objects
   for delete using (
-    bucket_id = 'community-docs' and auth.role() = 'authenticated'
+    bucket_id = 'community-docs'
+    and (string_to_array(name, '/'))[1]::uuid in (
+      select id from communities where firm_id = public.current_user_firm_id()
+    )
   );
