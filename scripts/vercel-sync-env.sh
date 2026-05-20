@@ -63,12 +63,18 @@ while IFS='=' read -r key val; do
     --arg e "$ENV" \
     '{key: $k, value: $v, type: $t, target: [$e]}')
 
-  if echo "$body" | vercel api "/v10/projects/${PROJECT_ID}/env?upsert=true" -X POST --input /dev/stdin </dev/null >/dev/null 2>&1; then
-    SUCCESS=$((SUCCESS+1))
-    echo "  ✓ $key"
+  if resp=$(printf '%s' "$body" | vercel api "/v10/projects/${PROJECT_ID}/env?upsert=true" -X POST --input /dev/stdin 2>&1); then
+    if echo "$resp" | jq -e '.error // empty' >/dev/null 2>&1; then
+      FAIL=$((FAIL+1))
+      err=$(echo "$resp" | jq -r '.error.message // .error.code // "unknown"')
+      echo "  ✗ $key — $err"
+    else
+      SUCCESS=$((SUCCESS+1))
+      echo "  ✓ $key"
+    fi
   else
     FAIL=$((FAIL+1))
-    echo "  ✗ $key"
+    echo "  ✗ $key (CLI error)"
   fi
 done < "$FILE"
 
