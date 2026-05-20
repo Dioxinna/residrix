@@ -14,6 +14,11 @@ create table firms (
   email text not null unique,
   phone text,
   plan text not null default 'base' check (plan in ('base', 'pro', 'total')),
+  stripe_customer_id text unique,
+  stripe_subscription_id text unique,
+  subscription_status text,
+  subscription_quantity int,
+  current_period_end timestamptz,
   created_at timestamptz default now()
 );
 
@@ -248,6 +253,37 @@ $$;
 create trigger profiles_prevent_escalation
   before update on profiles
   for each row execute function prevent_profile_escalation();
+
+-- Limita nº de comunidades por firma según subscription_quantity (free tier = 1)
+create or replace function check_community_limit()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  current_count int;
+  allowed int;
+  sub_status text;
+begin
+  select count(*) into current_count from communities where firm_id = new.firm_id;
+  select coalesce(subscription_quantity, 1), subscription_status
+    into allowed, sub_status
+    from firms where id = new.firm_id;
+  if sub_status is null or sub_status not in ('active', 'trialing') then
+    allowed := 1;
+  end if;
+  if current_count >= allowed then
+    raise exception 'COMMUNITY_LIMIT_REACHED'
+      using hint = format('Estás en el límite (%s). Suscríbete o aumenta la cantidad en /billing.', allowed);
+  end if;
+  return new;
+end;
+$$;
+
+create trigger enforce_community_limit
+  before insert on communities
+  for each row execute function check_community_limit();
 
 -- =============================================
 -- HELPERS PARA RLS (SECURITY DEFINER para evitar recursión en profiles)

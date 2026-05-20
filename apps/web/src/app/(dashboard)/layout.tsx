@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/comunidades',  label: 'Comunidades',  icon: '🏢' },
   { href: '/vecinos',      label: 'Vecinos',      icon: '👥' },
   { href: '/documentos',   label: 'Documentos',   icon: '📄' },
+  { href: '/billing',      label: 'Facturación',  icon: '💳' },
   { href: '/ajustes',      label: 'Ajustes',      icon: '⚙' },
 ]
 

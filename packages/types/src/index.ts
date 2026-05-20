@@ -24,6 +24,16 @@ export type IncidenceCategory =
   | 'noise'         // ruido / convivencia
   | 'other'
 
+export type SubscriptionStatus =
+  | 'active'
+  | 'trialing'
+  | 'past_due'
+  | 'canceled'
+  | 'incomplete'
+  | 'incomplete_expired'
+  | 'unpaid'
+  | 'paused'
+
 export interface Firm {
   id: string
   name: string
@@ -31,6 +41,11 @@ export interface Firm {
   phone?: string
   plan: 'base' | 'pro' | 'total'
   communities_count: number
+  stripe_customer_id?: string
+  stripe_subscription_id?: string
+  subscription_status?: SubscriptionStatus
+  subscription_quantity?: number
+  current_period_end?: string
   created_at: string
 }
 
