@@ -12,7 +12,8 @@
     "web": "turbo run dev --filter=@residrix/web",
     "mobile": "turbo run dev --filter=@residrix/mobile",
     "build": "turbo run build",
-    "type-check": "turbo run type-check"
+    "type-check": "turbo run type-check",
+    "vercel:env:sync": "bash scripts/vercel-sync-env.sh"
   },
   "devDependencies": {
     "turbo": "^2.9.14"

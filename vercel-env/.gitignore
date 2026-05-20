@@ -1,0 +1,3 @@
+# Archivos con valores reales — no commitear
+*.env
+!*.env.example
