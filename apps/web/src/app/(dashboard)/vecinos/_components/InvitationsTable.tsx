@@ -1,5 +1,7 @@
 import { formatDistanceToNow } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { Mail } from 'lucide-react'
+import { EmptyState } from '@/components/ui/EmptyState'
 
 interface Invitation {
   id: string
@@ -20,9 +22,11 @@ function communityName(c: Invitation['communities']): string {
 export function InvitationsTable({ invitations }: { invitations: Invitation[] }) {
   if (invitations.length === 0) {
     return (
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6 text-sm text-zinc-500 text-center">
-        Aún no has enviado ninguna invitación.
-      </div>
+      <EmptyState
+        icon={Mail}
+        title="Sin invitaciones enviadas"
+        description="Cuando envíes códigos a los vecinos aparecerán aquí con su estado (pendiente, usada, caducada)."
+      />
     )
   }
 

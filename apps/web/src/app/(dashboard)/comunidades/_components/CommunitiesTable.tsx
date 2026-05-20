@@ -3,8 +3,10 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { Building2 } from 'lucide-react'
 import { CommunityDialog, type CommunityRow } from './CommunityDialog'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+import { EmptyState } from '@/components/ui/EmptyState'
 
 interface CommunityWithStats extends CommunityRow {
   created_at: string | null
@@ -50,10 +52,12 @@ export function CommunitiesTable({
 
   if (communities.length === 0) {
     return (
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-10 text-center">
-        <p className="text-zinc-400 text-sm">No tienes comunidades todavía.</p>
-        <p className="text-zinc-600 text-xs mt-1">Pulsa &ldquo;Nueva comunidad&rdquo; para empezar.</p>
-      </div>
+      <EmptyState
+        icon={Building2}
+        title="Aún no tienes comunidades"
+        description="Crea tu primera comunidad para empezar a gestionar incidencias, comunicados y vecinos. La primera es gratis."
+        action={{ type: 'hint', label: 'Pulsa "Nueva comunidad" arriba para empezar' }}
+      />
     )
   }
 

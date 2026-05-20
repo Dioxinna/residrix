@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { formatDistanceToNow } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { FileText } from 'lucide-react'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+import { EmptyState } from '@/components/ui/EmptyState'
 
 interface Document {
   id: string
@@ -83,10 +85,12 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
 
   if (documents.length === 0) {
     return (
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-10 text-center">
-        <p className="text-zinc-400 text-sm">No hay documentos todavía.</p>
-        <p className="text-zinc-600 text-xs mt-1">Pulsa &ldquo;Subir documento&rdquo; para empezar.</p>
-      </div>
+      <EmptyState
+        icon={FileText}
+        title="No hay documentos todavía"
+        description="Sube actas, estatutos, seguros y otros documentos para que tus vecinos los vean desde su app."
+        action={{ type: 'hint', label: 'Pulsa "Subir documento" arriba para empezar' }}
+      />
     )
   }
 

@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { formatDistanceToNow } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { Megaphone } from 'lucide-react'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+import { EmptyState } from '@/components/ui/EmptyState'
 
 interface Announcement {
   id: string
@@ -69,10 +71,12 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
 
   if (announcements.length === 0) {
     return (
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-10 text-center">
-        <p className="text-zinc-400 text-sm">No hay comunicados.</p>
-        <p className="text-zinc-600 text-xs mt-1">Pulsa &ldquo;Nuevo comunicado&rdquo; para empezar.</p>
-      </div>
+      <EmptyState
+        icon={Megaphone}
+        title="Sin comunicados aún"
+        description="Publica avisos para toda la comunidad — cortes de agua, juntas, recordatorios. Llegan al feed móvil y por notificación."
+        action={{ type: 'hint', label: 'Pulsa "Nuevo comunicado" arriba para empezar' }}
+      />
     )
   }
 
