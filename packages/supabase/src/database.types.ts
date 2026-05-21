@@ -458,6 +458,53 @@ export type Database = {
         }
         Relationships: []
       }
+      providers: {
+        Row: {
+          contact_name: string | null
+          created_at: string | null
+          email: string | null
+          firm_id: string
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+          provider_type: string
+          updated_at: string | null
+        }
+        Insert: {
+          contact_name?: string | null
+          created_at?: string | null
+          email?: string | null
+          firm_id: string
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          provider_type: string
+          updated_at?: string | null
+        }
+        Update: {
+          contact_name?: string | null
+          created_at?: string | null
+          email?: string | null
+          firm_id?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          provider_type?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "providers_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "firms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           community_id: string | null

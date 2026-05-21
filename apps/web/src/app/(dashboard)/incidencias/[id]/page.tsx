@@ -40,6 +40,18 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
   const inc = incResult.data
   const messages = messagesResult.data ?? []
 
+  // Proveedores sugeridos: si la IA propuso un tipo, buscamos los de la firma
+  // de ese tipo (RLS filtra por firma del usuario actual).
+  let suggestedProviders: Array<{ id: string; name: string; contact_name: string | null; phone: string | null; email: string | null }> = []
+  if (inc.ai_suggested_provider) {
+    const { data } = await supabase
+      .from('providers')
+      .select('id, name, contact_name, phone, email')
+      .eq('provider_type', inc.ai_suggested_provider)
+      .order('name')
+    suggestedProviders = data ?? []
+  }
+
   const reporter = inc.profiles as { full_name: string; unit_number: string | null; phone: string | null } | null
   const community = inc.communities as { name: string; address: string } | null
 
@@ -89,6 +101,58 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
               <div className="flex justify-end mt-4">
                 <AcceptAIResponseButton incidenceId={id} alreadyAccepted={!!inc.ai_response_accepted_at} />
               </div>
+            </section>
+          )}
+
+          {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
+            <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-amber-400 text-xs font-semibold uppercase tracking-wide">
+                  Proveedor sugerido: {PROVIDER_LABEL[inc.ai_suggested_provider as ProviderType]}
+                </span>
+              </div>
+              {suggestedProviders.length === 0 ? (
+                <div className="flex items-center justify-between gap-3 flex-wrap">
+                  <p className="text-zinc-400 text-sm">
+                    Aún no tienes proveedores de este tipo. Añade uno para verlo aquí.
+                  </p>
+                  <a
+                    href="/proveedores"
+                    className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium px-3 py-1.5 rounded"
+                  >
+                    Ir a Proveedores →
+                  </a>
+                </div>
+              ) : (
+                <ul className="divide-y divide-zinc-800 -mx-6">
+                  {suggestedProviders.map((p) => (
+                    <li key={p.id} className="px-6 py-3 flex items-center justify-between gap-3 flex-wrap">
+                      <div className="min-w-0">
+                        <p className="text-white text-sm font-medium">{p.name}</p>
+                        {p.contact_name && <p className="text-zinc-500 text-xs">{p.contact_name}</p>}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {p.phone && (
+                          <a
+                            href={`tel:${p.phone}`}
+                            className="inline-flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs font-medium px-2 py-1 rounded border border-emerald-500/30"
+                          >
+                            ☎ {p.phone}
+                          </a>
+                        )}
+                        {p.email && (
+                          <a
+                            href={`mailto:${p.email}?subject=Incidencia: ${encodeURIComponent(inc.title)}`}
+                            className="inline-flex items-center gap-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2 py-1 rounded border border-indigo-500/30"
+                          >
+                            ✉ Email
+                          </a>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </section>
           )}
 
