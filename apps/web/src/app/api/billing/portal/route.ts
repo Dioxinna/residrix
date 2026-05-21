@@ -29,6 +29,30 @@ export async function POST() {
   }
 
   const stripe = requireStripe()
+
+  try {
+    const existing = await stripe.customers.retrieve(firm.stripe_customer_id)
+    if ((existing as { deleted?: boolean }).deleted) throw { code: 'resource_missing' }
+  } catch (err) {
+    if ((err as { code?: string })?.code === 'resource_missing') {
+      await service
+        .from('firms')
+        .update({
+          stripe_customer_id: null,
+          stripe_subscription_id: null,
+          subscription_status: null,
+          subscription_quantity: null,
+          current_period_end: null,
+        })
+        .eq('id', profile.firm_id)
+      return Response.json(
+        { error: 'Tu customer Stripe ya no existe (cambio de cuenta/modo). Vuelve a /billing y pulsa Suscribirse.' },
+        { status: 409 },
+      )
+    }
+    throw err
+  }
+
   const origin = await getAppOrigin()
   const session = await stripe.billingPortal.sessions.create({
     customer: firm.stripe_customer_id,

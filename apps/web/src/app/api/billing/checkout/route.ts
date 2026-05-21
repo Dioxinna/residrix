@@ -55,6 +55,32 @@ export async function POST(request: Request) {
   const stripe = requireStripe()
 
   let customerId = firm.stripe_customer_id
+
+  // Verifica que el customer todavía existe en la cuenta Stripe configurada
+  // (se puede haber borrado, o cambiado de cuenta/modo test↔live).
+  if (customerId) {
+    try {
+      const existing = await stripe.customers.retrieve(customerId)
+      if ((existing as { deleted?: boolean }).deleted) customerId = null
+    } catch (err) {
+      if ((err as { code?: string })?.code === 'resource_missing') {
+        await service
+          .from('firms')
+          .update({
+            stripe_customer_id: null,
+            stripe_subscription_id: null,
+            subscription_status: null,
+            subscription_quantity: null,
+            current_period_end: null,
+          })
+          .eq('id', firm.id)
+        customerId = null
+      } else {
+        throw err
+      }
+    }
+  }
+
   if (!customerId) {
     const customer = await stripe.customers.create({
       email: user.email,

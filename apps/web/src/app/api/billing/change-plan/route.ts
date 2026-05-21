@@ -52,7 +52,28 @@ export async function POST(request: Request) {
   }
 
   const stripe = requireStripe()
-  const subscription = await stripe.subscriptions.retrieve(firm.stripe_subscription_id)
+  let subscription
+  try {
+    subscription = await stripe.subscriptions.retrieve(firm.stripe_subscription_id)
+  } catch (err) {
+    if ((err as { code?: string })?.code === 'resource_missing') {
+      await service
+        .from('firms')
+        .update({
+          stripe_customer_id: null,
+          stripe_subscription_id: null,
+          subscription_status: null,
+          subscription_quantity: null,
+          current_period_end: null,
+        })
+        .eq('id', profile.firm_id)
+      return Response.json(
+        { error: 'Tu suscripción Stripe ya no existe (cambio de cuenta/modo). Vuelve a /billing y pulsa Suscribirse.' },
+        { status: 409 },
+      )
+    }
+    throw err
+  }
   const currentItem = subscription.items.data[0]
   if (!currentItem) {
     return Response.json({ error: 'Suscripción sin items' }, { status: 500 })
