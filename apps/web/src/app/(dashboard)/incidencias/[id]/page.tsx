@@ -6,6 +6,8 @@ import { es } from 'date-fns/locale'
 import type { IncidenceCategory, IncidenceStatus, IncidenceUrgency } from '@residrix/types'
 import { MessageThread } from './_components/MessageThread'
 import { StatusSelector } from './_components/StatusSelector'
+import { AcceptAIResponseButton } from './_components/AcceptAIResponseButton'
+import { PROVIDER_LABEL, type ProviderType } from '@/lib/ai/types'
 
 const categoryLabels: Record<IncidenceCategory, string> = {
   plumbing: 'Fontanería', electricity: 'Electricidad', cleaning: 'Limpieza',
@@ -72,13 +74,21 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
 
           {inc.ai_response && (
             <section className="bg-indigo-950/50 border border-indigo-800/50 rounded-xl p-6">
-              <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
                 <span className="text-indigo-400 text-xs font-semibold uppercase tracking-wide">✦ Respuesta IA sugerida</span>
+                {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
+                  <span className="text-[10px] uppercase tracking-wide font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
+                    Llamar: {PROVIDER_LABEL[inc.ai_suggested_provider as ProviderType]}
+                  </span>
+                )}
               </div>
               {inc.ai_summary && (
                 <p className="text-zinc-400 text-xs mb-3 italic">Resumen: {inc.ai_summary}</p>
               )}
-              <p className="text-indigo-100 text-sm leading-relaxed">{inc.ai_response}</p>
+              <p className="text-indigo-100 text-sm leading-relaxed whitespace-pre-wrap">{inc.ai_response}</p>
+              <div className="flex justify-end mt-4">
+                <AcceptAIResponseButton incidenceId={id} alreadyAccepted={!!inc.ai_response_accepted_at} />
+              </div>
             </section>
           )}
 

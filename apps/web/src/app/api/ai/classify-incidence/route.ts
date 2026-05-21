@@ -1,121 +1,99 @@
-import Anthropic from '@anthropic-ai/sdk'
-import type { Database } from '@residrix/supabase'
-import type { AIClassificationResult, IncidenceCategory, IncidenceUrgency } from '@residrix/types'
-import { createClient } from '@supabase/supabase-js'
+import { createSupabaseServiceClient } from '@/lib/supabase/server'
+import { resolveAIProvider, type AIClassifyOutput } from '@/lib/ai'
+import { tierIncludes } from '@/lib/features'
+import type { TierKey } from '@/lib/stripe'
 
-const anthropic = new Anthropic()
-
-function createServiceClient() {
-  return createClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  )
-}
+export const runtime = 'nodejs'
 
 export async function POST(request: Request) {
   let body: { incidenceId: string; description: string; photoUrl?: string }
-
   try {
     body = await request.json()
   } catch {
     return Response.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  const { incidenceId, description, photoUrl } = body
-
+  const { incidenceId, description } = body
   if (!incidenceId || !description) {
-    return Response.json({ error: 'incidenceId and description are required' }, { status: 400 })
+    return Response.json(
+      { error: 'incidenceId and description are required' },
+      { status: 400 },
+    )
   }
 
-  // PASO 1: Haiku clasifica urgencia y categoría (barato y rápido)
-  let urgency: IncidenceUrgency = 'medium'
-  let category: IncidenceCategory = 'other'
+  const supabase = createSupabaseServiceClient()
 
-  try {
-    const classification = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 300,
-      system: `Eres un clasificador de incidencias para comunidades de vecinos en España.
-Responde SOLO con JSON válido, sin texto adicional.
-Formato exacto:
-{
-  "urgency": "low|medium|high|critical",
-  "category": "plumbing|electricity|cleaning|elevator|structure|access|noise|other"
-}
+  const { data: incidence, error: incErr } = await supabase
+    .from('incidences')
+    .select('id, community_id, communities!inner(firm_id)')
+    .eq('id', incidenceId)
+    .single()
+  if (incErr || !incidence) {
+    return Response.json({ error: 'Incidence not found' }, { status: 404 })
+  }
+  const firmId = (incidence.communities as { firm_id: string }).firm_id
 
-Criterios de urgencia:
-- critical: riesgo para personas (inundación, gas, ascensor atrapado)
-- high: afecta a múltiples vecinos o es urgente (avería luz escalera, puerta entrada)
-- medium: afecta a uno pero requiere atención pronta (gotera, bajante)
-- low: estético o no urgente (pintura, jardín)`,
-      messages: [{ role: 'user', content: description }],
+  const { data: firm } = await supabase
+    .from('firms')
+    .select('plan, subscription_status, ai_assistant_enabled')
+    .eq('id', firmId)
+    .single()
+
+  const status = firm?.subscription_status
+  const isActive = status === 'active' || status === 'trialing'
+  const tier = (isActive ? (firm?.plan ?? 'base') : 'base') as TierKey
+  const aiEnabled = tierIncludes(tier, 'ai_assistant') && firm?.ai_assistant_enabled !== false
+
+  if (!aiEnabled) {
+    return Response.json({
+      skipped: true,
+      reason: tierIncludes(tier, 'ai_assistant') ? 'toggle_off' : 'tier_insufficient',
     })
-
-    const parsed = JSON.parse((classification.content[0] as Anthropic.TextBlock).text)
-    urgency = parsed.urgency as IncidenceUrgency
-    category = parsed.category as IncidenceCategory
-  } catch (err) {
-    console.error('Classification step failed:', err)
-    // Continúa con valores por defecto; no bloqueamos la incidencia
   }
 
-  // PASO 2: Sonnet genera resumen y respuesta inicial para el vecino
-  let summary = ''
-  let suggested_response = ''
+  const provider = resolveAIProvider()
+  if (!provider) {
+    console.error('[classify-incidence] no AI provider configured')
+    return Response.json({ error: 'No AI provider configured' }, { status: 503 })
+  }
 
+  let result: AIClassifyOutput
   try {
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 500,
-      system: `Eres el asistente virtual de una comunidad de vecinos en España.
-Tu tono es profesional, empático y claro. Hablas en español.
-Responde SOLO con JSON válido, sin texto adicional.
-Formato exacto:
-{
-  "summary": "Resumen breve de la incidencia en 1 frase (para el administrador)",
-  "suggested_response": "Respuesta al vecino confirmando recepción y próximos pasos (2-3 frases)"
-}`,
-      messages: [
-        {
-          role: 'user',
-          content: `Incidencia reportada:\nCategoría: ${category}\nUrgencia: ${urgency}\nDescripción: ${description}`,
-        },
-      ],
-    })
-
-    const parsed = JSON.parse((response.content[0] as Anthropic.TextBlock).text)
-    summary = parsed.summary as string
-    suggested_response = parsed.suggested_response as string
+    result = await provider.classifyIncidence({ description })
   } catch (err) {
-    console.error('Summary generation step failed:', err)
+    console.error(`[classify-incidence] ${provider.name} failed:`, err)
+    return Response.json({ error: 'AI classification failed' }, { status: 502 })
   }
-
-  // PASO 3: Actualizar la incidencia en Supabase con los resultados de la IA
-  const supabase = createServiceClient()
 
   const { error: updateError } = await supabase
     .from('incidences')
     .update({
-      urgency,
-      category,
-      ai_summary: summary || null,
-      ai_response: suggested_response || null,
-      status: urgency === 'critical' ? ('in_progress' as const) : ('open' as const),
+      urgency: result.urgency,
+      category: result.category,
+      ai_summary: result.summary || null,
+      ai_response: result.suggested_response || null,
+      ai_group_key: sanitizeSlug(result.group_key),
+      ai_suggested_provider: result.suggested_provider ?? null,
+      status: result.urgency === 'critical' ? 'in_progress' : 'open',
     })
     .eq('id', incidenceId)
 
   if (updateError) {
-    console.error('Supabase update failed:', updateError)
+    console.error('[classify-incidence] supabase update failed:', updateError)
     return Response.json({ error: 'Failed to update incidence' }, { status: 500 })
   }
 
-  const result: AIClassificationResult = {
-    urgency,
-    category,
-    summary,
-    suggested_response,
-  }
+  return Response.json({ ...result, provider: provider.name })
+}
 
-  return Response.json(result)
+function sanitizeSlug(value: string | null | undefined): string | null {
+  if (!value) return null
+  const slug = value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 60)
+  return slug || null
 }

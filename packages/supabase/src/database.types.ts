@@ -172,6 +172,7 @@ export type Database = {
       }
       firms: {
         Row: {
+          ai_assistant_enabled: boolean
           created_at: string | null
           current_period_end: string | null
           email: string
@@ -185,6 +186,7 @@ export type Database = {
           subscription_status: string | null
         }
         Insert: {
+          ai_assistant_enabled?: boolean
           created_at?: string | null
           current_period_end?: string | null
           email: string
@@ -198,6 +200,7 @@ export type Database = {
           subscription_status?: string | null
         }
         Update: {
+          ai_assistant_enabled?: boolean
           created_at?: string | null
           current_period_end?: string | null
           email?: string
@@ -257,7 +260,10 @@ export type Database = {
       incidences: {
         Row: {
           admin_notes: string | null
+          ai_group_key: string | null
           ai_response: string | null
+          ai_response_accepted_at: string | null
+          ai_suggested_provider: string | null
           ai_summary: string | null
           category: string
           community_id: string
@@ -274,7 +280,10 @@ export type Database = {
         }
         Insert: {
           admin_notes?: string | null
+          ai_group_key?: string | null
           ai_response?: string | null
+          ai_response_accepted_at?: string | null
+          ai_suggested_provider?: string | null
           ai_summary?: string | null
           category: string
           community_id: string
@@ -291,7 +300,10 @@ export type Database = {
         }
         Update: {
           admin_notes?: string | null
+          ai_group_key?: string | null
           ai_response?: string | null
+          ai_response_accepted_at?: string | null
+          ai_suggested_provider?: string | null
           ai_summary?: string | null
           category?: string
           community_id?: string
