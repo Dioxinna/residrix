@@ -170,6 +170,76 @@ export type Database = {
           },
         ]
       }
+      expenses: {
+        Row: {
+          amount_cents: number
+          category: string
+          community_id: string
+          created_at: string | null
+          created_by: string | null
+          description: string
+          expense_date: string
+          firm_id: string
+          id: string
+          notes: string | null
+          paid_at: string | null
+          updated_at: string | null
+          vendor_name: string | null
+        }
+        Insert: {
+          amount_cents: number
+          category: string
+          community_id: string
+          created_at?: string | null
+          created_by?: string | null
+          description: string
+          expense_date: string
+          firm_id: string
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          updated_at?: string | null
+          vendor_name?: string | null
+        }
+        Update: {
+          amount_cents?: number
+          category?: string
+          community_id?: string
+          created_at?: string | null
+          created_by?: string | null
+          description?: string
+          expense_date?: string
+          firm_id?: string
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          updated_at?: string | null
+          vendor_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "firms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       firms: {
         Row: {
           ai_assistant_enabled: boolean
