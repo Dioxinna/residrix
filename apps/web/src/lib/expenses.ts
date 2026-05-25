@@ -94,3 +94,85 @@ export function monthLabel(monthIso: string): string {
   const d = new Date(Date.UTC(y, m - 1, 1))
   return d.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })
 }
+
+export type PeriodPreset =
+  | 'this_month'
+  | 'last_month'
+  | 'q1'
+  | 'q2'
+  | 'q3'
+  | 'q4'
+  | 'ytd'
+  | 'last_year'
+  | 'custom'
+
+export interface PeriodRange {
+  from: string         // inclusive YYYY-MM-DD
+  toExclusive: string  // exclusive YYYY-MM-DD (use < for SQL bounds)
+  label: string
+}
+
+function dateIso(y: number, m: number, d: number): string {
+  return `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`
+}
+
+export function periodForPreset(preset: PeriodPreset, refYear?: number): PeriodRange | null {
+  const now = new Date()
+  const year = refYear ?? now.getUTCFullYear()
+  const monthNow = now.getUTCMonth() + 1
+
+  switch (preset) {
+    case 'this_month': {
+      const m = monthNow
+      const next = new Date(Date.UTC(year, m, 1))
+      return {
+        from: dateIso(year, m, 1),
+        toExclusive: dateIso(next.getUTCFullYear(), next.getUTCMonth() + 1, 1),
+        label: `${monthLabel(`${year}-${String(m).padStart(2, '0')}`)}`,
+      }
+    }
+    case 'last_month': {
+      const m = monthNow
+      const prev = new Date(Date.UTC(year, m - 2, 1))
+      const py = prev.getUTCFullYear()
+      const pm = prev.getUTCMonth() + 1
+      return {
+        from: dateIso(py, pm, 1),
+        toExclusive: dateIso(year, m, 1),
+        label: monthLabel(`${py}-${String(pm).padStart(2, '0')}`),
+      }
+    }
+    case 'q1':
+      return { from: dateIso(year, 1, 1), toExclusive: dateIso(year, 4, 1), label: `1er trimestre ${year}` }
+    case 'q2':
+      return { from: dateIso(year, 4, 1), toExclusive: dateIso(year, 7, 1), label: `2º trimestre ${year}` }
+    case 'q3':
+      return { from: dateIso(year, 7, 1), toExclusive: dateIso(year, 10, 1), label: `3er trimestre ${year}` }
+    case 'q4':
+      return { from: dateIso(year, 10, 1), toExclusive: dateIso(year + 1, 1, 1), label: `4º trimestre ${year}` }
+    case 'ytd':
+      return {
+        from: dateIso(year, 1, 1),
+        toExclusive: dateIso(year, monthNow, now.getUTCDate() + 1),
+        label: `Año ${year} en curso`,
+      }
+    case 'last_year':
+      return { from: dateIso(year - 1, 1, 1), toExclusive: dateIso(year, 1, 1), label: `Año ${year - 1}` }
+    case 'custom':
+      return null
+  }
+}
+
+export function formatDateEs(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number)
+  return `${String(d).padStart(2, '0')}/${String(m).padStart(2, '0')}/${y}`
+}
+
+export function inclusiveEndLabel(toExclusive: string): string {
+  // toExclusive es exclusivo en SQL; para mostrar al usuario restamos 1 día.
+  const [y, m, d] = toExclusive.split('-').map(Number)
+  const last = new Date(Date.UTC(y, m - 1, d - 1))
+  return formatDateEs(
+    `${last.getUTCFullYear()}-${String(last.getUTCMonth() + 1).padStart(2, '0')}-${String(last.getUTCDate()).padStart(2, '0')}`,
+  )
+}
