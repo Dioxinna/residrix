@@ -41,7 +41,9 @@ SUCCESS=0
 FAIL=0
 SKIP=0
 
-while IFS='=' read -r key val; do
+# `|| [[ -n "$key" ]]` permite procesar la última línea aunque el
+# archivo no termine con \n (read devuelve nonzero al ver EOF).
+while IFS='=' read -r key val || [[ -n "$key" ]]; do
   if [[ -z "$key" || "$key" =~ ^# ]]; then continue; fi
   if [[ -z "$val" ]]; then
     SKIP=$((SKIP+1))
