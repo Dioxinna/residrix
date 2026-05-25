@@ -1,5 +1,6 @@
 import type { Database } from '@residrix/supabase'
 import { createClient } from '@supabase/supabase-js'
+import { checkRateLimit, ipFromRequest, rateLimited, RATE_LIMITS } from '@/lib/ratelimit'
 
 function createServiceClient() {
   return createClient<Database>(
@@ -10,6 +11,16 @@ function createServiceClient() {
 }
 
 export async function POST(request: Request) {
+  // Rate limit por IP: 5 intentos / 15 min. Esto cubre tanto spam de
+  // signup como brute-force del código de invitación de 8 chars (480
+  // intentos/día por IP → 8M+ días para barrer las 4B combinaciones
+  // desde una sola IP).
+  const ip = ipFromRequest(request)
+  const rl = await checkRateLimit(RATE_LIMITS.signupInvitation, ip)
+  if (!rl.success) {
+    return rateLimited(rl, 'Demasiados intentos. Espera unos minutos.')
+  }
+
   let body: { code?: string; full_name?: string; email?: string; password?: string }
 
   try {

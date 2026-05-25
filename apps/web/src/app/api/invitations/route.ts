@@ -1,5 +1,6 @@
 import { createSupabaseServerClient, createSupabaseServiceClient } from '@/lib/supabase/server'
 import { dispatch } from '@/lib/notifications/dispatch'
+import { checkRateLimit, rateLimited, RATE_LIMITS } from '@/lib/ratelimit'
 
 export const runtime = 'nodejs'
 
@@ -25,6 +26,17 @@ export async function POST(request: Request) {
     .single()
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return Response.json({ error: 'Forbidden' }, { status: 403 })
+  }
+
+  // Rate limit por user: 30 invitaciones/hora. Si una cuenta admin
+  // queda comprometida, esto acota el daño (no se pueden mandar miles
+  // de invitaciones spam con su SMTP).
+  const rl = await checkRateLimit(RATE_LIMITS.createInvitation, user.id)
+  if (!rl.success) {
+    return rateLimited(
+      rl,
+      'Has creado demasiadas invitaciones en poco tiempo. Espera un rato antes de mandar más.',
+    )
   }
 
   let body: Body

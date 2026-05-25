@@ -1,4 +1,5 @@
 import { createSupabaseServiceClient } from '@/lib/supabase/server'
+import { checkRateLimit, ipFromRequest, rateLimited, RATE_LIMITS } from '@/lib/ratelimit'
 
 export const runtime = 'nodejs'
 
@@ -13,6 +14,12 @@ interface Body {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(request: Request) {
+  const ip = ipFromRequest(request)
+  const rl = await checkRateLimit(RATE_LIMITS.signupFirm, ip)
+  if (!rl.success) {
+    return rateLimited(rl, 'Demasiados intentos de registro. Espera unos minutos.')
+  }
+
   let body: Body
   try {
     body = (await request.json()) as Body
