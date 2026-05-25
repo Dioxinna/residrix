@@ -459,6 +459,82 @@ export type Database = {
           },
         ]
       }
+      meetings: {
+        Row: {
+          audio_duration_seconds: number | null
+          audio_path: string
+          audio_size_bytes: number
+          community_id: string
+          created_at: string | null
+          created_by: string | null
+          error_message: string | null
+          firm_id: string
+          id: string
+          meeting_date: string
+          status: string
+          summary: string | null
+          title: string
+          transcript: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          audio_duration_seconds?: number | null
+          audio_path: string
+          audio_size_bytes: number
+          community_id: string
+          created_at?: string | null
+          created_by?: string | null
+          error_message?: string | null
+          firm_id: string
+          id?: string
+          meeting_date: string
+          status?: string
+          summary?: string | null
+          title: string
+          transcript?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          audio_duration_seconds?: number | null
+          audio_path?: string
+          audio_size_bytes?: number
+          community_id?: string
+          created_at?: string | null
+          created_by?: string | null
+          error_message?: string | null
+          firm_id?: string
+          id?: string
+          meeting_date?: string
+          status?: string
+          summary?: string | null
+          title?: string
+          transcript?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "meetings_community_id_fkey"
+            columns: ["community_id"]
+            isOneToOne: false
+            referencedRelation: "communities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "meetings_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "firms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "meetings_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       device_tokens: {
         Row: {
           created_at: string

@@ -1,6 +1,12 @@
 import Anthropic from '@anthropic-ai/sdk'
-import type { AIClassifyInput, AIClassifyOutput, AIProvider } from './types'
-import { SYSTEM_PROMPT } from './prompt'
+import type {
+  AIClassifyInput,
+  AIClassifyOutput,
+  AIProvider,
+  MeetingSummaryInput,
+  MeetingSummaryOutput,
+} from './types'
+import { SYSTEM_PROMPT, MEETING_SUMMARY_SYSTEM } from './prompt'
 
 let _client: Anthropic | null = null
 function getClient() {
@@ -25,6 +31,34 @@ export const anthropicProvider: AIProvider = {
     const text = (response.content[0] as Anthropic.TextBlock).text
     return parseJsonOutput(text)
   },
+  async summarizeMeeting(input: MeetingSummaryInput): Promise<MeetingSummaryOutput> {
+    const client = getClient()
+    if (!client) throw new Error('ANTHROPIC_API_KEY not configured')
+
+    const userMsg = [
+      `Comunidad: ${input.communityName}`,
+      `Fecha: ${input.meetingDate}`,
+      `Título: ${input.title}`,
+      '',
+      'Transcripción:',
+      input.transcript,
+    ].join('\n')
+
+    const response = await client.messages.create({
+      model: 'claude-sonnet-4-5-20250930',
+      max_tokens: 2500,
+      system: MEETING_SUMMARY_SYSTEM,
+      messages: [{ role: 'user', content: userMsg }],
+    })
+
+    const text = (response.content[0] as Anthropic.TextBlock).text.trim()
+    return { summary: stripCodeFence(text) }
+  },
+}
+
+function stripCodeFence(text: string): string {
+  const fenceMatch = text.match(/^```(?:markdown|md)?\s*([\s\S]*?)```\s*$/)
+  return fenceMatch ? fenceMatch[1].trim() : text
 }
 
 function parseJsonOutput(text: string): AIClassifyOutput {

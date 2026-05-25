@@ -38,9 +38,22 @@ export interface AIClassifyOutput {
   group_key: string
 }
 
+export interface MeetingSummaryInput {
+  transcript: string
+  communityName: string
+  meetingDate: string  // ISO date YYYY-MM-DD
+  title: string
+}
+
+export interface MeetingSummaryOutput {
+  /** Markdown con secciones: Resumen, Temas tratados, Acuerdos, Pendientes. */
+  summary: string
+}
+
 export type AIProviderName = 'anthropic' | 'groq'
 
 export interface AIProvider {
   name: AIProviderName
   classifyIncidence(input: AIClassifyInput): Promise<AIClassifyOutput>
+  summarizeMeeting(input: MeetingSummaryInput): Promise<MeetingSummaryOutput>
 }
