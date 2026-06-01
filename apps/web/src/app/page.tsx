@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {
   AlertTriangle, Megaphone, FileText, Smartphone, Bell, ShieldCheck,
-  Sparkles, BarChart3, type LucideIcon,
+  Sparkles, type LucideIcon,
 } from 'lucide-react'
 import { TIERS, TIER_ORDER } from '@/lib/stripe'
 import { GlassCard, GlassButton, Eyebrow } from '@/components/ui/glass'
@@ -19,7 +19,6 @@ export default function LandingPage() {
     <div className="min-h-screen text-ink">
       <Nav />
       <Hero />
-      <DesktopShowcase />
       <MobileShowcase />
       <HowItWorks />
       <Features />
@@ -63,28 +62,95 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="max-w-5xl mx-auto px-6 pt-24 pb-32 text-center">
-      <Eyebrow className="mb-8">
-        <span className="w-1.5 h-1.5 rounded-full bg-brand-soft animate-pulse" />
-        Software para administradores de fincas
-      </Eyebrow>
-      <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-7xl font-bold tracking-[-0.03em] leading-[1.02] mb-7 max-w-4xl mx-auto">
-        <span className="text-gradient">Toda tu comunidad,</span>
-        <br />
-        <span className="text-ink">en una sola plataforma</span>
-      </h1>
-      <p className="text-lg text-ink-soft max-w-2xl mx-auto mb-11 leading-relaxed">
-        Incidencias con IA, comunicados, documentación y una app para que los vecinos
-        se comuniquen contigo sin saturar el teléfono.
-      </p>
-      <div className="flex items-center justify-center gap-3 flex-wrap">
-        <GlassButton href="/signup">Empezar gratis →</GlassButton>
-        <GlassButton href="#pricing" variant="ghost">Ver precios</GlassButton>
+    <section className="relative overflow-hidden px-6 pt-20 pb-0">
+      {/* Floating product fragments — desktop only, decorative */}
+      <FloatingFragments />
+
+      <div className="relative max-w-4xl mx-auto text-center">
+        <div className="rise" style={{ animationDelay: '0ms' }}>
+          <Eyebrow className="mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-soft animate-pulse" />
+            Software para administradores de fincas
+          </Eyebrow>
+        </div>
+        <h1 className="rise font-[family-name:var(--font-display)] text-[clamp(2.75rem,8vw,5.5rem)] font-bold tracking-[-0.04em] leading-[0.98] mb-7" style={{ animationDelay: '80ms' }}>
+          <span className="text-gradient">Toda tu comunidad,</span>
+          <br />
+          <span className="text-ink">en una plataforma</span>
+        </h1>
+        <p className="rise text-lg text-ink-soft max-w-xl mx-auto mb-10 leading-relaxed" style={{ animationDelay: '160ms' }}>
+          Incidencias con IA, comunicados, documentación y una app para que los vecinos
+          se comuniquen contigo sin saturar el teléfono.
+        </p>
+        <div className="rise flex items-center justify-center gap-3 flex-wrap" style={{ animationDelay: '240ms' }}>
+          <GlassButton href="/signup">Empezar gratis →</GlassButton>
+          <GlassButton href="#pricing" variant="ghost">Ver precios</GlassButton>
+        </div>
+        <p className="rise text-xs text-ink-faint mt-5" style={{ animationDelay: '320ms' }}>
+          Sin tarjeta. Primera comunidad gratis para siempre.
+        </p>
       </div>
-      <p className="text-xs text-ink-faint mt-5">
-        Sin tarjeta. Primera comunidad gratis para siempre.
-      </p>
+
+      {/* Perspective product peek bleeding into the page */}
+      <div className="relative max-w-5xl mx-auto mt-16 px-4" style={{ perspective: '2000px' }}>
+        <div
+          className="rise origin-top"
+          style={{ animationDelay: '420ms', transform: 'rotateX(32deg) scale(0.96)' }}
+        >
+          <BrowserMockup />
+        </div>
+        {/* Fade mask so it dissolves into the section below */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-48"
+          style={{ background: 'linear-gradient(to bottom, transparent, var(--canvas))' }}
+          aria-hidden
+        />
+      </div>
     </section>
+  )
+}
+
+function FloatingFragments() {
+  return (
+    <div className="hidden lg:block absolute inset-0 max-w-6xl mx-auto pointer-events-none" aria-hidden>
+      {/* Incidencia card — top left */}
+      <div className="float absolute top-10 left-0 w-56 glass rounded-2xl p-3.5 depth">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-brand/10 px-1.5 py-0.5 rounded">Incidencia</span>
+          <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-300">Media</span>
+        </div>
+        <p className="text-xs font-medium text-ink">Gotera en el 2A</p>
+        <p className="text-[10px] text-ink-faint mt-0.5">Clasificada por IA · Fontanería</p>
+      </div>
+
+      {/* Notification toast — top right */}
+      <div className="float-delay absolute top-16 right-0 w-52 glass rounded-2xl p-3.5 depth">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-brand/15 flex items-center justify-center">
+            <Bell size={15} className="text-brand" strokeWidth={1.75} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs font-medium text-ink truncate">Nuevo comunicado</p>
+            <p className="text-[10px] text-ink-faint">Enviado a 48 vecinos</p>
+          </div>
+        </div>
+      </div>
+
+      {/* AI suggestion — bottom left */}
+      <div className="float-slow absolute top-[58%] left-6 w-48 glass rounded-2xl p-3 depth">
+        <div className="flex items-center gap-2 mb-1.5">
+          <Sparkles size={13} className="text-brand" />
+          <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft">Respuesta IA</span>
+        </div>
+        <p className="text-[11px] text-ink-soft leading-snug">"Hemos avisado al fontanero, pasará mañana…"</p>
+      </div>
+
+      {/* Stat chip — bottom right */}
+      <div className="float absolute top-[60%] right-8 glass rounded-2xl px-4 py-3 depth">
+        <p className="text-[10px] uppercase tracking-wide text-ink-faint">Resueltas este mes</p>
+        <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-emerald-500">83%</p>
+      </div>
+    </div>
   )
 }
 
@@ -110,43 +176,6 @@ function HowItWorks() {
               <p className="text-ink-soft text-sm leading-relaxed">{s.body}</p>
             </GlassCard>
           ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function DesktopShowcase() {
-  return (
-    <section className="max-w-6xl mx-auto px-6 py-20">
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
-        <div className="order-2 lg:order-1">
-          <BrowserMockup />
-        </div>
-        <div className="order-1 lg:order-2">
-          <Eyebrow className="mb-5">
-            <BarChart3 size={13} /> Panel de despacho
-          </Eyebrow>
-          <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Tu despacho, bajo control
-          </h2>
-          <p className="text-ink-soft leading-relaxed mb-6">
-            Gestiona todas tus comunidades desde un único panel. Incidencias clasificadas por IA,
-            gastos, liquidaciones, comunicados e informes mensuales. Sin Excel, sin WhatsApp,
-            sin perder nada.
-          </p>
-          <ul className="space-y-3">
-            {[
-              'Incidencias priorizadas y agrupadas por la IA',
-              'Gastos y liquidaciones por comunidad',
-              'Informes mensuales automáticos en PDF',
-            ].map((t) => (
-              <li key={t} className="flex items-center gap-3 text-sm text-ink">
-                <span className="w-5 h-5 rounded-full bg-brand/15 text-brand flex items-center justify-center text-[11px] flex-shrink-0">✓</span>
-                {t}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

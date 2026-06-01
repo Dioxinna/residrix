@@ -171,8 +171,35 @@ button:not(:disabled),
   from { transform: translate3d(0, 0, 0) scale(1.1); }
   to   { transform: translate3d(-5vw, -3vh, 0) scale(1); }
 }
+
+/* Floating hero fragments */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+@utility float {
+  animation: float-y 6s ease-in-out infinite;
+}
+@utility float-slow {
+  animation: float-y 8.5s ease-in-out infinite;
+}
+@utility float-delay {
+  animation: float-y 7s ease-in-out infinite;
+  animation-delay: -2.5s;
+}
+
+/* Kinetic entrance reveal (runs once on load) */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@utility rise {
+  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .aurora::before, .aurora::after, .aurora-cyan { animation: none; }
+  .aurora::before, .aurora::after, .aurora-cyan,
+  .float, .float-slow, .float-delay, .rise { animation: none; }
 }
 
 /* -------------------------------------------------------------
