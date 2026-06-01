@@ -57,7 +57,7 @@ export function InformePicker({
 
       <button
         onClick={submit}
-        className="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2.5 rounded"
+        className="w-full bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2.5 rounded"
       >
         Generar informe →
       </button>

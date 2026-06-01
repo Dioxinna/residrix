@@ -107,7 +107,7 @@ function ToggleRow({ label, description, checked, onChange }: ToggleRowProps) {
         aria-checked={checked}
         onClick={onChange}
         className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full transition-colors ${
-          checked ? 'bg-indigo-600' : 'bg-zinc-700'
+          checked ? 'bg-violet-600' : 'bg-zinc-700'
         }`}
       >
         <span

@@ -34,9 +34,9 @@
   --c-base-2: #f6f7fe;
   --c-surface: #ffffff;
 
-  --c-brand: #6366f1;
-  --c-brand-soft: #4f46e5;
-  --c-violet: #8b5cf6;
+  --c-brand: #7c3aed;
+  --c-brand-soft: #6d28d9;
+  --c-violet: #a855f7;
   --c-cyan: #06b6d4;
 
   --c-ink: #15151c;
@@ -52,7 +52,7 @@
   --glass-blur: 24px;
 
   /* Aurora blob colors (light = vivid pastels on near-white) */
-  --aurora-1: rgba(129, 140, 248, 0.55);
+  --aurora-1: rgba(167, 139, 250, 0.55);
   --aurora-2: rgba(168, 130, 246, 0.5);
   --aurora-3: rgba(45, 212, 238, 0.4);
   --canvas: #e9ebfb;
@@ -64,9 +64,9 @@
   --c-base-2: #0b0b12;
   --c-surface: #101019;
 
-  --c-brand: #6366f1;
-  --c-brand-soft: #a5b4fc;
-  --c-violet: #8b5cf6;
+  --c-brand: #8b5cf6;
+  --c-brand-soft: #c4b5fd;
+  --c-violet: #a855f7;
   --c-cyan: #22d3ee;
 
   --c-ink: #f5f5f7;
@@ -80,7 +80,7 @@
   --glass-shadow: rgba(0, 0, 0, 0.65);
   --glass-blur: 20px;
 
-  --aurora-1: rgba(99, 102, 241, 0.55);
+  --aurora-1: rgba(124, 58, 237, 0.55);
   --aurora-2: rgba(139, 92, 246, 0.45);
   --aurora-3: rgba(34, 211, 238, 0.32);
   --canvas: #07070b;
@@ -231,15 +231,15 @@ button:not(:disabled),
   box-shadow:
     inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
     0 1px 2px rgba(0, 0, 0, 0.18),
-    0 14px 30px -10px rgba(99, 102, 241, 0.5),
+    0 14px 30px -10px rgba(124, 58, 237, 0.5),
     0 30px 60px -24px var(--glass-shadow);
 }
 
 @utility glow-brand {
-  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.35), 0 10px 45px -6px rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.35), 0 10px 45px -6px rgba(124, 58, 237, 0.55);
 }
 @utility glow-soft {
-  box-shadow: 0 10px 55px -10px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 55px -10px rgba(124, 58, 237, 0.4);
 }
 
 @utility lift {

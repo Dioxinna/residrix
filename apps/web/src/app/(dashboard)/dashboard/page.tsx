@@ -30,7 +30,7 @@ export default async function DashboardPage() {
   const stats = [
     { label: 'Incidencias abiertas', value: openResult.count ?? 0,      color: 'text-blue-400' },
     { label: 'Críticas activas',     value: criticalResult.count ?? 0,  color: 'text-red-400' },
-    { label: 'Comunidades',          value: communitiesResult.count ?? 0, color: 'text-indigo-400' },
+    { label: 'Comunidades',          value: communitiesResult.count ?? 0, color: 'text-violet-400' },
     { label: 'Resueltas este mes',   value: resolvedResult.count ?? 0,  color: 'text-green-400' },
   ]
 
@@ -65,7 +65,7 @@ export default async function DashboardPage() {
       <div className="glass rounded-xl">
         <div className="px-6 py-4 border-b border-[color:var(--glass-border)] flex items-center justify-between">
           <h2 className="text-ink font-semibold text-sm">Últimas incidencias</h2>
-          <Link href="/incidencias" className="text-indigo-400 text-xs hover:text-brand-soft transition-colors">
+          <Link href="/incidencias" className="text-violet-400 text-xs hover:text-brand-soft transition-colors">
             Ver todas →
           </Link>
         </div>

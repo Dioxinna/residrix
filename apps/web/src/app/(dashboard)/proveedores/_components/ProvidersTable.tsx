@@ -68,7 +68,7 @@ export function ProvidersTable({
                 {p.contact_name && <p className="text-ink-faint text-xs">{p.contact_name}</p>}
               </td>
               <td className="px-6 py-3">
-                <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-indigo-500/10 border border-indigo-500/30 px-1.5 py-0.5 rounded">
+                <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-violet-500/10 border border-violet-500/30 px-1.5 py-0.5 rounded">
                   {typeLabel(p.provider_type)}
                 </span>
               </td>
@@ -89,7 +89,7 @@ export function ProvidersTable({
                   {p.email && (
                     <a
                       href={`mailto:${p.email}`}
-                      className="inline-flex items-center gap-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-brand-soft text-xs font-medium px-2 py-1 rounded border border-indigo-500/30"
+                      className="inline-flex items-center gap-1 bg-violet-500/10 hover:bg-violet-500/20 text-brand-soft text-xs font-medium px-2 py-1 rounded border border-violet-500/30"
                     >
                       <Mail size={12} /> Email
                     </a>

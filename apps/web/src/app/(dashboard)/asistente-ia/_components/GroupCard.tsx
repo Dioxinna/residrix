@@ -50,7 +50,7 @@ export function GroupCard({
         <div className="min-w-0">
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
             {groupKey ? (
-              <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-indigo-500/10 border border-indigo-500/30 px-1.5 py-0.5 rounded">
+              <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-violet-500/10 border border-violet-500/30 px-1.5 py-0.5 rounded">
                 {groupKey}
               </span>
             ) : (
@@ -149,7 +149,7 @@ function IncidenceRow({ inc }: { inc: GroupedIncidence }) {
               <button
                 onClick={acceptResponse}
                 disabled={pending}
-                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
+                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
               >
                 {pending ? 'Enviando…' : 'Aceptar y enviar al vecino'}
               </button>

@@ -32,7 +32,7 @@ const categoryOptions = [
   { value: 'other', label: 'Otros' },
 ]
 
-const selectClass = 'glass border border-[color:var(--glass-border)] text-ink-soft text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500'
+const selectClass = 'glass border border-[color:var(--glass-border)] text-ink-soft text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500'
 
 export function IncidenciasFilters() {
   const router = useRouter()
@@ -56,7 +56,7 @@ export function IncidenciasFilters() {
         placeholder="Buscar incidencia..."
         defaultValue={searchParams.get('q') ?? ''}
         onChange={(e) => updateParam('q', e.target.value)}
-        className="glass border border-[color:var(--glass-border)] text-ink-soft text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-56 placeholder-zinc-500"
+        className="glass border border-[color:var(--glass-border)] text-ink-soft text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500 w-56 placeholder-zinc-500"
       />
       <select value={searchParams.get('status') ?? ''} onChange={(e) => updateParam('status', e.target.value)} className={selectClass}>
         {statusOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}

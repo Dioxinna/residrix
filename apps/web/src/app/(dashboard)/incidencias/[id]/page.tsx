@@ -87,7 +87,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
           {inc.ai_response && (
             <section className="bg-brand/8 border border-brand/25 rounded-xl p-6">
               <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
-                <span className="text-indigo-400 text-xs font-semibold uppercase tracking-wide">✦ Respuesta IA sugerida</span>
+                <span className="text-violet-400 text-xs font-semibold uppercase tracking-wide">✦ Respuesta IA sugerida</span>
                 {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
                   <span className="text-[10px] uppercase tracking-wide font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
                     Llamar: {PROVIDER_LABEL[inc.ai_suggested_provider as ProviderType]}
@@ -118,7 +118,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                   </p>
                   <a
                     href="/proveedores"
-                    className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium px-3 py-1.5 rounded"
+                    className="bg-violet-600 hover:bg-violet-500 text-white text-xs font-medium px-3 py-1.5 rounded"
                   >
                     Ir a Proveedores →
                   </a>
@@ -143,7 +143,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                         {p.email && (
                           <a
                             href={`mailto:${p.email}?subject=Incidencia: ${encodeURIComponent(inc.title)}`}
-                            className="inline-flex items-center gap-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-brand-soft text-xs font-medium px-2 py-1 rounded border border-indigo-500/30"
+                            className="inline-flex items-center gap-1 bg-violet-500/10 hover:bg-violet-500/20 text-brand-soft text-xs font-medium px-2 py-1 rounded border border-violet-500/30"
                           >
                             ✉ Email
                           </a>

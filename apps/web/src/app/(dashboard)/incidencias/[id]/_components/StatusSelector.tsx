@@ -42,7 +42,7 @@ export function StatusSelector({ incidenceId, currentStatus }: Props) {
       value={status}
       onChange={(e) => handleChange(e.target.value as IncidenceStatus)}
       disabled={saving}
-      className="w-full glass-strong border border-[color:var(--glass-border)] text-ink-soft text-sm rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
+      className="w-full glass-strong border border-[color:var(--glass-border)] text-ink-soft text-sm rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-violet-500 disabled:opacity-50"
     >
       {statusOptions.map((o) => (
         <option key={o.value} value={o.value}>{o.label}</option>

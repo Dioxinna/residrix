@@ -91,12 +91,12 @@ export function TierCards({
               key={tier.key}
               className={`relative rounded-xl border p-5 flex flex-col ${
                 isCurrent
-                  ? 'bg-indigo-500/5 border-indigo-500/40'
+                  ? 'bg-violet-500/5 border-violet-500/40'
                   : 'glass border-[color:var(--glass-border)]'
               }`}
             >
               {isCurrent && (
-                <span className="absolute -top-2.5 left-5 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">
+                <span className="absolute -top-2.5 left-5 bg-violet-600 text-white text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">
                   Tu plan
                 </span>
               )}
@@ -112,7 +112,7 @@ export function TierCards({
               <ul className="space-y-2 mb-5 text-sm text-ink-soft flex-1">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2">
-                    <span className="text-indigo-400 mt-0.5">✓</span>
+                    <span className="text-violet-400 mt-0.5">✓</span>
                     <span>{f}</span>
                   </li>
                 ))}
@@ -124,7 +124,7 @@ export function TierCards({
                 className={`w-full text-sm font-medium px-4 py-2 rounded ${
                   isCurrent
                     ? 'glass-strong text-ink-faint cursor-not-allowed'
-                    : 'bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white'
+                    : 'bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white'
                 }`}
               >
                 {isBusy ? '…' : cta}

@@ -76,7 +76,7 @@ export default async function IncidenciasPage({ searchParams }: PageProps) {
             {incidences?.map((inc) => (
               <tr key={inc.id} className="hover:glass transition-colors">
                 <td className="px-6 py-4">
-                  <Link href={`/incidencias/${inc.id}`} className="text-ink hover:text-indigo-400 font-medium transition-colors line-clamp-1">
+                  <Link href={`/incidencias/${inc.id}`} className="text-ink hover:text-violet-400 font-medium transition-colors line-clamp-1">
                     {inc.title}
                   </Link>
                   <p className="text-ink-faint text-xs mt-0.5">

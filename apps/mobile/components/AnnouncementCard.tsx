@@ -12,7 +12,7 @@ export interface Announcement {
 }
 
 const SEVERITY: Record<string, { label: string; color: string; bg: string }> = {
-  info:    { label: 'Información', color: '#6366f1', bg: '#6366f11f' },
+  info:    { label: 'Información', color: '#7c3aed', bg: '#7c3aed1f' },
   warning: { label: 'Aviso',       color: '#d97706', bg: '#d977061f' },
   urgent:  { label: 'Urgente',     color: '#dc2626', bg: '#dc26261f' },
 }

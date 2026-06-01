@@ -418,7 +418,7 @@ function Stat({
   return (
     <div
       className={`rounded-xl border px-4 py-3 ${
-        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'glass border-[color:var(--glass-border)]'
+        accent ? 'bg-violet-500/5 border-violet-500/30' : 'glass border-[color:var(--glass-border)]'
       }`}
     >
       <p className="text-[10px] uppercase tracking-wide text-ink-faint print-muted mb-1">{label}</p>
@@ -442,7 +442,7 @@ function MiniStat({
   return (
     <div
       className={`rounded-lg border px-3 py-2 ${
-        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'glass border-[color:var(--glass-border)]'
+        accent ? 'bg-violet-500/5 border-violet-500/30' : 'glass border-[color:var(--glass-border)]'
       }`}
     >
       <p className="text-[10px] uppercase tracking-wide text-ink-faint print-muted">{label}</p>

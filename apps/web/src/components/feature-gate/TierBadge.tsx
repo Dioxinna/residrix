@@ -3,7 +3,7 @@ import { TIER_NAME } from '@/lib/features'
 
 const STYLES: Record<TierKey, string> = {
   base: 'bg-zinc-700/60 text-zinc-300',
-  pro: 'bg-indigo-500/15 text-indigo-300 border border-indigo-500/40',
+  pro: 'bg-violet-500/15 text-violet-300 border border-violet-500/40',
   total: 'bg-amber-500/15 text-amber-300 border border-amber-500/40',
 }
 

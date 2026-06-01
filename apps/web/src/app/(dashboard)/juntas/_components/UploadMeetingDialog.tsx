@@ -90,7 +90,7 @@ export function UploadMeetingDialog({
     <>
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded"
+        className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
       >
         <Upload size={14} /> Subir audio
       </button>
@@ -154,7 +154,7 @@ export function UploadMeetingDialog({
                 accept="audio/*,.mp3,.m4a,.mp4,.wav,.webm,.ogg,.flac"
                 onChange={onFileChange}
                 disabled={pending}
-                className="w-full text-xs text-white-soft file:mr-3 file:rounded file:border-0 file:bg-indigo-600 file:hover:bg-indigo-500 file:text-white file:text-xs file:font-medium file:px-3 file:py-1.5"
+                className="w-full text-xs text-white-soft file:mr-3 file:rounded file:border-0 file:bg-violet-600 file:hover:bg-violet-500 file:text-white file:text-xs file:font-medium file:px-3 file:py-1.5"
               />
               {fileName && fileSize !== null && (
                 <p className="text-xs text-ink-faint mt-1.5">
@@ -175,7 +175,7 @@ export function UploadMeetingDialog({
               <button
                 type="submit"
                 disabled={pending}
-                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
               >
                 {pending ? 'Subiendo…' : 'Subir y procesar'}
               </button>

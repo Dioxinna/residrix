@@ -33,8 +33,8 @@ export function AIAssistantToggle({ initialEnabled }: { initialEnabled: boolean 
   return (
     <section className="glass rounded-xl p-6 mb-6">
       <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-lg bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center flex-shrink-0">
-          <Sparkles size={18} className="text-indigo-400" strokeWidth={1.75} />
+        <div className="w-10 h-10 rounded-lg bg-violet-500/15 border border-violet-500/30 flex items-center justify-center flex-shrink-0">
+          <Sparkles size={18} className="text-violet-400" strokeWidth={1.75} />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-3 mb-1">
@@ -45,7 +45,7 @@ export function AIAssistantToggle({ initialEnabled }: { initialEnabled: boolean 
               role="switch"
               aria-checked={enabled}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors disabled:opacity-50 ${
-                enabled ? 'bg-indigo-600' : 'bg-zinc-700'
+                enabled ? 'bg-violet-600' : 'bg-zinc-700'
               }`}
             >
               <span

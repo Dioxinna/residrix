@@ -21,7 +21,7 @@ const categoryLabel: Record<string, string> = {
 }
 
 const categoryColor: Record<string, string> = {
-  acta: '#6366f1', estatutos: '#0ea5e9', seguro: '#10b981',
+  acta: '#7c3aed', estatutos: '#0ea5e9', seguro: '#10b981',
   presupuesto: '#f59e0b', circular: '#ec4899', other: '#71717a',
 }
 
@@ -65,35 +65,35 @@ export default function DocumentosScreen() {
     await WebBrowser.openBrowserAsync(data.signedUrl, {
       presentationStyle: WebBrowser.WebBrowserPresentationStyle.FULL_SCREEN,
       toolbarColor: '#09090b',
-      controlsColor: '#6366f1',
+      controlsColor: '#7c3aed',
     })
   }
 
   if (loading) {
     return (
-      <View className="flex-1 bg-zinc-950 items-center justify-center">
-        <ActivityIndicator color="#6366f1" />
+      <View className="flex-1 bg-base items-center justify-center">
+        <ActivityIndicator color="#7c3aed" />
       </View>
     )
   }
 
   return (
-    <View className="flex-1 bg-zinc-950">
+    <View className="flex-1 bg-base">
       <View className="px-5 pt-14 pb-4">
-        <Text className="text-white text-xl font-bold">Documentos</Text>
-        <Text className="text-zinc-400 text-sm mt-0.5">Documentación de tu comunidad</Text>
+        <Text className="text-ink text-xl font-bold">Documentos</Text>
+        <Text className="text-ink-soft text-sm mt-0.5">Documentación de tu comunidad</Text>
       </View>
 
       <FlatList
         data={docs}
         keyExtractor={(item) => item.id}
         contentContainerClassName="px-5 pb-8"
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#6366f1" />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#7c3aed" />}
         ListEmptyComponent={
           <View className="items-center justify-center py-20">
             <Text className="text-4xl mb-4">📁</Text>
-            <Text className="text-white font-semibold text-base">Sin documentos</Text>
-            <Text className="text-zinc-500 text-sm mt-1">Tu administrador no ha subido documentos aún</Text>
+            <Text className="text-ink font-semibold text-base">Sin documentos</Text>
+            <Text className="text-ink-faint text-sm mt-1">Tu administrador no ha subido documentos aún</Text>
           </View>
         }
         renderItem={({ item }) => {
@@ -101,24 +101,24 @@ export default function DocumentosScreen() {
           return (
             <TouchableOpacity
               onPress={() => openDoc(item.file_url)}
-              className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 mb-3 flex-row items-center gap-4"
+              className="bg-surface border border-glassline rounded-2xl p-4 mb-3 flex-row items-center gap-4"
               activeOpacity={0.7}
             >
               <View className="w-10 h-10 rounded-xl items-center justify-center" style={{ backgroundColor: `${color}22` }}>
                 <Text style={{ color, fontSize: 18 }}>📄</Text>
               </View>
               <View className="flex-1">
-                <Text className="text-white font-medium text-sm" numberOfLines={1}>{item.name}</Text>
+                <Text className="text-ink font-medium text-sm" numberOfLines={1}>{item.name}</Text>
                 <View className="flex-row items-center gap-2 mt-1">
                   <View className="rounded-md px-1.5 py-0.5" style={{ backgroundColor: `${color}22` }}>
                     <Text style={{ color, fontSize: 10, fontWeight: '600' }}>{categoryLabel[item.category] ?? item.category}</Text>
                   </View>
-                  <Text className="text-zinc-600 text-xs">
+                  <Text className="text-ink-faint text-xs">
                     {formatDistanceToNow(new Date(item.created_at), { addSuffix: true, locale: es })}
                   </Text>
                 </View>
               </View>
-              <Text className="text-zinc-600 text-lg">›</Text>
+              <Text className="text-ink-faint text-lg">›</Text>
             </TouchableOpacity>
           )
         }}

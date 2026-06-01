@@ -136,7 +136,7 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
                   href={step.href}
                   className={`flex-shrink-0 text-sm font-medium px-3 py-1.5 rounded flex items-center gap-1.5 ${
                     isNext
-                      ? 'bg-indigo-600 hover:bg-indigo-500 text-white'
+                      ? 'bg-violet-600 hover:bg-violet-500 text-white'
                       : 'text-ink-soft hover:text-ink border border-[color:var(--glass-border)] hover:border-[color:var(--glass-border)]'
                   }`}
                 >

@@ -9,10 +9,10 @@ module.exports = {
         base2: '#f6f7fe',
         surface: '#ffffff',
         brand: {
-          DEFAULT: '#6366f1',
-          soft: '#4f46e5',
+          DEFAULT: '#7c3aed',
+          soft: '#6d28d9',
         },
-        violet: '#8b5cf6',
+        violet: '#a855f7',
         ink: {
           DEFAULT: '#15151c',
           soft: '#4b4b57',

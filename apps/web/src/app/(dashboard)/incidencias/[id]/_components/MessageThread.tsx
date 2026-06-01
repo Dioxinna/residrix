@@ -102,10 +102,10 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
           onChange={(e) => setContent(e.target.value)}
           placeholder="Escribe un mensaje al vecino..."
           rows={3}
-          className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none"
+          className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm resize-none"
         />
         {aiResponse && !content && (
-          <button onClick={() => setContent(aiResponse)} className="text-indigo-400 text-xs hover:text-brand-soft transition-colors">
+          <button onClick={() => setContent(aiResponse)} className="text-violet-400 text-xs hover:text-brand-soft transition-colors">
             ✦ Usar respuesta IA
           </button>
         )}
@@ -113,7 +113,7 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
           <button
             onClick={() => sendMessage(false)}
             disabled={sending || !content.trim()}
-            className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg py-2 transition-colors"
+            className="flex-1 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg py-2 transition-colors"
           >
             Enviar al vecino
           </button>

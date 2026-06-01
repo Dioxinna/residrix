@@ -64,7 +64,7 @@ export function PreviewActions({
         </button>
         <button
           onClick={() => window.print()}
-          className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-3 py-1.5 rounded"
+          className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-3 py-1.5 rounded"
         >
           <Printer size={14} /> Imprimir / Guardar PDF
         </button>

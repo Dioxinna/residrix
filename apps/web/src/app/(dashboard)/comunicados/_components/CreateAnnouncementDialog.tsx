@@ -81,7 +81,7 @@ export function CreateAnnouncementDialog({
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded"
+        className="bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
       >
         Nuevo comunicado
       </button>
@@ -124,7 +124,7 @@ export function CreateAnnouncementDialog({
                           ? 'bg-red-500/15 border-red-500/40 text-red-700 dark:text-red-300'
                           : s.value === 'warning'
                           ? 'bg-amber-500/15 border-amber-500/40 text-amber-700 dark:text-amber-300'
-                          : 'bg-indigo-500/15 border-indigo-500/40 text-brand-soft'
+                          : 'bg-violet-500/15 border-violet-500/40 text-brand-soft'
                         : 'border-[color:var(--glass-border)] text-ink-soft hover:text-ink'
                     }`}
                   >
@@ -169,7 +169,7 @@ export function CreateAnnouncementDialog({
               <button
                 type="submit"
                 disabled={pending}
-                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
               >
                 {pending ? 'Publicando…' : 'Publicar'}
               </button>

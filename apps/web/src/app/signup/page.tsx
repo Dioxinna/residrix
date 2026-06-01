@@ -73,7 +73,7 @@ export default function SignupPage() {
                 value={firmName}
                 onChange={(e) => setFirmName(e.target.value)}
                 placeholder="Administraciones García"
-                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
               />
             </Field>
             <Field label="Teléfono (opcional)">
@@ -82,7 +82,7 @@ export default function SignupPage() {
                 value={firmPhone}
                 onChange={(e) => setFirmPhone(e.target.value)}
                 placeholder="+34 600 000 000"
-                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
               />
             </Field>
           </Section>
@@ -95,7 +95,7 @@ export default function SignupPage() {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Ana García"
-                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
               />
             </Field>
             <Field label="Email">
@@ -105,7 +105,7 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@despacho.es"
-                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
               />
             </Field>
             <Field label="Contraseña (mínimo 8 caracteres)">
@@ -116,7 +116,7 @@ export default function SignupPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm"
               />
             </Field>
           </Section>
@@ -124,14 +124,14 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={pending}
-            className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-lg py-2.5 text-sm transition-colors"
+            className="w-full bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-lg py-2.5 text-sm transition-colors"
           >
             {pending ? 'Creando cuenta…' : 'Crear cuenta'}
           </button>
 
           <p className="text-center text-xs text-ink-faint">
             ¿Ya tienes cuenta?{' '}
-            <Link href="/login" className="text-indigo-400 hover:text-indigo-300">
+            <Link href="/login" className="text-violet-400 hover:text-violet-300">
               Inicia sesión
             </Link>
           </p>

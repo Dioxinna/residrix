@@ -102,16 +102,16 @@ export default function AjustesScreen() {
 
   if (loading) {
     return (
-      <View className="flex-1 bg-zinc-950 items-center justify-center">
-        <ActivityIndicator color="#6366f1" />
+      <View className="flex-1 bg-base items-center justify-center">
+        <ActivityIndicator color="#7c3aed" />
       </View>
     )
   }
 
   return (
-    <ScrollView className="flex-1 bg-zinc-950" contentContainerStyle={{ paddingBottom: 32 }}>
+    <ScrollView className="flex-1 bg-base" contentContainerStyle={{ paddingBottom: 32 }}>
       <View className="pt-16 px-5 pb-4">
-        <Text className="text-white text-3xl font-bold">Ajustes</Text>
+        <Text className="text-ink text-3xl font-bold">Ajustes</Text>
       </View>
 
       <Section title="Notificaciones push">
@@ -138,7 +138,7 @@ export default function AjustesScreen() {
 
       <View className="px-5 pt-8">
         <TouchableOpacity
-          className="bg-zinc-900 border border-red-500/30 rounded-xl py-4 items-center"
+          className="bg-surface border border-red-500/30 rounded-xl py-4 items-center"
           onPress={logout}
         >
           <Text className="text-red-400 font-semibold">Cerrar sesión</Text>
@@ -151,20 +151,20 @@ export default function AjustesScreen() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <View className="px-5 mt-6">
-      <Text className="text-zinc-500 text-xs uppercase tracking-wide mb-2 px-1">{title}</Text>
-      <View className="bg-zinc-900 rounded-xl overflow-hidden">{children}</View>
+      <Text className="text-ink-faint text-xs uppercase tracking-wide mb-2 px-1">{title}</Text>
+      <View className="bg-surface rounded-xl overflow-hidden">{children}</View>
     </View>
   )
 }
 
 function Row({ label, value, onChange }: { label: string; value: boolean; onChange: () => void }) {
   return (
-    <View className="flex-row items-center justify-between px-4 py-3 border-b border-zinc-800 last:border-b-0">
-      <Text className="text-white text-base flex-1">{label}</Text>
+    <View className="flex-row items-center justify-between px-4 py-3 border-b border-glassline last:border-b-0">
+      <Text className="text-ink text-base flex-1">{label}</Text>
       <Switch
         value={value}
         onValueChange={onChange}
-        trackColor={{ true: '#6366f1', false: '#3f3f46' }}
+        trackColor={{ true: '#7c3aed', false: '#3f3f46' }}
         thumbColor="#fff"
       />
     </View>

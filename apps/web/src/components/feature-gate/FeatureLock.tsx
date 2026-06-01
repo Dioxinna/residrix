@@ -8,8 +8,8 @@ export function FeatureLock({ feature, description }: { feature: FeatureKey; des
   const label = FEATURE_LABEL[feature]
   return (
     <div className="max-w-2xl mx-auto px-6 py-20 text-center">
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-5">
-        <Lock className="text-indigo-400" size={26} strokeWidth={1.75} />
+      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/10 border border-violet-500/30 mb-5">
+        <Lock className="text-violet-400" size={26} strokeWidth={1.75} />
       </div>
       <div className="mb-3 flex items-center justify-center gap-2">
         <TierBadge tier={minTier} />
@@ -21,7 +21,7 @@ export function FeatureLock({ feature, description }: { feature: FeatureKey; des
       </p>
       <Link
         href={`/billing?upgrade=${feature}`}
-        className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-lg font-medium text-sm"
+        className="inline-block bg-violet-600 hover:bg-violet-500 text-white px-6 py-2.5 rounded-lg font-medium text-sm"
       >
         Ver planes →
       </Link>

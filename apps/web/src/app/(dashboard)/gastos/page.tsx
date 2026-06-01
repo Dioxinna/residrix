@@ -65,7 +65,7 @@ export default async function GastosPage({ searchParams }: PageProps) {
         </p>
         <Link
           href="/comunidades"
-          className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded"
+          className="inline-block bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
         >
           Ir a Comunidades →
         </Link>
@@ -225,7 +225,7 @@ function Stat({
   return (
     <div
       className={`rounded-xl border px-4 py-3 ${
-        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'glass border-[color:var(--glass-border)]'
+        accent ? 'bg-violet-500/5 border-violet-500/30' : 'glass border-[color:var(--glass-border)]'
       }`}
     >
       <p className="text-[10px] uppercase tracking-wide text-ink-faint mb-1">{label}</p>

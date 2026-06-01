@@ -107,7 +107,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded"
+        className="bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
       >
         Subir documento
       </button>
@@ -204,7 +204,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
               <button
                 type="submit"
                 disabled={pending}
-                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
               >
                 {pending ? 'Subiendo…' : 'Subir'}
               </button>

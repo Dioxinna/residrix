@@ -114,21 +114,21 @@ export default function NuevaIncidenciaScreen() {
   }
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 bg-zinc-950">
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 bg-base">
       <ScrollView contentContainerClassName="px-5 py-6" keyboardShouldPersistTaps="handled">
         <View className="mb-5">
-          <Text className="text-zinc-300 text-sm font-medium mb-2">Título *</Text>
+          <Text className="text-ink-soft text-sm font-medium mb-2">Título *</Text>
           <TextInput
             value={title}
             onChangeText={setTitle}
             placeholder="Ej: Gotera en el techo del portal"
             placeholderTextColor="#52525b"
-            className="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3.5 text-white text-sm"
+            className="bg-surface border border-glassline rounded-xl px-4 py-3.5 text-ink text-sm"
           />
         </View>
 
         <View className="mb-5">
-          <Text className="text-zinc-300 text-sm font-medium mb-2">Descripción * <Text className="text-zinc-500 font-normal">(mín. 20 caracteres)</Text></Text>
+          <Text className="text-ink-soft text-sm font-medium mb-2">Descripción * <Text className="text-ink-faint font-normal">(mín. 20 caracteres)</Text></Text>
           <TextInput
             value={description}
             onChangeText={setDescription}
@@ -137,48 +137,48 @@ export default function NuevaIncidenciaScreen() {
             multiline
             numberOfLines={5}
             textAlignVertical="top"
-            className="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3.5 text-white text-sm"
+            className="bg-surface border border-glassline rounded-xl px-4 py-3.5 text-ink text-sm"
             style={{ minHeight: 120 }}
           />
-          <Text className={`text-xs mt-1 text-right ${description.length >= 20 ? 'text-green-500' : 'text-zinc-600'}`}>
+          <Text className={`text-xs mt-1 text-right ${description.length >= 20 ? 'text-green-500' : 'text-ink-faint'}`}>
             {description.length} caracteres
           </Text>
         </View>
 
         <View className="mb-5">
-          <Text className="text-zinc-300 text-sm font-medium mb-2">Categoría</Text>
+          <Text className="text-ink-soft text-sm font-medium mb-2">Categoría</Text>
           <View className="flex-row flex-wrap gap-2">
             {CATEGORIES.map(({ value, label }) => (
               <TouchableOpacity
                 key={value}
                 onPress={() => setCategory(value)}
-                className={`px-3 py-2 rounded-xl border ${category === value ? 'bg-indigo-600 border-indigo-500' : 'bg-zinc-900 border-zinc-700'}`}
+                className={`px-3 py-2 rounded-xl border ${category === value ? 'bg-violet-600 border-violet-500' : 'bg-surface border-glassline'}`}
               >
-                <Text className={`text-sm font-medium ${category === value ? 'text-white' : 'text-zinc-400'}`}>{label}</Text>
+                <Text className={`text-sm font-medium ${category === value ? 'text-ink' : 'text-ink-soft'}`}>{label}</Text>
               </TouchableOpacity>
             ))}
           </View>
         </View>
 
         <View className="mb-8">
-          <Text className="text-zinc-300 text-sm font-medium mb-2">Foto <Text className="text-zinc-500 font-normal">(opcional)</Text></Text>
+          <Text className="text-ink-soft text-sm font-medium mb-2">Foto <Text className="text-ink-faint font-normal">(opcional)</Text></Text>
           {photoUri ? (
             <View className="relative">
               <Image source={{ uri: photoUri }} className="w-full h-48 rounded-xl" resizeMode="cover" />
               <TouchableOpacity
                 onPress={() => setPhotoUri(null)}
-                className="absolute top-2 right-2 bg-black/60 rounded-full w-8 h-8 items-center justify-center"
+                className="absolute top-2 right-2 bg-base/60 rounded-full w-8 h-8 items-center justify-center"
               >
-                <Text className="text-white text-sm">✕</Text>
+                <Text className="text-ink text-sm">✕</Text>
               </TouchableOpacity>
             </View>
           ) : (
             <TouchableOpacity
               onPress={pickPhoto}
-              className="bg-zinc-900 border border-dashed border-zinc-700 rounded-xl h-32 items-center justify-center gap-2"
+              className="bg-surface border border-dashed border-glassline rounded-xl h-32 items-center justify-center gap-2"
             >
               <Text className="text-3xl">📷</Text>
-              <Text className="text-zinc-500 text-sm">Adjuntar foto</Text>
+              <Text className="text-ink-faint text-sm">Adjuntar foto</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -186,11 +186,11 @@ export default function NuevaIncidenciaScreen() {
         <TouchableOpacity
           onPress={handleSubmit}
           disabled={submitting}
-          className="bg-indigo-600 rounded-xl py-4 items-center disabled:opacity-50"
+          className="bg-violet-600 rounded-xl py-4 items-center disabled:opacity-50"
         >
           {submitting
             ? <ActivityIndicator color="white" />
-            : <Text className="text-white font-semibold text-base">Enviar incidencia</Text>
+            : <Text className="text-ink font-semibold text-base">Enviar incidencia</Text>
           }
         </TouchableOpacity>
       </ScrollView>

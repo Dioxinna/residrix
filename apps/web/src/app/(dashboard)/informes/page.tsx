@@ -51,7 +51,7 @@ export default async function InformesPage() {
         </p>
         <Link
           href="/comunidades"
-          className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded"
+          className="inline-block bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
         >
           Ir a Comunidades →
         </Link>

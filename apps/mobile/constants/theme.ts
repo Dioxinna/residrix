@@ -6,9 +6,9 @@ export const colors = {
   base: '#eceeff',
   base2: '#f6f7fe',
   surface: '#ffffff',
-  brand: '#6366f1',
-  brandSoft: '#4f46e5',
-  violet: '#8b5cf6',
+  brand: '#7c3aed',
+  brandSoft: '#6d28d9',
+  violet: '#a855f7',
   cyan: '#06b6d4',
   ink: '#15151c',
   inkSoft: '#4b4b57',
@@ -23,7 +23,7 @@ export const colors = {
   orange: '#ea580c',
   emerald: '#059669',
   blue: '#2563eb',
-  purple: '#7c3aed',
+  purple: '#9333ea',
 } as const
 
 export const urgencyColor: Record<string, string> = {

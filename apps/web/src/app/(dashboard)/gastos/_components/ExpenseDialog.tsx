@@ -118,8 +118,8 @@ export function ExpenseDialog(props: Props) {
         onClick={() => setOpen(true)}
         className={
           isCreate
-            ? 'bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded'
-            : 'text-indigo-400 hover:text-brand-soft text-sm'
+            ? 'bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded'
+            : 'text-violet-400 hover:text-brand-soft text-sm'
         }
       >
         {props.trigger}
@@ -190,7 +190,7 @@ export function ExpenseDialog(props: Props) {
                 type="checkbox"
                 checked={paid}
                 onChange={(e) => setPaid(e.target.checked)}
-                className="w-4 h-4 accent-indigo-500"
+                className="w-4 h-4 accent-violet-500"
               />
               Ya pagado
             </label>
@@ -237,7 +237,7 @@ export function ExpenseDialog(props: Props) {
               <button
                 type="submit"
                 disabled={pending}
-                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
               >
                 {pending ? 'Guardando…' : isCreate ? 'Crear' : 'Guardar'}
               </button>

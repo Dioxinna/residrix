@@ -121,7 +121,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
         <button
           type="submit"
           disabled={pending}
-          className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+          className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
         >
           {pending ? 'Enviando…' : 'Enviar invitación'}
         </button>

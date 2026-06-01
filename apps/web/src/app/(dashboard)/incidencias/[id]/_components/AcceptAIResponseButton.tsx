@@ -46,7 +46,7 @@ export function AcceptAIResponseButton({
     <button
       onClick={accept}
       disabled={pending}
-      className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
+      className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
     >
       {pending ? 'Enviando…' : 'Aceptar y enviar al vecino'}
     </button>

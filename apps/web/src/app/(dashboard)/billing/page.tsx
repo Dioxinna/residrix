@@ -11,7 +11,7 @@ function isFeatureKey(value: string | undefined): value is FeatureKey {
 
 const STATUS_LABEL: Record<string, { label: string; tone: string }> = {
   active: { label: 'Activa', tone: 'text-emerald-400 bg-emerald-500/10' },
-  trialing: { label: 'En prueba', tone: 'text-indigo-400 bg-indigo-500/10' },
+  trialing: { label: 'En prueba', tone: 'text-violet-400 bg-violet-500/10' },
   past_due: { label: 'Pago pendiente', tone: 'text-amber-400 bg-amber-500/10' },
   canceled: { label: 'Cancelada', tone: 'text-ink-faint bg-zinc-500/10' },
   incomplete: { label: 'Incompleta', tone: 'text-amber-400 bg-amber-500/10' },
@@ -76,7 +76,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
       </p>
 
       {upgradeFeature && (
-        <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-brand-soft">
+        <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-brand-soft">
           <strong className="text-ink">{FEATURE_LABEL[upgradeFeature]}</strong> está incluida en el plan{' '}
           <strong className="text-ink">{TIER_NAME[FEATURE_MIN_TIER[upgradeFeature]]}</strong>. Súbete para usarla.
         </div>
