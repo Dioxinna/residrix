@@ -14,9 +14,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.residrix.app"
     },
     "android": {
+      "package": "com.residrix.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -30,7 +32,20 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-web-browser"
-    ]
+      "expo-web-browser",
+      "expo-dev-client",
+      [
+        "expo-notifications",
+        {
+          "color": "#6366f1",
+          "defaultChannel": "default"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": ""
+      }
+    }
   }
 }

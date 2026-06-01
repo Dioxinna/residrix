@@ -1,0 +1,42 @@
+{
+  "cli": {
+    "version": ">= 20.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development",
+      "ios": {
+        "simulator": false
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://residrix.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://lvdgwxjvwzezwicbbhgh.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_Jl6cDEeySbMljPk7z34nfA_ofA8gPCL"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://residrix.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://lvdgwxjvwzezwicbbhgh.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_Jl6cDEeySbMljPk7z34nfA_ofA8gPCL"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://residrix.com",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://lvdgwxjvwzezwicbbhgh.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_Jl6cDEeySbMljPk7z34nfA_ofA8gPCL"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
