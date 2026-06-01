@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${display.variable} h-full antialiased`}>
-      <body className="min-h-full bg-base text-white">
+    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${display.variable} h-full antialiased`}>
+      <body className="min-h-full bg-base text-ink">
         <div className="aurora" aria-hidden />
         <div className="aurora-cyan" aria-hidden />
         <div className="noise" aria-hidden />

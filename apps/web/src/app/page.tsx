@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { TIERS, TIER_ORDER } from '@/lib/stripe'
 import { GlassCard, GlassButton, Eyebrow } from '@/components/ui/glass'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 
 export const metadata = {
   title: 'Residrix — Software para administradores de fincas',
@@ -10,7 +11,7 @@ export const metadata = {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen text-ink">
       <Nav />
       <Hero />
       <HowItWorks />
@@ -31,12 +32,13 @@ function Nav() {
             <div className="w-8 h-8 rounded-xl bg-brand flex items-center justify-center depth">
               <span className="text-white font-bold">R</span>
             </div>
-            <span className="text-white font-semibold tracking-tight">Residrix</span>
+            <span className="text-ink font-semibold tracking-tight">Residrix</span>
           </Link>
           <div className="flex items-center gap-1.5">
-            <Link href="/login" className="text-sm text-ink-soft hover:text-white px-4 py-2 rounded-full transition-colors">
+            <Link href="/login" className="text-sm text-ink-soft hover:text-ink px-4 py-2 rounded-full transition-colors">
               Iniciar sesión
             </Link>
+            <ThemeToggle />
             <Link
               href="/signup"
               className="text-sm bg-brand hover:-translate-y-0.5 text-white px-4 py-2 rounded-full font-medium depth lift hover:glow-brand"
@@ -60,7 +62,7 @@ function Hero() {
       <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-7xl font-bold tracking-[-0.03em] leading-[1.02] mb-7 max-w-4xl mx-auto">
         <span className="text-gradient">Toda tu comunidad,</span>
         <br />
-        <span className="text-white/95">en una sola plataforma</span>
+        <span className="text-ink">en una sola plataforma</span>
       </h1>
       <p className="text-lg text-ink-soft max-w-2xl mx-auto mb-11 leading-relaxed">
         Incidencias con IA, comunicados, documentación y una app para que los vecinos
@@ -95,7 +97,7 @@ function HowItWorks() {
               <div className="font-[family-name:var(--font-display)] text-4xl font-bold text-brand-soft/40 mb-4">
                 {s.n}
               </div>
-              <h3 className="text-white font-semibold mb-2 text-lg">{s.title}</h3>
+              <h3 className="text-ink font-semibold mb-2 text-lg">{s.title}</h3>
               <p className="text-ink-soft text-sm leading-relaxed">{s.body}</p>
             </GlassCard>
           ))}
@@ -128,7 +130,7 @@ function Features() {
             <div className="w-12 h-12 rounded-2xl glass-strong flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
               {f.icon}
             </div>
-            <h3 className="text-white font-semibold mb-2">{f.title}</h3>
+            <h3 className="text-ink font-semibold mb-2">{f.title}</h3>
             <p className="text-ink-soft text-sm leading-relaxed">{f.body}</p>
           </GlassCard>
         ))}
@@ -167,10 +169,10 @@ function Pricing() {
                     Más popular
                   </span>
                 )}
-                <h3 className="text-white text-lg font-semibold mb-1">{tier.name}</h3>
+                <h3 className="text-ink text-lg font-semibold mb-1">{tier.name}</h3>
                 <p className="text-ink-faint text-xs mb-5">{tier.tagline}</p>
                 <div className="mb-6 flex items-baseline gap-1">
-                  <span className="font-[family-name:var(--font-display)] text-4xl font-bold text-white">{tier.pricePerCommunity} €</span>
+                  <span className="font-[family-name:var(--font-display)] text-4xl font-bold text-ink">{tier.pricePerCommunity} €</span>
                   <span className="text-sm text-ink-faint">/comunidad/mes</span>
                 </div>
                 <ul className="space-y-2.5 mb-7 text-sm text-ink-soft flex-1">
@@ -186,7 +188,7 @@ function Pricing() {
                   className={`w-full text-center text-sm font-medium px-4 py-2.5 rounded-full lift hover:-translate-y-0.5 ${
                     isPro
                       ? 'bg-brand text-white depth hover:glow-brand'
-                      : 'glass text-white/90 hover:glass-strong'
+                      : 'glass text-ink hover:glass-strong'
                   }`}
                 >
                   Empezar
@@ -230,8 +232,8 @@ function Footer() {
             <span className="text-ink-faint text-sm">© {new Date().getFullYear()} Residrix</span>
           </div>
           <div className="flex items-center gap-5 text-sm text-ink-faint">
-            <Link href="/login" className="hover:text-white transition-colors">Iniciar sesión</Link>
-            <Link href="/signup" className="hover:text-white transition-colors">Empezar</Link>
+            <Link href="/login" className="hover:text-ink transition-colors">Iniciar sesión</Link>
+            <Link href="/signup" className="hover:text-ink transition-colors">Empezar</Link>
           </div>
         </div>
       </div>

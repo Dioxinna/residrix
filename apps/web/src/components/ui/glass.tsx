@@ -53,7 +53,7 @@ export function GlassButton({
     'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium lift',
     variant === 'primary'
       ? 'bg-brand text-white depth hover:-translate-y-0.5 hover:glow-brand'
-      : 'glass text-white/90 hover:glass-strong hover:-translate-y-0.5',
+      : 'glass text-ink hover:glass-strong hover:-translate-y-0.5',
     className,
   )
   if (href) {
