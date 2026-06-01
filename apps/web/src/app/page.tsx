@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { TIERS, TIER_ORDER } from '@/lib/stripe'
+import { GlassCard, GlassButton, Eyebrow } from '@/components/ui/glass'
 
 export const metadata = {
   title: 'Residrix — Software para administradores de fincas',
@@ -9,7 +10,7 @@ export const metadata = {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen text-white">
       <Nav />
       <Hero />
       <HowItWorks />
@@ -23,24 +24,26 @@ export default function LandingPage() {
 
 function Nav() {
   return (
-    <nav className="sticky top-0 z-40 backdrop-blur-md bg-[#0a0a0a]/80 border-b border-zinc-900">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
-            <span className="text-white font-bold">R</span>
+    <nav className="sticky top-0 z-40">
+      <div className="max-w-6xl mx-auto px-4 pt-4">
+        <div className="glass rounded-full px-5 py-3 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-brand flex items-center justify-center depth">
+              <span className="text-white font-bold">R</span>
+            </div>
+            <span className="text-white font-semibold tracking-tight">Residrix</span>
+          </Link>
+          <div className="flex items-center gap-1.5">
+            <Link href="/login" className="text-sm text-ink-soft hover:text-white px-4 py-2 rounded-full transition-colors">
+              Iniciar sesión
+            </Link>
+            <Link
+              href="/signup"
+              className="text-sm bg-brand hover:-translate-y-0.5 text-white px-4 py-2 rounded-full font-medium depth lift hover:glow-brand"
+            >
+              Empezar gratis
+            </Link>
           </div>
-          <span className="text-white font-semibold">Residrix</span>
-        </Link>
-        <div className="flex items-center gap-2">
-          <Link href="/login" className="text-sm text-zinc-400 hover:text-white px-3 py-1.5">
-            Iniciar sesión
-          </Link>
-          <Link
-            href="/signup"
-            className="text-sm bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-1.5 rounded-lg font-medium"
-          >
-            Empezar gratis
-          </Link>
         </div>
       </div>
     </nav>
@@ -49,34 +52,25 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="max-w-6xl mx-auto px-6 pt-24 pb-32 text-center">
-      <div className="inline-block px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium mb-6">
+    <section className="max-w-5xl mx-auto px-6 pt-24 pb-32 text-center">
+      <Eyebrow className="mb-8">
+        <span className="w-1.5 h-1.5 rounded-full bg-brand-soft animate-pulse" />
         Software para administradores de fincas
-      </div>
-      <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 max-w-3xl mx-auto">
-        Toda tu comunidad,
+      </Eyebrow>
+      <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-7xl font-bold tracking-[-0.03em] leading-[1.02] mb-7 max-w-4xl mx-auto">
+        <span className="text-gradient">Toda tu comunidad,</span>
         <br />
-        <span className="text-indigo-400">en una sola plataforma</span>
+        <span className="text-white/95">en una sola plataforma</span>
       </h1>
-      <p className="text-lg text-zinc-400 max-w-2xl mx-auto mb-10">
+      <p className="text-lg text-ink-soft max-w-2xl mx-auto mb-11 leading-relaxed">
         Incidencias con IA, comunicados, documentación y una app para que los vecinos
         se comuniquen contigo sin saturar el teléfono.
       </p>
       <div className="flex items-center justify-center gap-3 flex-wrap">
-        <Link
-          href="/signup"
-          className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium"
-        >
-          Empezar gratis →
-        </Link>
-        <a
-          href="#pricing"
-          className="text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-700 px-6 py-3 rounded-lg font-medium"
-        >
-          Ver precios
-        </a>
+        <GlassButton href="/signup">Empezar gratis →</GlassButton>
+        <GlassButton href="#pricing" variant="ghost">Ver precios</GlassButton>
       </div>
-      <p className="text-xs text-zinc-600 mt-4">
+      <p className="text-xs text-ink-faint mt-5">
         Sin tarjeta. Primera comunidad gratis para siempre.
       </p>
     </section>
@@ -85,23 +79,25 @@ function Hero() {
 
 function HowItWorks() {
   const steps = [
-    { n: 1, title: 'Registra tu despacho', body: 'Crea tu cuenta en menos de un minuto. Sin instalaciones ni configuración.' },
-    { n: 2, title: 'Añade tus comunidades', body: 'Crea tantas comunidades como gestiones y envía códigos de invitación a los vecinos.' },
-    { n: 3, title: 'Los vecinos reportan, tú gestionas', body: 'Las incidencias llegan organizadas por urgencia y clasificadas con IA. Respondes desde web o móvil.' },
+    { n: '01', title: 'Registra tu despacho', body: 'Crea tu cuenta en menos de un minuto. Sin instalaciones ni configuración.' },
+    { n: '02', title: 'Añade tus comunidades', body: 'Crea tantas comunidades como gestiones y envía códigos de invitación a los vecinos.' },
+    { n: '03', title: 'Los vecinos reportan, tú gestionas', body: 'Las incidencias llegan organizadas por urgencia y clasificadas con IA. Respondes desde web o móvil.' },
   ]
   return (
-    <section className="border-y border-zinc-900 bg-zinc-950/40 py-20">
+    <section className="py-20">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12">Cómo funciona</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold text-center mb-12 tracking-tight">
+          Cómo funciona
+        </h2>
+        <div className="grid md:grid-cols-3 gap-5">
           {steps.map((s) => (
-            <div key={s.n} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-              <div className="w-10 h-10 rounded-full bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-bold mb-4">
+            <GlassCard key={s.n} lift className="p-7">
+              <div className="font-[family-name:var(--font-display)] text-4xl font-bold text-brand-soft/40 mb-4">
                 {s.n}
               </div>
-              <h3 className="text-white font-semibold mb-2">{s.title}</h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">{s.body}</p>
-            </div>
+              <h3 className="text-white font-semibold mb-2 text-lg">{s.title}</h3>
+              <p className="text-ink-soft text-sm leading-relaxed">{s.body}</p>
+            </GlassCard>
           ))}
         </div>
       </div>
@@ -111,50 +107,30 @@ function HowItWorks() {
 
 function Features() {
   const features = [
-    {
-      icon: '⚠️',
-      title: 'Incidencias con IA',
-      body: 'Cada incidencia se clasifica automáticamente por urgencia y categoría. La IA sugiere primeras respuestas.',
-    },
-    {
-      icon: '📢',
-      title: 'Comunicados en tiempo real',
-      body: 'Avisa a toda una comunidad con un click. Push + email a todos los vecinos según sus preferencias.',
-    },
-    {
-      icon: '📄',
-      title: 'Documentación compartida',
-      body: 'Sube actas, presupuestos y normativa. Los vecinos los ven en su app. Tú controlas qué es público.',
-    },
-    {
-      icon: '📱',
-      title: 'App nativa para vecinos',
-      body: 'iOS y Android. Reportan incidencias con foto, ven comunicados, consultan documentos. Sin sobrecarga.',
-    },
-    {
-      icon: '🔔',
-      title: 'Notificaciones inteligentes',
-      body: 'Push y email para cada evento clave. Cada usuario decide qué quiere recibir y cómo.',
-    },
-    {
-      icon: '🔒',
-      title: 'Multi-comunidad seguro',
-      body: 'Cada comunidad ve solo lo suyo. RLS de Supabase. Cumple con el GDPR de un extremo a otro.',
-    },
+    { icon: '⚠️', title: 'Incidencias con IA', body: 'Cada incidencia se clasifica automáticamente por urgencia y categoría. La IA sugiere primeras respuestas.' },
+    { icon: '📢', title: 'Comunicados en tiempo real', body: 'Avisa a toda una comunidad con un click. Push + email a todos los vecinos según sus preferencias.' },
+    { icon: '📄', title: 'Documentación compartida', body: 'Sube actas, presupuestos y normativa. Los vecinos los ven en su app. Tú controlas qué es público.' },
+    { icon: '📱', title: 'App nativa para vecinos', body: 'iOS y Android. Reportan incidencias con foto, ven comunicados, consultan documentos. Sin sobrecarga.' },
+    { icon: '🔔', title: 'Notificaciones inteligentes', body: 'Push y email para cada evento clave. Cada usuario decide qué quiere recibir y cómo.' },
+    { icon: '🔒', title: 'Multi-comunidad seguro', body: 'Cada comunidad ve solo lo suyo. RLS de Supabase. Cumple con el GDPR de un extremo a otro.' },
   ]
   return (
     <section className="max-w-6xl mx-auto px-6 py-24">
-      <h2 className="text-3xl font-bold text-center mb-3">Todo lo que necesita tu despacho</h2>
-      <p className="text-zinc-400 text-center mb-12 max-w-2xl mx-auto">
+      <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold text-center mb-3 tracking-tight">
+        Todo lo que necesita tu despacho
+      </h2>
+      <p className="text-ink-soft text-center mb-14 max-w-2xl mx-auto">
         Reemplaza el WhatsApp, los emails sueltos y los Excel. Una sola herramienta para todo.
       </p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {features.map((f) => (
-          <div key={f.title} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors">
-            <div className="text-3xl mb-3">{f.icon}</div>
+          <GlassCard key={f.title} lift className="p-6 group">
+            <div className="w-12 h-12 rounded-2xl glass-strong flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              {f.icon}
+            </div>
             <h3 className="text-white font-semibold mb-2">{f.title}</h3>
-            <p className="text-zinc-400 text-sm leading-relaxed">{f.body}</p>
-          </div>
+            <p className="text-ink-soft text-sm leading-relaxed">{f.body}</p>
+          </GlassCard>
         ))}
       </div>
     </section>
@@ -164,57 +140,58 @@ function Features() {
 function Pricing() {
   const tiers = TIER_ORDER.map((k) => TIERS[k])
   return (
-    <section id="pricing" className="border-y border-zinc-900 bg-zinc-950/40 py-24">
+    <section id="pricing" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-3">Precios</h2>
-        <p className="text-zinc-400 text-center mb-2 max-w-2xl mx-auto">
+        <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold text-center mb-3 tracking-tight">
+          Precios
+        </h2>
+        <p className="text-ink-soft text-center mb-2 max-w-2xl mx-auto">
           Por comunidad, por mes. Tu primera comunidad es gratis para siempre.
         </p>
-        <p className="text-zinc-500 text-sm text-center mb-12">
+        <p className="text-ink-faint text-sm text-center mb-14">
           Sin permanencia · IVA no incluido · Cambia o cancela cuando quieras
         </p>
-        <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto items-start">
           {tiers.map((tier) => {
             const isPro = tier.key === 'pro'
             return (
-              <div
+              <GlassCard
                 key={tier.key}
-                className={`relative rounded-xl border p-6 flex flex-col ${
-                  isPro
-                    ? 'bg-indigo-500/5 border-indigo-500/40 md:scale-105'
-                    : 'bg-zinc-900 border-zinc-800'
-                }`}
+                strong={isPro}
+                glow={isPro}
+                lift
+                className={`relative p-7 flex flex-col ${isPro ? 'md:-translate-y-3 md:scale-[1.03]' : ''}`}
               >
                 {isPro && (
-                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full depth">
                     Más popular
                   </span>
                 )}
                 <h3 className="text-white text-lg font-semibold mb-1">{tier.name}</h3>
-                <p className="text-zinc-500 text-xs mb-4">{tier.tagline}</p>
-                <div className="mb-6">
-                  <span className="text-3xl font-bold text-white">{tier.pricePerCommunity} €</span>
-                  <span className="text-sm text-zinc-500"> /comunidad/mes</span>
+                <p className="text-ink-faint text-xs mb-5">{tier.tagline}</p>
+                <div className="mb-6 flex items-baseline gap-1">
+                  <span className="font-[family-name:var(--font-display)] text-4xl font-bold text-white">{tier.pricePerCommunity} €</span>
+                  <span className="text-sm text-ink-faint">/comunidad/mes</span>
                 </div>
-                <ul className="space-y-2 mb-6 text-sm text-zinc-300 flex-1">
+                <ul className="space-y-2.5 mb-7 text-sm text-ink-soft flex-1">
                   {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2">
-                      <span className="text-indigo-400 mt-0.5">✓</span>
+                    <li key={f} className="flex items-start gap-2.5">
+                      <span className="mt-0.5 w-4 h-4 rounded-full bg-brand/20 text-brand-soft flex items-center justify-center text-[10px] flex-shrink-0">✓</span>
                       <span>{f}</span>
                     </li>
                   ))}
                 </ul>
                 <Link
                   href="/signup"
-                  className={`w-full text-center text-sm font-medium px-4 py-2 rounded ${
+                  className={`w-full text-center text-sm font-medium px-4 py-2.5 rounded-full lift hover:-translate-y-0.5 ${
                     isPro
-                      ? 'bg-indigo-600 hover:bg-indigo-500 text-white'
-                      : 'border border-zinc-700 hover:border-zinc-600 text-zinc-200'
+                      ? 'bg-brand text-white depth hover:glow-brand'
+                      : 'glass text-white/90 hover:glass-strong'
                   }`}
                 >
                   Empezar
                 </Link>
-              </div>
+              </GlassCard>
             )
           })}
         </div>
@@ -225,36 +202,37 @@ function Pricing() {
 
 function CTA() {
   return (
-    <section className="max-w-4xl mx-auto px-6 py-24 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">
-        Empieza a ahorrar horas cada semana
-      </h2>
-      <p className="text-zinc-400 text-lg mb-8">
-        Sin tarjeta. Primera comunidad gratis. Configura tu despacho en 5 minutos.
-      </p>
-      <Link
-        href="/signup"
-        className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-lg font-medium text-lg"
-      >
-        Crear cuenta gratis →
-      </Link>
+    <section className="max-w-4xl mx-auto px-6 py-24">
+      <GlassCard strong glow className="px-8 py-16 text-center overflow-hidden relative">
+        <div className="absolute inset-0 -z-10 opacity-60" style={{ background: 'radial-gradient(circle at 50% 0%, rgba(99,102,241,0.25), transparent 60%)' }} aria-hidden />
+        <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-5xl font-bold mb-4 tracking-tight text-gradient">
+          Empieza a ahorrar horas cada semana
+        </h2>
+        <p className="text-ink-soft text-lg mb-9 max-w-xl mx-auto">
+          Sin tarjeta. Primera comunidad gratis. Configura tu despacho en 5 minutos.
+        </p>
+        <GlassButton href="/signup" className="text-base px-8">Crear cuenta gratis →</GlassButton>
+      </GlassCard>
     </section>
   )
 }
 
 function Footer() {
   return (
-    <footer className="border-t border-zinc-900 py-10">
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center">
-            <span className="text-white font-bold text-xs">R</span>
+    <footer className="py-10">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="hairline mb-8" />
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-lg bg-brand flex items-center justify-center">
+              <span className="text-white font-bold text-xs">R</span>
+            </div>
+            <span className="text-ink-faint text-sm">© {new Date().getFullYear()} Residrix</span>
           </div>
-          <span className="text-zinc-500 text-sm">© {new Date().getFullYear()} Residrix</span>
-        </div>
-        <div className="flex items-center gap-5 text-sm text-zinc-500">
-          <Link href="/login" className="hover:text-zinc-300">Iniciar sesión</Link>
-          <Link href="/signup" className="hover:text-zinc-300">Empezar</Link>
+          <div className="flex items-center gap-5 text-sm text-ink-faint">
+            <Link href="/login" className="hover:text-white transition-colors">Iniciar sesión</Link>
+            <Link href="/signup" className="hover:text-white transition-colors">Empezar</Link>
+          </div>
         </div>
       </div>
     </footer>
