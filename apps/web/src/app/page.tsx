@@ -112,43 +112,51 @@ function Hero() {
 
 function FloatingFragments() {
   return (
-    <div className="hidden lg:block absolute inset-0 max-w-6xl mx-auto pointer-events-none" aria-hidden>
-      {/* Incidencia card — top left */}
-      <div className="float absolute top-10 left-0 w-56 glass rounded-2xl p-3.5 depth">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-brand/10 px-1.5 py-0.5 rounded">Incidencia</span>
-          <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-300">Media</span>
-        </div>
-        <p className="text-xs font-medium text-ink">Gotera en el 2A</p>
-        <p className="text-[10px] text-ink-faint mt-0.5">Clasificada por IA · Fontanería</p>
-      </div>
-
-      {/* Notification toast — top right */}
-      <div className="float-delay absolute top-16 right-0 w-52 glass rounded-2xl p-3.5 depth">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-brand/15 flex items-center justify-center">
-            <Bell size={15} className="text-brand" strokeWidth={1.75} />
+    <div className="hidden lg:block absolute inset-0 max-w-[1400px] mx-auto pointer-events-none" aria-hidden>
+      {/* Incidencia card — upper left, tucked near the headline */}
+      <div className="absolute top-[14%] left-[6%] -rotate-[4deg]">
+        <div className="float w-52 glass rounded-2xl p-3.5 depth">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-brand/10 px-1.5 py-0.5 rounded">Incidencia</span>
+            <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-300">Media</span>
           </div>
-          <div className="min-w-0">
-            <p className="text-xs font-medium text-ink truncate">Nuevo comunicado</p>
-            <p className="text-[10px] text-ink-faint">Enviado a 48 vecinos</p>
+          <p className="text-xs font-medium text-ink">Gotera en el 2A</p>
+          <p className="text-[10px] text-ink-faint mt-0.5">Clasificada por IA · Fontanería</p>
+        </div>
+      </div>
+
+      {/* Stat chip — small, high right, close to headline */}
+      <div className="absolute top-[10%] right-[9%] rotate-[5deg]">
+        <div className="float-delay glass rounded-2xl px-4 py-3 depth">
+          <p className="text-[10px] uppercase tracking-wide text-ink-faint">Resueltas</p>
+          <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-emerald-500">83%</p>
+        </div>
+      </div>
+
+      {/* Notification toast — mid right, drifting toward the product */}
+      <div className="absolute top-[40%] right-[4%] rotate-[3deg]">
+        <div className="float-slow w-52 glass rounded-2xl p-3.5 depth">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-brand/15 flex items-center justify-center">
+              <Bell size={15} className="text-brand" strokeWidth={1.75} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-medium text-ink truncate">Nuevo comunicado</p>
+              <p className="text-[10px] text-ink-faint">Enviado a 48 vecinos</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* AI suggestion — bottom left */}
-      <div className="float-slow absolute top-[58%] left-6 w-48 glass rounded-2xl p-3 depth">
-        <div className="flex items-center gap-2 mb-1.5">
-          <Sparkles size={13} className="text-brand" />
-          <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft">Respuesta IA</span>
+      {/* AI suggestion — mid left, overlapping toward the product peek */}
+      <div className="absolute top-[46%] left-[3%] -rotate-[2deg]">
+        <div className="float w-48 glass rounded-2xl p-3 depth">
+          <div className="flex items-center gap-2 mb-1.5">
+            <Sparkles size={13} className="text-brand" />
+            <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft">Respuesta IA</span>
+          </div>
+          <p className="text-[11px] text-ink-soft leading-snug">&ldquo;Hemos avisado al fontanero, pasará mañana…&rdquo;</p>
         </div>
-        <p className="text-[11px] text-ink-soft leading-snug">"Hemos avisado al fontanero, pasará mañana…"</p>
-      </div>
-
-      {/* Stat chip — bottom right */}
-      <div className="float absolute top-[60%] right-8 glass rounded-2xl px-4 py-3 depth">
-        <p className="text-[10px] uppercase tracking-wide text-ink-faint">Resueltas este mes</p>
-        <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-emerald-500">83%</p>
       </div>
     </div>
   )
