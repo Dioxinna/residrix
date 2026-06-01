@@ -60,7 +60,7 @@ export default async function AsistenteIaPage() {
       <p className="text-sm text-ink-soft mb-8">
         Incidencias abiertas con sugerencias automáticas. Agrupadas por patrón para que respondas a varias a la vez.
         {pendingCount > 0 && (
-          <span className="text-indigo-300"> · {pendingCount} respuesta{pendingCount === 1 ? '' : 's'} pendiente{pendingCount === 1 ? '' : 's'} de enviar</span>
+          <span className="text-brand-soft"> · {pendingCount} respuesta{pendingCount === 1 ? '' : 's'} pendiente{pendingCount === 1 ? '' : 's'} de enviar</span>
         )}
       </p>
 

@@ -65,7 +65,7 @@ export default async function DashboardPage() {
       <div className="glass rounded-xl">
         <div className="px-6 py-4 border-b border-[color:var(--glass-border)] flex items-center justify-between">
           <h2 className="text-ink font-semibold text-sm">Últimas incidencias</h2>
-          <Link href="/incidencias" className="text-indigo-400 text-xs hover:text-indigo-300 transition-colors">
+          <Link href="/incidencias" className="text-indigo-400 text-xs hover:text-brand-soft transition-colors">
             Ver todas →
           </Link>
         </div>

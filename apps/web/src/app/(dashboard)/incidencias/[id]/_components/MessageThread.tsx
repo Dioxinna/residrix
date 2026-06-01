@@ -105,7 +105,7 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
           className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none"
         />
         {aiResponse && !content && (
-          <button onClick={() => setContent(aiResponse)} className="text-indigo-400 text-xs hover:text-indigo-300 transition-colors">
+          <button onClick={() => setContent(aiResponse)} className="text-indigo-400 text-xs hover:text-brand-soft transition-colors">
             ✦ Usar respuesta IA
           </button>
         )}

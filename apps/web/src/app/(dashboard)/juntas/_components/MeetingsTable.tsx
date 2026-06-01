@@ -25,9 +25,9 @@ function durationLabel(seconds: number | null): string {
 
 const STATUS_STYLES: Record<string, { label: string; tone: string }> = {
   pending: { label: 'En cola', tone: 'text-ink-soft bg-zinc-700/40 border-zinc-600/40' },
-  transcribing: { label: 'Transcribiendo', tone: 'text-indigo-300 bg-indigo-500/10 border-indigo-500/30' },
-  transcribed: { label: 'Transcrita', tone: 'text-indigo-300 bg-indigo-500/10 border-indigo-500/30' },
-  summarizing: { label: 'Resumiendo', tone: 'text-indigo-300 bg-indigo-500/10 border-indigo-500/30' },
+  transcribing: { label: 'Transcribiendo', tone: 'text-brand-soft bg-indigo-500/10 border-indigo-500/30' },
+  transcribed: { label: 'Transcrita', tone: 'text-brand-soft bg-indigo-500/10 border-indigo-500/30' },
+  summarizing: { label: 'Resumiendo', tone: 'text-brand-soft bg-indigo-500/10 border-indigo-500/30' },
   completed: { label: 'Lista', tone: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/30' },
   failed: { label: 'Falló', tone: 'text-red-300 bg-red-500/10 border-red-500/30' },
 }
@@ -81,7 +81,7 @@ export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
                 <td className="px-6 py-3 text-right">
                   <Link
                     href={`/juntas/${m.id}`}
-                    className="text-indigo-400 hover:text-indigo-300 text-sm"
+                    className="text-indigo-400 hover:text-brand-soft text-sm"
                   >
                     Abrir →
                   </Link>

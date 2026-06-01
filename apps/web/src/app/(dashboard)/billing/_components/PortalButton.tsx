@@ -22,7 +22,7 @@ export function PortalButton() {
     <button
       onClick={open}
       disabled={pending}
-      className="text-sm text-indigo-400 hover:text-indigo-300 disabled:opacity-50"
+      className="text-sm text-indigo-400 hover:text-brand-soft disabled:opacity-50"
     >
       {pending ? 'Abriendo…' : 'Portal de cliente →'}
     </button>

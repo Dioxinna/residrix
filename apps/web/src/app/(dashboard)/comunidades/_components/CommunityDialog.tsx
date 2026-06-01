@@ -87,7 +87,7 @@ export function CommunityDialog(props: Props) {
         className={
           isCreate
             ? 'bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded'
-            : 'text-indigo-400 hover:text-indigo-300 text-sm'
+            : 'text-indigo-400 hover:text-brand-soft text-sm'
         }
       >
         {props.trigger}

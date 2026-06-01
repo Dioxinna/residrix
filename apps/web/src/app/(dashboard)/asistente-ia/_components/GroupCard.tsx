@@ -50,7 +50,7 @@ export function GroupCard({
         <div className="min-w-0">
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
             {groupKey ? (
-              <span className="text-[10px] uppercase tracking-wide font-bold text-indigo-300 bg-indigo-500/10 border border-indigo-500/30 px-1.5 py-0.5 rounded">
+              <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-indigo-500/10 border border-indigo-500/30 px-1.5 py-0.5 rounded">
                 {groupKey}
               </span>
             ) : (
@@ -118,7 +118,7 @@ function IncidenceRow({ inc }: { inc: GroupedIncidence }) {
         <div className="min-w-0">
           <Link
             href={`/incidencias/${inc.id}`}
-            className="text-ink text-sm font-medium hover:text-indigo-300 inline-flex items-center gap-1"
+            className="text-ink text-sm font-medium hover:text-brand-soft inline-flex items-center gap-1"
           >
             {inc.title}
             <ExternalLink size={12} className="text-ink-faint" />
@@ -135,11 +135,11 @@ function IncidenceRow({ inc }: { inc: GroupedIncidence }) {
       </div>
 
       {inc.ai_response ? (
-        <div className="bg-indigo-950/30 border border-indigo-900/50 rounded-lg p-3 mt-2">
-          <p className="text-[10px] uppercase tracking-wide font-bold text-indigo-300 mb-1.5">
+        <div className="bg-brand/8 border border-brand/25 rounded-xl p-3 mt-2">
+          <p className="text-[10px] uppercase tracking-wide font-bold text-brand-soft mb-1.5">
             ✦ Respuesta sugerida
           </p>
-          <p className="text-indigo-100 text-sm leading-relaxed whitespace-pre-wrap">{inc.ai_response}</p>
+          <p className="text-ink text-sm leading-relaxed whitespace-pre-wrap">{inc.ai_response}</p>
           <div className="flex items-center justify-end gap-2 mt-3">
             {accepted ? (
               <span className="inline-flex items-center gap-1 text-xs text-emerald-400 font-medium">

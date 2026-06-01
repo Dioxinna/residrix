@@ -85,7 +85,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
           </section>
 
           {inc.ai_response && (
-            <section className="bg-indigo-950/50 border border-indigo-800/50 rounded-xl p-6">
+            <section className="bg-brand/8 border border-brand/25 rounded-xl p-6">
               <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
                 <span className="text-indigo-400 text-xs font-semibold uppercase tracking-wide">✦ Respuesta IA sugerida</span>
                 {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
@@ -97,7 +97,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
               {inc.ai_summary && (
                 <p className="text-ink-soft text-xs mb-3 italic">Resumen: {inc.ai_summary}</p>
               )}
-              <p className="text-indigo-100 text-sm leading-relaxed whitespace-pre-wrap">{inc.ai_response}</p>
+              <p className="text-ink text-sm leading-relaxed whitespace-pre-wrap">{inc.ai_response}</p>
               <div className="flex justify-end mt-4">
                 <AcceptAIResponseButton incidenceId={id} alreadyAccepted={!!inc.ai_response_accepted_at} />
               </div>
@@ -143,7 +143,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                         {p.email && (
                           <a
                             href={`mailto:${p.email}?subject=Incidencia: ${encodeURIComponent(inc.title)}`}
-                            className="inline-flex items-center gap-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2 py-1 rounded border border-indigo-500/30"
+                            className="inline-flex items-center gap-1 bg-indigo-500/10 hover:bg-indigo-500/20 text-brand-soft text-xs font-medium px-2 py-1 rounded border border-indigo-500/30"
                           >
                             ✉ Email
                           </a>

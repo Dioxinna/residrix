@@ -124,7 +124,7 @@ export function CreateAnnouncementDialog({
                           ? 'bg-red-500/15 border-red-500/40 text-red-300'
                           : s.value === 'warning'
                           ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
-                          : 'bg-indigo-500/15 border-indigo-500/40 text-indigo-300'
+                          : 'bg-indigo-500/15 border-indigo-500/40 text-brand-soft'
                         : 'border-[color:var(--glass-border)] text-ink-soft hover:text-ink'
                     }`}
                   >

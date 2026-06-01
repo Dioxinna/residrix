@@ -33,7 +33,7 @@ function author(p: Announcement['profiles']): string {
 const SEVERITY_STYLES: Record<string, { label: string; tag: string; bar: string }> = {
   info: {
     label: 'Información',
-    tag: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
+    tag: 'bg-indigo-500/15 text-brand-soft border-indigo-500/30',
     bar: 'bg-indigo-500',
   },
   warning: {

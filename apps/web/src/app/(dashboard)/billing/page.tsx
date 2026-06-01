@@ -76,7 +76,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
       </p>
 
       {upgradeFeature && (
-        <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-indigo-200">
+        <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-brand-soft">
           <strong className="text-ink">{FEATURE_LABEL[upgradeFeature]}</strong> está incluida en el plan{' '}
           <strong className="text-ink">{TIER_NAME[FEATURE_MIN_TIER[upgradeFeature]]}</strong>. Súbete para usarla.
         </div>

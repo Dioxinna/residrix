@@ -139,7 +139,7 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
                     type="button"
                     disabled={isPending}
                     onClick={() => download(doc)}
-                    className="text-indigo-400 hover:text-indigo-300 disabled:opacity-50"
+                    className="text-indigo-400 hover:text-brand-soft disabled:opacity-50"
                   >
                     Ver
                   </button>

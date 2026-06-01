@@ -93,7 +93,7 @@ export function LiquidacionPicker({
                 onClick={() => setPreset(p.value)}
                 className={`text-xs px-2.5 py-1 rounded border ${
                   active
-                    ? 'bg-indigo-500/15 border-indigo-500/40 text-white'
+                    ? 'bg-brand/15 border-brand/40 text-ink'
                     : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)] text-ink-soft hover:text-ink hover:border-[color:var(--glass-border)]'
                 }`}
               >
