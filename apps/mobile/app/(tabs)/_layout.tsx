@@ -1,46 +1,55 @@
 import { Tabs } from 'expo-router'
-import { Text } from 'react-native'
-
-function TabIcon({ symbol, focused }: { symbol: string; focused: boolean }) {
-  return <Text style={{ fontSize: 20, opacity: focused ? 1 : 0.5 }}>{symbol}</Text>
-}
+import { StyleSheet } from 'react-native'
+import { BlurView } from 'expo-blur'
+import { House, TriangleAlert, FileText, Settings } from 'lucide-react-native'
+import { colors } from '@/constants/theme'
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: '#111111', borderTopColor: '#27272a' },
-        tabBarActiveTintColor: '#6366f1',
-        tabBarInactiveTintColor: '#71717a',
+        tabBarActiveTintColor: colors.brand,
+        tabBarInactiveTintColor: colors.inkFaint,
+        tabBarLabelStyle: { fontSize: 11, fontWeight: '500' },
+        tabBarStyle: {
+          position: 'absolute',
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: colors.glassline,
+          backgroundColor: 'transparent',
+          elevation: 0,
+        },
+        tabBarBackground: () => (
+          <BlurView intensity={40} tint="light" style={StyleSheet.absoluteFill} />
+        ),
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Inicio',
-          tabBarIcon: ({ focused }) => <TabIcon symbol="🏠" focused={focused} />,
+          tabBarIcon: ({ color, size }) => <House color={color} size={size} strokeWidth={1.75} />,
         }}
       />
       <Tabs.Screen
         name="mis-incidencias"
         options={{
-          title: 'Mis incidencias',
-          tabBarIcon: ({ focused }) => <TabIcon symbol="⚠️" focused={focused} />,
+          title: 'Incidencias',
+          tabBarIcon: ({ color, size }) => <TriangleAlert color={color} size={size} strokeWidth={1.75} />,
         }}
       />
       <Tabs.Screen
         name="documentos"
         options={{
           title: 'Documentos',
-          tabBarIcon: ({ focused }) => <TabIcon symbol="📄" focused={focused} />,
+          tabBarIcon: ({ color, size }) => <FileText color={color} size={size} strokeWidth={1.75} />,
         }}
       />
       <Tabs.Screen
         name="ajustes"
         options={{
           title: 'Ajustes',
-          tabBarIcon: ({ focused }) => <TabIcon symbol="⚙️" focused={focused} />,
+          tabBarIcon: ({ color, size }) => <Settings color={color} size={size} strokeWidth={1.75} />,
         }}
       />
     </Tabs>

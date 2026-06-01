@@ -1,10 +1,13 @@
 import { useEffect, useState, useCallback } from 'react'
 import { View, Text, FlatList, RefreshControl, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { useRouter } from 'expo-router'
+import { Plus, CheckCircle2 } from 'lucide-react-native'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/auth'
 import { IncidenceCard } from '@/components/IncidenceCard'
 import { AnnouncementCard, type Announcement } from '@/components/AnnouncementCard'
+import { AuroraBackground } from '@/components/AuroraBackground'
+import { colors } from '@/constants/theme'
 
 interface Incidence {
   id: string
@@ -72,8 +75,9 @@ export default function HomeScreen() {
 
   if (loading) {
     return (
-      <View className="flex-1 bg-zinc-950 items-center justify-center">
-        <ActivityIndicator color="#6366f1" />
+      <View className="flex-1 items-center justify-center">
+        <AuroraBackground />
+        <ActivityIndicator color={colors.brand} />
       </View>
     )
   }
@@ -91,29 +95,32 @@ export default function HomeScreen() {
   }
 
   return (
-    <View className="flex-1 bg-zinc-950">
-      <View className="px-5 pt-14 pb-4 flex-row items-center justify-between">
+    <View className="flex-1">
+      <AuroraBackground />
+      <View className="px-5 pt-16 pb-4 flex-row items-center justify-between">
         <View>
-          <Text className="text-white text-xl font-bold">Comunidad</Text>
-          <Text className="text-zinc-400 text-sm mt-0.5">Actividad de tu comunidad</Text>
+          <Text className="text-ink text-2xl font-bold">Comunidad</Text>
+          <Text className="text-ink-soft text-sm mt-0.5">Actividad de tu comunidad</Text>
         </View>
         <TouchableOpacity
           onPress={() => router.push('/incidencias/nueva')}
-          className="bg-indigo-600 rounded-xl w-10 h-10 items-center justify-center"
+          className="bg-brand rounded-2xl w-11 h-11 items-center justify-center"
+          style={{ shadowColor: colors.brand, shadowOpacity: 0.4, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 4 }}
+          activeOpacity={0.85}
         >
-          <Text className="text-white text-xl font-light">+</Text>
+          <Plus color="#fff" size={22} strokeWidth={2} />
         </TouchableOpacity>
       </View>
 
       <FlatList
         data={items}
         keyExtractor={(item) => `${item.kind}-${item.id}`}
-        contentContainerClassName="px-5 pb-8"
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#6366f1" />}
+        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 110 }}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.brand} />}
         renderItem={({ item }) => {
           if (item.kind === 'header') {
             return (
-              <Text className="text-zinc-500 text-xs uppercase tracking-wide font-medium mt-2 mb-2 px-1">
+              <Text className="text-ink-faint text-xs uppercase tracking-wide font-semibold mt-3 mb-2 px-1">
                 {item.title}
               </Text>
             )
@@ -124,9 +131,9 @@ export default function HomeScreen() {
           if (item.kind === 'empty-incidences') {
             return (
               <View className="items-center justify-center py-12">
-                <Text className="text-4xl mb-3">✓</Text>
-                <Text className="text-white font-semibold text-base">Todo en orden</Text>
-                <Text className="text-zinc-500 text-sm mt-1 text-center">No hay incidencias activas</Text>
+                <CheckCircle2 color={colors.emerald} size={40} strokeWidth={1.5} />
+                <Text className="text-ink font-semibold text-base mt-3">Todo en orden</Text>
+                <Text className="text-ink-faint text-sm mt-1 text-center">No hay incidencias activas</Text>
               </View>
             )
           }
