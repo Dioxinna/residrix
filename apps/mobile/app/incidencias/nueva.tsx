@@ -7,6 +7,7 @@ import { useRouter } from 'expo-router'
 import * as ImagePicker from 'expo-image-picker'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/auth'
+import { AuroraBackground } from '@/components/AuroraBackground'
 
 const CATEGORIES = [
   { value: 'plumbing',     label: 'Fontanería' },
@@ -114,7 +115,9 @@ export default function NuevaIncidenciaScreen() {
   }
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 bg-base">
+    <View className="flex-1">
+      <AuroraBackground />
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1">
       <ScrollView contentContainerClassName="px-5 py-6" keyboardShouldPersistTaps="handled">
         <View className="mb-5">
           <Text className="text-ink-soft text-sm font-medium mb-2">Título *</Text>
@@ -190,10 +193,11 @@ export default function NuevaIncidenciaScreen() {
         >
           {submitting
             ? <ActivityIndicator color="white" />
-            : <Text className="text-ink font-semibold text-base">Enviar incidencia</Text>
+            : <Text className="text-white font-semibold text-base">Enviar incidencia</Text>
           }
         </TouchableOpacity>
       </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </View>
   )
 }

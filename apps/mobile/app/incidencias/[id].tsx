@@ -8,6 +8,8 @@ import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/auth'
 import { formatDistanceToNow, format } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { AuroraBackground } from '@/components/AuroraBackground'
+import { colors } from '@/constants/theme'
 
 interface Incidence {
   id: string
@@ -88,16 +90,18 @@ export default function IncidenciaDetailScreen() {
   }
 
   if (loading) {
-    return <View className="flex-1 bg-base items-center justify-center"><ActivityIndicator color="#7c3aed" /></View>
+    return <View className="flex-1 items-center justify-center"><AuroraBackground /><ActivityIndicator color={colors.brand} /></View>
   }
   if (!incidence) {
-    return <View className="flex-1 bg-base items-center justify-center"><Text className="text-ink-soft">Incidencia no encontrada</Text></View>
+    return <View className="flex-1 items-center justify-center"><AuroraBackground /><Text className="text-ink-soft">Incidencia no encontrada</Text></View>
   }
 
-  const urgColor = urgencyColor[incidence.urgency] ?? '#71717a'
+  const urgColor = urgencyColor[incidence.urgency] ?? colors.inkFaint
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 bg-base">
+    <View className="flex-1">
+      <AuroraBackground />
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1">
       <ScrollView ref={scrollRef} className="flex-1" contentContainerClassName="pb-4">
         <View className="px-5 py-5 border-b border-glassline">
           <View className="flex-row items-center gap-2 mb-3 flex-wrap">
@@ -170,9 +174,10 @@ export default function IncidenciaDetailScreen() {
           disabled={sending || !messageText.trim()}
           className="bg-violet-600 rounded-2xl w-11 h-11 items-center justify-center disabled:opacity-50"
         >
-          {sending ? <ActivityIndicator color="white" size="small" /> : <Text className="text-ink text-lg">↑</Text>}
+          {sending ? <ActivityIndicator color="white" size="small" /> : <Text className="text-white text-lg">↑</Text>}
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </View>
   )
 }

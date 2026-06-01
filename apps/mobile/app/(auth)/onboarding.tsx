@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
 import { supabase } from '@/lib/supabase'
+import { AuroraBackground } from '@/components/AuroraBackground'
 
 export default function OnboardingScreen() {
   const router = useRouter()
@@ -70,7 +71,9 @@ export default function OnboardingScreen() {
   }
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 bg-base">
+    <View className="flex-1">
+      <AuroraBackground />
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1">
       <ScrollView contentContainerClassName="flex-grow justify-center px-6 py-10">
         <TouchableOpacity onPress={() => router.back()} className="mb-8">
           <Text className="text-violet-400 text-sm">← Volver</Text>
@@ -143,6 +146,7 @@ export default function OnboardingScreen() {
           </Text>
         </TouchableOpacity>
       </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </View>
   )
 }

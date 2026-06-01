@@ -1,8 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
 import { View, Text, FlatList, RefreshControl, ActivityIndicator } from 'react-native'
+import { ClipboardList } from 'lucide-react-native'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/auth'
 import { IncidenceCard } from '@/components/IncidenceCard'
+import { AuroraBackground } from '@/components/AuroraBackground'
+import { colors } from '@/constants/theme'
 
 interface Incidence {
   id: string
@@ -40,28 +43,30 @@ export default function MisIncidenciasScreen() {
 
   if (loading) {
     return (
-      <View className="flex-1 bg-base items-center justify-center">
-        <ActivityIndicator color="#7c3aed" />
+      <View className="flex-1 items-center justify-center">
+        <AuroraBackground />
+        <ActivityIndicator color={colors.brand} />
       </View>
     )
   }
 
   return (
-    <View className="flex-1 bg-base">
-      <View className="px-5 pt-14 pb-4">
-        <Text className="text-ink text-xl font-bold">Mis incidencias</Text>
+    <View className="flex-1">
+      <AuroraBackground />
+      <View className="px-5 pt-16 pb-4">
+        <Text className="text-ink text-2xl font-bold">Mis incidencias</Text>
         <Text className="text-ink-soft text-sm mt-0.5">{incidences.length} reportada{incidences.length !== 1 ? 's' : ''}</Text>
       </View>
 
       <FlatList
         data={incidences}
         keyExtractor={(item) => item.id}
-        contentContainerClassName="px-5 pb-8"
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#7c3aed" />}
+        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 110 }}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.brand} />}
         ListEmptyComponent={
           <View className="items-center justify-center py-20">
-            <Text className="text-4xl mb-4">📋</Text>
-            <Text className="text-ink font-semibold text-base">Sin incidencias</Text>
+            <ClipboardList color={colors.inkFaint} size={40} strokeWidth={1.5} />
+            <Text className="text-ink font-semibold text-base mt-3">Sin incidencias</Text>
             <Text className="text-ink-faint text-sm mt-1">Aún no has reportado ninguna incidencia</Text>
           </View>
         }

@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { View, Text, Switch, ActivityIndicator, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import { useRouter } from 'expo-router'
+import { LogOut } from 'lucide-react-native'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/auth'
 import { unregisterCurrentDevice } from '@/lib/push'
+import { AuroraBackground } from '@/components/AuroraBackground'
+import { colors } from '@/constants/theme'
 
 type PrefKey =
   | 'push_new_incidence'
@@ -102,17 +105,20 @@ export default function AjustesScreen() {
 
   if (loading) {
     return (
-      <View className="flex-1 bg-base items-center justify-center">
-        <ActivityIndicator color="#7c3aed" />
+      <View className="flex-1 items-center justify-center">
+        <AuroraBackground />
+        <ActivityIndicator color={colors.brand} />
       </View>
     )
   }
 
   return (
-    <ScrollView className="flex-1 bg-base" contentContainerStyle={{ paddingBottom: 32 }}>
-      <View className="pt-16 px-5 pb-4">
-        <Text className="text-ink text-3xl font-bold">Ajustes</Text>
-      </View>
+    <View className="flex-1">
+      <AuroraBackground />
+      <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 110 }}>
+        <View className="pt-16 px-5 pb-4">
+          <Text className="text-ink text-2xl font-bold">Ajustes</Text>
+        </View>
 
       <Section title="Notificaciones push">
         {PUSH_ROWS.map((row) => (
@@ -136,15 +142,18 @@ export default function AjustesScreen() {
         ))}
       </Section>
 
-      <View className="px-5 pt-8">
-        <TouchableOpacity
-          className="bg-surface border border-red-500/30 rounded-xl py-4 items-center"
-          onPress={logout}
-        >
-          <Text className="text-red-400 font-semibold">Cerrar sesión</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+        <View className="px-5 pt-8">
+          <TouchableOpacity
+            className="bg-surface border border-red-500/30 rounded-2xl py-4 flex-row items-center justify-center gap-2"
+            onPress={logout}
+            activeOpacity={0.8}
+          >
+            <LogOut color="#dc2626" size={16} strokeWidth={2} />
+            <Text className="text-red-600 font-semibold">Cerrar sesión</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
   )
 }
 
