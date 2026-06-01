@@ -65,7 +65,7 @@ export default async function IncidenciasPage({ searchParams }: PageProps) {
               <th className="px-6 py-3 text-left hidden md:table-cell">Fecha</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-zinc-800">
+          <tbody className="divide-y divide-[color:var(--glass-border)]">
             {(!incidences || incidences.length === 0) && (
               <tr>
                 <td colSpan={6} className="px-6 py-12 text-center text-ink-faint">

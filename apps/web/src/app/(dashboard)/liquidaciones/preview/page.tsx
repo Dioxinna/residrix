@@ -156,7 +156,7 @@ export default async function LiquidacionPreviewPage({ searchParams }: PageProps
                   <th className="px-4 py-2 font-medium text-right">% del periodo</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800">
+              <tbody className="divide-y divide-[color:var(--glass-border)]">
                 {categoryRows.map((r) => (
                   <tr key={r.category}>
                     <td className="px-4 py-2 text-ink">
@@ -197,7 +197,7 @@ export default async function LiquidacionPreviewPage({ searchParams }: PageProps
                   <th className="px-3 py-2 font-medium text-right">Importe</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800">
+              <tbody className="divide-y divide-[color:var(--glass-border)]">
                 {rows.map((e) => (
                   <tr key={e.id}>
                     <td className="px-3 py-2 text-ink-soft text-xs whitespace-nowrap">{formatDateEs(e.expense_date)}</td>

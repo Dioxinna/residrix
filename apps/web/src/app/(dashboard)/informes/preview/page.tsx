@@ -309,7 +309,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
                   <th className="px-3 py-2 font-medium">Estado</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800">
+              <tbody className="divide-y divide-[color:var(--glass-border)]">
                 {topIncidences.map((i) => (
                   <tr key={i.id}>
                     <td className="px-3 py-2 text-ink-soft text-xs whitespace-nowrap">
@@ -362,7 +362,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
                   <th className="px-4 py-2 font-medium text-right">%</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800">
+              <tbody className="divide-y divide-[color:var(--glass-border)]">
                 {expCatRows.map((r) => (
                   <tr key={r.category}>
                     <td className="px-4 py-2 text-ink">
@@ -466,7 +466,7 @@ function BreakdownTable({
         {title}
       </p>
       <table className="w-full text-sm">
-        <tbody className="divide-y divide-zinc-800">
+        <tbody className="divide-y divide-[color:var(--glass-border)]">
           {rows.map((r) => (
             <tr key={r.label}>
               <td className="px-4 py-1.5 text-ink">{r.label}</td>

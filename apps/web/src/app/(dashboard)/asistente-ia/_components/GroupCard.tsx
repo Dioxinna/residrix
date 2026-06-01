@@ -71,7 +71,7 @@ export function GroupCard({
         </div>
       </header>
 
-      <ul className="divide-y divide-zinc-800">
+      <ul className="divide-y divide-[color:var(--glass-border)]">
         {visible.map((inc) => (
           <IncidenceRow key={inc.id} inc={inc} />
         ))}

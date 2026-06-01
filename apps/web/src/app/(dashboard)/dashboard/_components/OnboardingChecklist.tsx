@@ -71,7 +71,12 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
   const next = steps.find((s) => !s.done)
 
   return (
-    <section className="mb-8 bg-gradient-to-br from-indigo-500/10 to-zinc-900 border border-indigo-500/20 rounded-xl p-6">
+    <section className="mb-8 glass rounded-[var(--radius-glass)] p-6 relative overflow-hidden">
+      <div
+        className="absolute inset-0 -z-10 opacity-70"
+        style={{ background: 'radial-gradient(120% 100% at 0% 0%, rgba(99,102,241,0.14), transparent 55%)' }}
+        aria-hidden
+      />
       <div className="flex items-start justify-between mb-4">
         <div>
           <h2 className="text-ink font-semibold text-lg mb-1">Configura tu despacho</h2>
@@ -89,9 +94,9 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
         </button>
       </div>
 
-      <div className="h-1 glass-strong rounded-full overflow-hidden mb-5">
+      <div className="h-1.5 rounded-full overflow-hidden mb-5 bg-[color:var(--glass-border)]">
         <div
-          className="h-full bg-indigo-500 transition-all"
+          className="h-full bg-brand transition-all rounded-full"
           style={{ width: `${(completed / steps.length) * 100}%` }}
         />
       </div>
@@ -103,18 +108,18 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
           return (
             <li
               key={step.id}
-              className={`flex items-center gap-4 px-4 py-3 rounded-lg border transition-colors ${
+              className={`flex items-center gap-4 px-4 py-3 rounded-xl border transition-colors ${
                 step.done
-                  ? 'border-[color:var(--glass-border)] glass opacity-60'
+                  ? 'border-transparent bg-[color:var(--glass-border)] opacity-70'
                   : isNext
-                    ? 'border-indigo-500/30 bg-indigo-500/5'
-                    : 'border-[color:var(--glass-border)] glass'
+                    ? 'border-brand/30 bg-brand/8'
+                    : 'border-[color:var(--glass-border)] bg-transparent'
               }`}
             >
               <div className="flex-shrink-0">
                 {step.done ? (
-                  <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center">
-                    <Check size={14} strokeWidth={3} className="text-ink" />
+                  <div className="w-6 h-6 rounded-full bg-brand flex items-center justify-center">
+                    <Check size={14} strokeWidth={3} className="text-white" />
                   </div>
                 ) : (
                   <Circle size={24} strokeWidth={1.5} className="text-ink-faint" />

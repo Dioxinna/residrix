@@ -80,7 +80,7 @@ function Section({ title, subtitle, children }: { title: string; subtitle: strin
     <section>
       <h2 className="text-sm font-semibold text-ink mb-1">{title}</h2>
       <p className="text-xs text-ink-faint mb-3">{subtitle}</p>
-      <div className="glass rounded-lg divide-y divide-zinc-800">
+      <div className="glass rounded-lg divide-y divide-[color:var(--glass-border)]">
         {children}
       </div>
     </section>

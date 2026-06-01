@@ -42,7 +42,7 @@ export function InvitationsTable({ invitations }: { invitations: Invitation[] })
             <th className="text-left px-4 py-3 font-medium">Enviada</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-800">
+        <tbody className="divide-y divide-[color:var(--glass-border)]">
           {invitations.map((inv) => {
             const used = !!inv.used_at
             const expired = !used && inv.expires_at && new Date(inv.expires_at) < new Date()

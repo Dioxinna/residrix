@@ -9,7 +9,7 @@ export default function Loading() {
         <div className="px-6 py-4 border-b border-[color:var(--glass-border)]">
           <Skeleton className="h-4 w-40" />
         </div>
-        <div className="divide-y divide-zinc-800">
+        <div className="divide-y divide-[color:var(--glass-border)]">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="px-6 py-4 flex items-center gap-4">
               <div className="flex-1">

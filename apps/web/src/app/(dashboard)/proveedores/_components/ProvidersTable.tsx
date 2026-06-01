@@ -60,7 +60,7 @@ export function ProvidersTable({
             <th className="px-6 py-3 font-medium text-right">·</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-800">
+        <tbody className="divide-y divide-[color:var(--glass-border)]">
           {providers.map((p) => (
             <tr key={p.id} className="hover:glass">
               <td className="px-6 py-3">

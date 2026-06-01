@@ -108,7 +108,7 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
             <th className="text-right px-4 py-3 font-medium">Acciones</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-800">
+        <tbody className="divide-y divide-[color:var(--glass-border)]">
           {documents.map((doc) => {
             const isPending = pendingId === doc.id || pending
             return (

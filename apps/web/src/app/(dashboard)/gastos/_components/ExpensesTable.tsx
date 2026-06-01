@@ -72,7 +72,7 @@ export function ExpensesTable({
             <th className="px-6 py-3 font-medium text-right">·</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-800">
+        <tbody className="divide-y divide-[color:var(--glass-border)]">
           {expenses.map((e) => (
             <tr key={e.id} className="hover:glass">
               <td className="px-6 py-3 text-ink-soft text-xs whitespace-nowrap">{dateLabel(e.expense_date)}</td>

@@ -124,7 +124,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                   </a>
                 </div>
               ) : (
-                <ul className="divide-y divide-zinc-800 -mx-6">
+                <ul className="divide-y divide-[color:var(--glass-border)] -mx-6">
                   {suggestedProviders.map((p) => (
                     <li key={p.id} className="px-6 py-3 flex items-center justify-between gap-3 flex-wrap">
                       <div className="min-w-0">

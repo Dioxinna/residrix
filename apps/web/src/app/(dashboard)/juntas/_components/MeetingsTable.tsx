@@ -55,7 +55,7 @@ export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
             <th className="px-6 py-3 font-medium text-right">·</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-800">
+        <tbody className="divide-y divide-[color:var(--glass-border)]">
           {meetings.map((m) => {
             const style = STATUS_STYLES[m.status] ?? STATUS_STYLES.pending
             return (

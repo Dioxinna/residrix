@@ -69,7 +69,7 @@ export default async function DashboardPage() {
             Ver todas →
           </Link>
         </div>
-        <div className="divide-y divide-zinc-800">
+        <div className="divide-y divide-[color:var(--glass-border)]">
           {recent.length === 0 && (
             <p className="px-6 py-8 text-center text-ink-faint text-sm">No hay incidencias aún</p>
           )}

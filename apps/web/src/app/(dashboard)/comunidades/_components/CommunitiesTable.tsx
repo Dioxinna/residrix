@@ -74,7 +74,7 @@ export function CommunitiesTable({
             <th className="text-right px-4 py-3 font-medium">Acciones</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-zinc-800">
+        <tbody className="divide-y divide-[color:var(--glass-border)]">
           {communities.map((c) => {
             const isPending = pendingId === c.id
             return (

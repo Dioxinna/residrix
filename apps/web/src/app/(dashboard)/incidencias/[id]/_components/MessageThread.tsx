@@ -73,7 +73,7 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
         <h2 className="text-ink font-semibold text-sm">Mensajes ({messages.length})</h2>
       </div>
 
-      <div className="divide-y divide-zinc-800 max-h-96 overflow-y-auto">
+      <div className="divide-y divide-[color:var(--glass-border)] max-h-96 overflow-y-auto">
         {messages.length === 0 && (
           <p className="px-6 py-8 text-center text-ink-faint text-sm">No hay mensajes aún</p>
         )}
