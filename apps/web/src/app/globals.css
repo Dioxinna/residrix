@@ -96,6 +96,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Tailwind v4 resets button cursor to default; restore pointer for
+   actionable buttons across the app. */
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
 /* -------------------------------------------------------------
    AURORA — fixed mesh background behind all content
    ------------------------------------------------------------- */

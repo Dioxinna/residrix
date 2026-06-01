@@ -28,17 +28,19 @@ function Nav() {
     <nav className="sticky top-0 z-40">
       <div className="max-w-6xl mx-auto px-4 pt-4">
         <div className="glass rounded-full px-5 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-brand flex items-center justify-center depth">
-              <span className="text-white font-bold">R</span>
-            </div>
-            <span className="text-ink font-semibold tracking-tight">Residrix</span>
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-brand flex items-center justify-center depth">
+                <span className="text-white font-bold">R</span>
+              </div>
+              <span className="text-ink font-semibold tracking-tight">Residrix</span>
+            </Link>
+            <ThemeToggle />
+          </div>
           <div className="flex items-center gap-1.5">
             <Link href="/login" className="text-sm text-ink-soft hover:text-ink px-4 py-2 rounded-full transition-colors">
               Iniciar sesión
             </Link>
-            <ThemeToggle />
             <Link
               href="/signup"
               className="text-sm bg-brand hover:-translate-y-0.5 text-white px-4 py-2 rounded-full font-medium depth lift hover:glow-brand"
