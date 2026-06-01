@@ -69,12 +69,12 @@ export function LiquidacionPicker({
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 space-y-5">
+    <div className="glass rounded-xl p-6 space-y-5">
       <Field label="Comunidad">
         <select
           value={communityId}
           onChange={(e) => setCommunityId(e.target.value)}
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink"
         >
           {communities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
@@ -94,7 +94,7 @@ export function LiquidacionPicker({
                 className={`text-xs px-2.5 py-1 rounded border ${
                   active
                     ? 'bg-indigo-500/15 border-indigo-500/40 text-white'
-                    : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
+                    : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)] text-ink-soft hover:text-ink hover:border-[color:var(--glass-border)]'
                 }`}
               >
                 {p.label}
@@ -109,7 +109,7 @@ export function LiquidacionPicker({
           <select
             value={year}
             onChange={(e) => setYear(Number(e.target.value))}
-            className="w-32 bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+            className="w-32 glass rounded px-3 py-2 text-sm text-ink"
           >
             {yearOptions.map((y) => (
               <option key={y} value={y}>{y}</option>
@@ -125,7 +125,7 @@ export function LiquidacionPicker({
               type="date"
               value={customFrom}
               onChange={(e) => setCustomFrom(e.target.value)}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+              className="w-full glass rounded px-3 py-2 text-sm text-ink"
             />
           </Field>
           <Field label="Hasta (incluido)">
@@ -133,7 +133,7 @@ export function LiquidacionPicker({
               type="date"
               value={customTo}
               onChange={(e) => setCustomTo(e.target.value)}
-              className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+              className="w-full glass rounded px-3 py-2 text-sm text-ink"
             />
           </Field>
         </div>
@@ -154,7 +154,7 @@ export function LiquidacionPicker({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1.5 uppercase tracking-wide">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1.5 uppercase tracking-wide">{label}</span>
       {children}
     </label>
   )

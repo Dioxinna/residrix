@@ -50,7 +50,7 @@ export function PreviewActions({
     <div className="no-print mb-6 flex items-center justify-between flex-wrap gap-2">
       <Link
         href="/liquidaciones"
-        className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-white"
+        className="inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink"
       >
         <ArrowLeft size={14} /> Volver
       </Link>
@@ -58,7 +58,7 @@ export function PreviewActions({
         <button
           onClick={downloadCsv}
           disabled={downloading}
-          className="inline-flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium px-3 py-1.5 rounded disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 glass hover:border-[color:var(--glass-border)] text-zinc-200 text-sm font-medium px-3 py-1.5 rounded disabled:opacity-50"
         >
           <Download size={14} /> {downloading ? 'Generando…' : 'CSV'}
         </button>

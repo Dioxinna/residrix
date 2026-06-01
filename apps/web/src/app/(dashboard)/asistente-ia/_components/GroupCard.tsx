@@ -45,8 +45,8 @@ export function GroupCard({
   const visible = expanded ? incidences : incidences.slice(0, 2)
 
   return (
-    <section className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
-      <header className="px-6 py-4 border-b border-zinc-800 flex items-start justify-between gap-4 flex-wrap">
+    <section className="glass rounded-xl overflow-hidden">
+      <header className="px-6 py-4 border-b border-[color:var(--glass-border)] flex items-start justify-between gap-4 flex-wrap">
         <div className="min-w-0">
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
             {groupKey ? (
@@ -54,11 +54,11 @@ export function GroupCard({
                 {groupKey}
               </span>
             ) : (
-              <span className="text-[10px] uppercase tracking-wide font-bold text-zinc-400 bg-zinc-800 px-1.5 py-0.5 rounded">
+              <span className="text-[10px] uppercase tracking-wide font-bold text-ink-soft glass-strong px-1.5 py-0.5 rounded">
                 Sin agrupar
               </span>
             )}
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-ink-faint">
               {incidences.length} incidencia{incidences.length === 1 ? '' : 's'}
             </span>
             {providerType && (
@@ -67,7 +67,7 @@ export function GroupCard({
               </span>
             )}
           </div>
-          <p className="text-white text-sm font-medium truncate">{summary}</p>
+          <p className="text-ink text-sm font-medium truncate">{summary}</p>
         </div>
       </header>
 
@@ -80,7 +80,7 @@ export function GroupCard({
       {incidences.length > visible.length && (
         <button
           onClick={() => setExpanded(true)}
-          className="w-full text-center py-3 text-xs text-zinc-500 hover:text-zinc-300 border-t border-zinc-800"
+          className="w-full text-center py-3 text-xs text-ink-faint hover:text-ink-soft border-t border-[color:var(--glass-border)]"
         >
           Mostrar {incidences.length - visible.length} más
         </button>
@@ -118,12 +118,12 @@ function IncidenceRow({ inc }: { inc: GroupedIncidence }) {
         <div className="min-w-0">
           <Link
             href={`/incidencias/${inc.id}`}
-            className="text-white text-sm font-medium hover:text-indigo-300 inline-flex items-center gap-1"
+            className="text-ink text-sm font-medium hover:text-indigo-300 inline-flex items-center gap-1"
           >
             {inc.title}
-            <ExternalLink size={12} className="text-zinc-500" />
+            <ExternalLink size={12} className="text-ink-faint" />
           </Link>
-          <p className="text-xs text-zinc-500 mt-0.5">
+          <p className="text-xs text-ink-faint mt-0.5">
             {inc.communities.name}
             {inc.profiles?.full_name && ` · ${inc.profiles.full_name}`}
             {inc.profiles?.unit_number && ` (${inc.profiles.unit_number})`}
@@ -157,7 +157,7 @@ function IncidenceRow({ inc }: { inc: GroupedIncidence }) {
           </div>
         </div>
       ) : (
-        <p className="text-xs text-zinc-600 mt-2 italic">Sin respuesta sugerida (IA no procesó esta incidencia).</p>
+        <p className="text-xs text-ink-faint mt-2 italic">Sin respuesta sugerida (IA no procesó esta incidencia).</p>
       )}
     </li>
   )

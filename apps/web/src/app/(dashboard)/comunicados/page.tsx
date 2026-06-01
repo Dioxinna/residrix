@@ -22,7 +22,7 @@ export default async function ComunicadosPage({ searchParams }: PageProps) {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -46,10 +46,10 @@ export default async function ComunicadosPage({ searchParams }: PageProps) {
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-1">
-        <h1 className="text-2xl font-semibold text-white">Comunicados</h1>
+        <h1 className="text-2xl font-semibold text-ink">Comunicados</h1>
         <CreateAnnouncementDialog communities={communities ?? []} authorId={user.id} />
       </div>
-      <p className="text-sm text-zinc-400 mb-8">
+      <p className="text-sm text-ink-soft mb-8">
         Avisos para toda la comunidad. Aparecen en la home del móvil y disparan notificación a los vecinos.
       </p>
 
@@ -57,7 +57,7 @@ export default async function ComunicadosPage({ searchParams }: PageProps) {
         <select
           name="community"
           defaultValue={filters.community ?? ''}
-          className="bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+          className="glass rounded px-3 py-2 text-sm text-ink"
         >
           <option value="">Todas las comunidades</option>
           {(communities ?? []).map((c) => (
@@ -66,7 +66,7 @@ export default async function ComunicadosPage({ searchParams }: PageProps) {
         </select>
         <button
           type="submit"
-          className="bg-zinc-800 hover:bg-zinc-700 text-white text-sm px-4 py-2 rounded"
+          className="glass-strong hover:bg-zinc-700 text-ink text-sm px-4 py-2 rounded"
         >
           Filtrar
         </button>

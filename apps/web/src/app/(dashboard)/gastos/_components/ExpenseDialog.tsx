@@ -133,9 +133,9 @@ export function ExpenseDialog(props: Props) {
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={submit}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-md space-y-4 max-h-[90vh] overflow-y-auto"
+            className="glass rounded-xl p-6 w-full max-w-md space-y-4 max-h-[90vh] overflow-y-auto"
           >
-            <h2 className="text-white text-lg font-semibold">
+            <h2 className="text-ink text-lg font-semibold">
               {isCreate ? 'Nuevo gasto' : 'Editar gasto'}
             </h2>
 
@@ -146,7 +146,7 @@ export function ExpenseDialog(props: Props) {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Factura agua marzo"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -159,14 +159,14 @@ export function ExpenseDialog(props: Props) {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="125,40"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
                 />
               </Field>
               <Field label="Categoría">
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink"
                 >
                   {EXPENSE_CATEGORY_ORDER.map((c) => (
                     <option key={c} value={c}>{EXPENSE_CATEGORY_LABEL[c]}</option>
@@ -181,11 +181,11 @@ export function ExpenseDialog(props: Props) {
                 required
                 value={expenseDate}
                 onChange={(e) => setExpenseDate(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink"
               />
             </Field>
 
-            <label className="flex items-center gap-2 text-sm text-zinc-300">
+            <label className="flex items-center gap-2 text-sm text-ink-soft">
               <input
                 type="checkbox"
                 checked={paid}
@@ -201,7 +201,7 @@ export function ExpenseDialog(props: Props) {
                   type="date"
                   value={paidAt}
                   onChange={(e) => setPaidAt(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink"
                 />
               </Field>
             )}
@@ -212,7 +212,7 @@ export function ExpenseDialog(props: Props) {
                 value={vendor}
                 onChange={(e) => setVendor(e.target.value)}
                 placeholder="Aguas de Madrid"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -221,7 +221,7 @@ export function ExpenseDialog(props: Props) {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={2}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600 resize-none"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint resize-none"
               />
             </Field>
 
@@ -230,7 +230,7 @@ export function ExpenseDialog(props: Props) {
                 type="button"
                 onClick={() => setOpen(false)}
                 disabled={pending}
-                className="text-sm px-4 py-2 rounded text-zinc-400 hover:text-white"
+                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
               >
                 Cancelar
               </button>
@@ -252,7 +252,7 @@ export function ExpenseDialog(props: Props) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1">{label}</span>
       {children}
     </label>
   )

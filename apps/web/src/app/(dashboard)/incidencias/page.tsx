@@ -46,17 +46,17 @@ export default async function IncidenciasPage({ searchParams }: PageProps) {
     <div className="p-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Incidencias</h1>
-          <p className="text-zinc-400 text-sm mt-1">{incidences?.length ?? 0} resultado{incidences?.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-2xl font-bold text-ink">Incidencias</h1>
+          <p className="text-ink-soft text-sm mt-1">{incidences?.length ?? 0} resultado{incidences?.length !== 1 ? 's' : ''}</p>
         </div>
       </div>
 
       <IncidenciasFilters />
 
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden mt-4">
+      <div className="glass rounded-xl overflow-hidden mt-4">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-800 text-zinc-400 text-xs uppercase tracking-wide">
+            <tr className="border-b border-[color:var(--glass-border)] text-ink-soft text-xs uppercase tracking-wide">
               <th className="px-6 py-3 text-left">Título</th>
               <th className="px-6 py-3 text-left hidden md:table-cell">Comunidad</th>
               <th className="px-6 py-3 text-left hidden lg:table-cell">Categoría</th>
@@ -68,25 +68,25 @@ export default async function IncidenciasPage({ searchParams }: PageProps) {
           <tbody className="divide-y divide-zinc-800">
             {(!incidences || incidences.length === 0) && (
               <tr>
-                <td colSpan={6} className="px-6 py-12 text-center text-zinc-500">
+                <td colSpan={6} className="px-6 py-12 text-center text-ink-faint">
                   No se encontraron incidencias
                 </td>
               </tr>
             )}
             {incidences?.map((inc) => (
-              <tr key={inc.id} className="hover:bg-zinc-800/50 transition-colors">
+              <tr key={inc.id} className="hover:glass transition-colors">
                 <td className="px-6 py-4">
-                  <Link href={`/incidencias/${inc.id}`} className="text-white hover:text-indigo-400 font-medium transition-colors line-clamp-1">
+                  <Link href={`/incidencias/${inc.id}`} className="text-ink hover:text-indigo-400 font-medium transition-colors line-clamp-1">
                     {inc.title}
                   </Link>
-                  <p className="text-zinc-500 text-xs mt-0.5">
+                  <p className="text-ink-faint text-xs mt-0.5">
                     {(inc.profiles as { full_name: string } | null)?.full_name ?? '—'}
                   </p>
                 </td>
-                <td className="px-6 py-4 text-zinc-400 hidden md:table-cell">
+                <td className="px-6 py-4 text-ink-soft hidden md:table-cell">
                   {(inc.communities as { name: string } | null)?.name ?? '—'}
                 </td>
-                <td className="px-6 py-4 text-zinc-400 hidden lg:table-cell">
+                <td className="px-6 py-4 text-ink-soft hidden lg:table-cell">
                   {categoryLabels[inc.category as IncidenceCategory]}
                 </td>
                 <td className="px-6 py-4">
@@ -95,7 +95,7 @@ export default async function IncidenciasPage({ searchParams }: PageProps) {
                 <td className="px-6 py-4">
                   <StatusBadge status={inc.status as IncidenceStatus} />
                 </td>
-                <td className="px-6 py-4 text-zinc-500 text-xs hidden md:table-cell">
+                <td className="px-6 py-4 text-ink-faint text-xs hidden md:table-cell">
                   {formatDistanceToNow(new Date(inc.created_at ?? Date.now()), { addSuffix: true, locale: es })}
                 </td>
               </tr>

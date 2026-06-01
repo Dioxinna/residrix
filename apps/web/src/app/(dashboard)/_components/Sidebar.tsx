@@ -59,19 +59,19 @@ export function Sidebar({ tier }: { tier: TierKey }) {
           <Link
             key={href}
             href={href}
-            className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+            className={`flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition-all ${
               active
-                ? 'bg-indigo-500/10 text-white border-l-2 border-indigo-500 -ml-px'
+                ? 'glass text-ink font-medium'
                 : locked
-                  ? 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/60'
-                  : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                  ? 'text-ink-faint hover:text-ink-soft hover:glass'
+                  : 'text-ink-soft hover:text-ink hover:glass'
             }`}
             title={locked && minTier ? `Disponible en plan ${TIER_NAME[minTier]}` : undefined}
           >
-            <Icon size={16} strokeWidth={1.75} className={active ? 'text-indigo-400' : ''} />
+            <Icon size={16} strokeWidth={1.75} className={active ? 'text-brand' : ''} />
             <span className="flex-1">{label}</span>
             {locked && minTier && (
-              <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wide text-zinc-500">
+              <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wide text-ink-faint">
                 <Lock size={10} strokeWidth={2.5} />
                 {TIER_NAME[minTier]}
               </span>

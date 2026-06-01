@@ -115,9 +115,9 @@ export function ProviderDialog(props: Props) {
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={submit}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-md space-y-4"
+            className="glass rounded-xl p-6 w-full max-w-md space-y-4"
           >
-            <h2 className="text-white text-lg font-semibold">
+            <h2 className="text-ink text-lg font-semibold">
               {isCreate ? 'Nuevo proveedor' : 'Editar proveedor'}
             </h2>
 
@@ -128,7 +128,7 @@ export function ProviderDialog(props: Props) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Fontanería García SL"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -136,7 +136,7 @@ export function ProviderDialog(props: Props) {
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink"
               >
                 {TYPE_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -150,7 +150,7 @@ export function ProviderDialog(props: Props) {
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Juan García"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -161,7 +161,7 @@ export function ProviderDialog(props: Props) {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="600 000 000"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
                 />
               </Field>
 
@@ -171,7 +171,7 @@ export function ProviderDialog(props: Props) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="contacto@empresa.com"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
                 />
               </Field>
             </div>
@@ -182,7 +182,7 @@ export function ProviderDialog(props: Props) {
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Tarifas, horarios, observaciones"
                 rows={2}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600 resize-none"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint resize-none"
               />
             </Field>
 
@@ -191,7 +191,7 @@ export function ProviderDialog(props: Props) {
                 type="button"
                 onClick={() => setOpen(false)}
                 disabled={pending}
-                className="text-sm px-4 py-2 rounded text-zinc-400 hover:text-white"
+                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
               >
                 Cancelar
               </button>
@@ -213,7 +213,7 @@ export function ProviderDialog(props: Props) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1">{label}</span>
       {children}
     </label>
   )

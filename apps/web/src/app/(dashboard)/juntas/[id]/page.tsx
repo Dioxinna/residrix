@@ -45,7 +45,7 @@ export default async function MeetingDetailPage({ params }: PageProps) {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -77,15 +77,15 @@ export default async function MeetingDetailPage({ params }: PageProps) {
     <div className="max-w-4xl mx-auto px-6 py-8">
       <Link
         href="/juntas"
-        className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-white mb-6"
+        className="inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink mb-6"
       >
         <ArrowLeft size={14} /> Volver a juntas
       </Link>
 
-      <header className="border-b border-zinc-800 pb-5 mb-6">
-        <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-1">Acta de junta</p>
-        <h1 className="text-2xl font-bold text-white">{meeting.title}</h1>
-        <p className="text-sm text-zinc-400 mt-1">
+      <header className="border-b border-[color:var(--glass-border)] pb-5 mb-6">
+        <p className="text-[10px] uppercase tracking-widest text-ink-faint mb-1">Acta de junta</p>
+        <h1 className="text-2xl font-bold text-ink">{meeting.title}</h1>
+        <p className="text-sm text-ink-soft mt-1">
           {community?.name ?? '—'} · {dateLabel(meeting.meeting_date)}
           {meeting.audio_duration_seconds && ` · ${durationLabel(meeting.audio_duration_seconds)} de audio`}
         </p>
@@ -108,32 +108,32 @@ export default async function MeetingDetailPage({ params }: PageProps) {
 
       {audioUrl && (
         <section className="mb-6">
-          <p className="text-xs uppercase tracking-wide text-zinc-500 mb-2 font-semibold">Audio original</p>
+          <p className="text-xs uppercase tracking-wide text-ink-faint mb-2 font-semibold">Audio original</p>
           <audio controls src={audioUrl} className="w-full" preload="none" />
         </section>
       )}
 
       {meeting.summary && (
-        <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 mb-6">
-          <p className="text-xs uppercase tracking-wide text-zinc-500 mb-3 font-semibold">Acta resumida</p>
+        <section className="glass rounded-xl p-6 mb-6">
+          <p className="text-xs uppercase tracking-wide text-ink-faint mb-3 font-semibold">Acta resumida</p>
           <MarkdownSummary text={meeting.summary} />
         </section>
       )}
 
       {meeting.transcript && (
-        <details className="bg-zinc-900 border border-zinc-800 rounded-xl">
-          <summary className="cursor-pointer px-6 py-4 text-sm text-zinc-300 font-medium hover:bg-zinc-800/40">
+        <details className="glass rounded-xl">
+          <summary className="cursor-pointer px-6 py-4 text-sm text-ink-soft font-medium hover:glass">
             Transcripción completa
           </summary>
-          <div className="px-6 pb-6 pt-2 text-sm text-zinc-300 whitespace-pre-wrap leading-relaxed">
+          <div className="px-6 pb-6 pt-2 text-sm text-ink-soft whitespace-pre-wrap leading-relaxed">
             {meeting.transcript}
           </div>
         </details>
       )}
 
       {!meeting.transcript && !meeting.summary && (
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-16 text-center">
-          <p className="text-zinc-400 text-sm">
+        <div className="glass rounded-xl px-6 py-16 text-center">
+          <p className="text-ink-soft text-sm">
             {meeting.status === 'failed'
               ? 'No se pudo procesar el audio.'
               : 'Procesando audio… esto suele tardar 1-3 minutos.'}
@@ -154,7 +154,7 @@ function MarkdownSummary({ text }: { text: string }) {
   function flushList(key: number) {
     if (listBuffer.length === 0) return
     nodes.push(
-      <ul key={`l-${key}`} className="list-disc pl-5 space-y-1 text-sm text-zinc-300 mb-4">
+      <ul key={`l-${key}`} className="list-disc pl-5 space-y-1 text-sm text-ink-soft mb-4">
         {listBuffer.map((item, idx) => (
           <li key={idx}>{renderInline(item)}</li>
         ))}
@@ -172,7 +172,7 @@ function MarkdownSummary({ text }: { text: string }) {
     if (line.startsWith('## ')) {
       flushList(i)
       nodes.push(
-        <h2 key={`h-${i}`} className="text-white font-semibold text-base mt-5 first:mt-0 mb-2">
+        <h2 key={`h-${i}`} className="text-ink font-semibold text-base mt-5 first:mt-0 mb-2">
           {line.replace(/^##\s+/, '')}
         </h2>,
       )
@@ -181,7 +181,7 @@ function MarkdownSummary({ text }: { text: string }) {
     if (line.startsWith('### ')) {
       flushList(i)
       nodes.push(
-        <h3 key={`h-${i}`} className="text-white font-semibold text-sm mt-3 mb-1">
+        <h3 key={`h-${i}`} className="text-ink font-semibold text-sm mt-3 mb-1">
           {line.replace(/^###\s+/, '')}
         </h3>,
       )
@@ -193,7 +193,7 @@ function MarkdownSummary({ text }: { text: string }) {
     }
     flushList(i)
     nodes.push(
-      <p key={`p-${i}`} className="text-sm text-zinc-300 leading-relaxed mb-3">
+      <p key={`p-${i}`} className="text-sm text-ink-soft leading-relaxed mb-3">
         {renderInline(line)}
       </p>,
     )
@@ -207,7 +207,7 @@ function renderInline(text: string): React.ReactNode {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
   return parts.map((p, i) =>
     p.startsWith('**') && p.endsWith('**') ? (
-      <strong key={i} className="text-white font-semibold">
+      <strong key={i} className="text-ink font-semibold">
         {p.slice(2, -2)}
       </strong>
     ) : (

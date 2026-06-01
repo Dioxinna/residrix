@@ -6,7 +6,7 @@ export default function Loading() {
       <PageHeaderSkeleton />
       <div className="space-y-3">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+          <div key={i} className="glass rounded-lg p-4">
             <Skeleton className="h-4 w-20 mb-3" />
             <Skeleton className="h-5 w-2/3 mb-2" />
             <Skeleton className="h-4 w-full mb-1.5" />

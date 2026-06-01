@@ -31,9 +31,9 @@ export function InvitationsTable({ invitations }: { invitations: Invitation[] })
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+    <div className="glass rounded-lg overflow-hidden">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-950 text-zinc-500 text-xs uppercase tracking-wide">
+        <thead className="bg-[color:var(--c-surface)] text-ink-faint text-xs uppercase tracking-wide">
           <tr>
             <th className="text-left px-4 py-3 font-medium">Email</th>
             <th className="text-left px-4 py-3 font-medium">Comunidad · Piso</th>
@@ -50,20 +50,20 @@ export function InvitationsTable({ invitations }: { invitations: Invitation[] })
             const statusColor = used
               ? 'text-emerald-400 bg-emerald-500/10'
               : expired
-              ? 'text-zinc-500 bg-zinc-500/10'
+              ? 'text-ink-faint bg-zinc-500/10'
               : 'text-amber-400 bg-amber-500/10'
             return (
-              <tr key={inv.id} className="text-zinc-300">
+              <tr key={inv.id} className="text-ink-soft">
                 <td className="px-4 py-3">{inv.email ?? '—'}</td>
                 <td className="px-4 py-3">
-                  <span className="text-white">{communityName(inv.communities)}</span>
-                  <span className="text-zinc-500"> · {inv.unit_number}</span>
+                  <span className="text-ink">{communityName(inv.communities)}</span>
+                  <span className="text-ink-faint"> · {inv.unit_number}</span>
                 </td>
                 <td className="px-4 py-3 font-mono text-xs">{inv.code}</td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusColor}`}>{statusLabel}</span>
                 </td>
-                <td className="px-4 py-3 text-zinc-500 text-xs">
+                <td className="px-4 py-3 text-ink-faint text-xs">
                   {inv.created_at
                     ? formatDistanceToNow(new Date(inv.created_at), { addSuffix: true, locale: es })
                     : '—'}

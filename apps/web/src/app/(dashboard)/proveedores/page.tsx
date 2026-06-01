@@ -31,7 +31,7 @@ export default async function ProveedoresPage() {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -45,10 +45,10 @@ export default async function ProveedoresPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-1">
-        <h1 className="text-2xl font-semibold text-white">Proveedores</h1>
+        <h1 className="text-2xl font-semibold text-ink">Proveedores</h1>
         <ProviderDialog firmId={profile.firm_id} mode="create" trigger="Nuevo proveedor" />
       </div>
-      <p className="text-sm text-zinc-400 mb-8">
+      <p className="text-sm text-ink-soft mb-8">
         Contactos por tipo de servicio. El Agente IA sugerirá automáticamente cuál llamar cuando llegue una incidencia.
       </p>
 

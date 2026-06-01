@@ -16,7 +16,7 @@ export function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+      className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-ink-soft hover:text-ink hover:glass transition-colors"
     >
       <span className="text-base leading-none">→</span>
       Cerrar sesión

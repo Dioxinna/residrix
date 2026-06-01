@@ -74,8 +74,8 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
     <section className="mb-8 bg-gradient-to-br from-indigo-500/10 to-zinc-900 border border-indigo-500/20 rounded-xl p-6">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h2 className="text-white font-semibold text-lg mb-1">Configura tu despacho</h2>
-          <p className="text-zinc-400 text-sm">
+          <h2 className="text-ink font-semibold text-lg mb-1">Configura tu despacho</h2>
+          <p className="text-ink-soft text-sm">
             {completed} de {steps.length} completados · te lleva ~5 minutos
           </p>
         </div>
@@ -83,13 +83,13 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
           type="button"
           onClick={dismiss}
           aria-label="Cerrar"
-          className="text-zinc-500 hover:text-zinc-300 -mt-1 -mr-1 p-1"
+          className="text-ink-faint hover:text-ink-soft -mt-1 -mr-1 p-1"
         >
           <X size={16} />
         </button>
       </div>
 
-      <div className="h-1 bg-zinc-800 rounded-full overflow-hidden mb-5">
+      <div className="h-1 glass-strong rounded-full overflow-hidden mb-5">
         <div
           className="h-full bg-indigo-500 transition-all"
           style={{ width: `${(completed / steps.length) * 100}%` }}
@@ -105,26 +105,26 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
               key={step.id}
               className={`flex items-center gap-4 px-4 py-3 rounded-lg border transition-colors ${
                 step.done
-                  ? 'border-zinc-800 bg-zinc-900/40 opacity-60'
+                  ? 'border-[color:var(--glass-border)] glass opacity-60'
                   : isNext
                     ? 'border-indigo-500/30 bg-indigo-500/5'
-                    : 'border-zinc-800 bg-zinc-900/40'
+                    : 'border-[color:var(--glass-border)] glass'
               }`}
             >
               <div className="flex-shrink-0">
                 {step.done ? (
                   <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center">
-                    <Check size={14} strokeWidth={3} className="text-white" />
+                    <Check size={14} strokeWidth={3} className="text-ink" />
                   </div>
                 ) : (
-                  <Circle size={24} strokeWidth={1.5} className="text-zinc-600" />
+                  <Circle size={24} strokeWidth={1.5} className="text-ink-faint" />
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <div className={`font-medium text-sm ${step.done ? 'text-zinc-400 line-through' : 'text-white'}`}>
+                <div className={`font-medium text-sm ${step.done ? 'text-ink-soft line-through' : 'text-ink'}`}>
                   {step.label}
                 </div>
-                <div className="text-xs text-zinc-500 mt-0.5">{step.description}</div>
+                <div className="text-xs text-ink-faint mt-0.5">{step.description}</div>
               </div>
               {!step.done && (
                 <Link
@@ -132,7 +132,7 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
                   className={`flex-shrink-0 text-sm font-medium px-3 py-1.5 rounded flex items-center gap-1.5 ${
                     isNext
                       ? 'bg-indigo-600 hover:bg-indigo-500 text-white'
-                      : 'text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-700'
+                      : 'text-ink-soft hover:text-ink border border-[color:var(--glass-border)] hover:border-[color:var(--glass-border)]'
                   }`}
                 >
                   <Icon size={14} />

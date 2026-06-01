@@ -20,22 +20,22 @@ export function MonthPicker({
   const prev = shift(selectedMonth, -1)
   const next = shift(selectedMonth, 1)
   return (
-    <div className="inline-flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded">
+    <div className="inline-flex items-center gap-1 glass rounded">
       <Link
         href={`/gastos?community=${selectedCommunityId}&month=${prev}`}
         scroll={false}
-        className="px-2 py-1 text-zinc-400 hover:text-white"
+        className="px-2 py-1 text-ink-soft hover:text-ink"
         aria-label="Mes anterior"
       >
         <ChevronLeft size={14} />
       </Link>
-      <span className="text-xs text-zinc-300 px-2 capitalize min-w-[10ch] text-center">
+      <span className="text-xs text-ink-soft px-2 capitalize min-w-[10ch] text-center">
         {monthLabel(selectedMonth)}
       </span>
       <Link
         href={`/gastos?community=${selectedCommunityId}&month=${next}`}
         scroll={false}
-        className="px-2 py-1 text-zinc-400 hover:text-white"
+        className="px-2 py-1 text-ink-soft hover:text-ink"
         aria-label="Mes siguiente"
       >
         <ChevronRight size={14} />

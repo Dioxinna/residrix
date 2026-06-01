@@ -69,7 +69,7 @@ export function CreateAnnouncementDialog({
     return (
       <button
         disabled
-        className="bg-zinc-800 text-zinc-500 text-sm px-4 py-2 rounded cursor-not-allowed"
+        className="glass-strong text-ink-faint text-sm px-4 py-2 rounded cursor-not-allowed"
         title="Crea primero una comunidad"
       >
         Nuevo comunicado
@@ -94,16 +94,16 @@ export function CreateAnnouncementDialog({
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={submit}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-lg space-y-4"
+            className="glass rounded-xl p-6 w-full max-w-lg space-y-4"
           >
-            <h2 className="text-white text-lg font-semibold">Nuevo comunicado</h2>
+            <h2 className="text-ink text-lg font-semibold">Nuevo comunicado</h2>
 
             <Field label="Comunidad">
               <select
                 value={communityId}
                 onChange={(e) => setCommunityId(e.target.value)}
                 required
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink"
               >
                 {communities.map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
@@ -125,7 +125,7 @@ export function CreateAnnouncementDialog({
                           : s.value === 'warning'
                           ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
                           : 'bg-indigo-500/15 border-indigo-500/40 text-indigo-300'
-                        : 'border-zinc-800 text-zinc-400 hover:text-white'
+                        : 'border-[color:var(--glass-border)] text-ink-soft hover:text-ink'
                     }`}
                   >
                     {s.label}
@@ -142,7 +142,7 @@ export function CreateAnnouncementDialog({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Corte de agua martes 12:00"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -153,7 +153,7 @@ export function CreateAnnouncementDialog({
                 onChange={(e) => setBody(e.target.value)}
                 rows={6}
                 placeholder="Detalles del comunicado..."
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -162,7 +162,7 @@ export function CreateAnnouncementDialog({
                 type="button"
                 onClick={() => setOpen(false)}
                 disabled={pending}
-                className="text-sm px-4 py-2 rounded text-zinc-400 hover:text-white"
+                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
               >
                 Cancelar
               </button>
@@ -184,7 +184,7 @@ export function CreateAnnouncementDialog({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1">{label}</span>
       {children}
     </label>
   )

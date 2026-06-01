@@ -24,7 +24,7 @@ function durationLabel(seconds: number | null): string {
 }
 
 const STATUS_STYLES: Record<string, { label: string; tone: string }> = {
-  pending: { label: 'En cola', tone: 'text-zinc-300 bg-zinc-700/40 border-zinc-600/40' },
+  pending: { label: 'En cola', tone: 'text-ink-soft bg-zinc-700/40 border-zinc-600/40' },
   transcribing: { label: 'Transcribiendo', tone: 'text-indigo-300 bg-indigo-500/10 border-indigo-500/30' },
   transcribed: { label: 'Transcrita', tone: 'text-indigo-300 bg-indigo-500/10 border-indigo-500/30' },
   summarizing: { label: 'Resumiendo', tone: 'text-indigo-300 bg-indigo-500/10 border-indigo-500/30' },
@@ -35,18 +35,18 @@ const STATUS_STYLES: Record<string, { label: string; tone: string }> = {
 export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
   if (meetings.length === 0) {
     return (
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-16 text-center">
-        <p className="text-zinc-400 text-sm mb-1">Aún no has subido ninguna junta.</p>
-        <p className="text-zinc-500 text-xs">Pulsa "Subir audio" para empezar.</p>
+      <div className="glass rounded-xl px-6 py-16 text-center">
+        <p className="text-ink-soft text-sm mb-1">Aún no has subido ninguna junta.</p>
+        <p className="text-ink-faint text-xs">Pulsa "Subir audio" para empezar.</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+    <div className="glass rounded-xl overflow-hidden">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-950/50 border-b border-zinc-800">
-          <tr className="text-left text-zinc-500 text-xs uppercase tracking-wide">
+        <thead className="glass border-b border-[color:var(--glass-border)]">
+          <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
             <th className="px-6 py-3 font-medium">Fecha</th>
             <th className="px-6 py-3 font-medium">Junta</th>
             <th className="px-6 py-3 font-medium hidden md:table-cell">Comunidad</th>
@@ -59,18 +59,18 @@ export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
           {meetings.map((m) => {
             const style = STATUS_STYLES[m.status] ?? STATUS_STYLES.pending
             return (
-              <tr key={m.id} className="hover:bg-zinc-800/40">
-                <td className="px-6 py-3 text-zinc-400 text-xs whitespace-nowrap">{dateLabel(m.meeting_date)}</td>
+              <tr key={m.id} className="hover:glass">
+                <td className="px-6 py-3 text-ink-soft text-xs whitespace-nowrap">{dateLabel(m.meeting_date)}</td>
                 <td className="px-6 py-3">
-                  <p className="text-white">{m.title}</p>
+                  <p className="text-ink">{m.title}</p>
                   {m.error_message && m.status === 'failed' && (
                     <p className="text-red-400 text-xs mt-0.5 line-clamp-1">{m.error_message}</p>
                   )}
                 </td>
-                <td className="px-6 py-3 hidden md:table-cell text-zinc-400 text-xs">
+                <td className="px-6 py-3 hidden md:table-cell text-ink-soft text-xs">
                   {m.communities?.name ?? '—'}
                 </td>
-                <td className="px-6 py-3 hidden lg:table-cell text-zinc-400 text-xs tabular-nums">
+                <td className="px-6 py-3 hidden lg:table-cell text-ink-soft text-xs tabular-nums">
                   {durationLabel(m.audio_duration_seconds)}
                 </td>
                 <td className="px-6 py-3">

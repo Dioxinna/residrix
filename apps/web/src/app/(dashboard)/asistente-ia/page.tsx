@@ -31,7 +31,7 @@ export default async function AsistenteIaPage() {
   if (!profile?.firm_id || profile.role !== 'admin') {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Solo administradores pueden ver esta página.</p>
+        <p className="text-ink-soft text-sm">Solo administradores pueden ver esta página.</p>
       </div>
     )
   }
@@ -55,9 +55,9 @@ export default async function AsistenteIaPage() {
         <div className="w-9 h-9 rounded-lg bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center">
           <Sparkles size={18} className="text-indigo-400" strokeWidth={1.75} />
         </div>
-        <h1 className="text-2xl font-semibold text-white">Asistente IA</h1>
+        <h1 className="text-2xl font-semibold text-ink">Asistente IA</h1>
       </div>
-      <p className="text-sm text-zinc-400 mb-8">
+      <p className="text-sm text-ink-soft mb-8">
         Incidencias abiertas con sugerencias automáticas. Agrupadas por patrón para que respondas a varias a la vez.
         {pendingCount > 0 && (
           <span className="text-indigo-300"> · {pendingCount} respuesta{pendingCount === 1 ? '' : 's'} pendiente{pendingCount === 1 ? '' : 's'} de enviar</span>
@@ -65,8 +65,8 @@ export default async function AsistenteIaPage() {
       </p>
 
       {groups.length === 0 && (
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-16 text-center">
-          <p className="text-zinc-400 text-sm">No hay incidencias abiertas que revisar.</p>
+        <div className="glass rounded-xl px-6 py-16 text-center">
+          <p className="text-ink-soft text-sm">No hay incidencias abiertas que revisar.</p>
         </div>
       )}
 
@@ -80,7 +80,7 @@ export default async function AsistenteIaPage() {
         ))}
       </div>
 
-      <p className="text-xs text-zinc-600 mt-10">
+      <p className="text-xs text-ink-faint mt-10">
         Tipos de proveedor sugeridos: {Object.values(PROVIDER_LABEL).join(', ')}.
       </p>
     </div>

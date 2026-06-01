@@ -95,7 +95,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
     return (
       <button
         disabled
-        className="bg-zinc-800 text-zinc-500 text-sm px-4 py-2 rounded cursor-not-allowed"
+        className="glass-strong text-ink-faint text-sm px-4 py-2 rounded cursor-not-allowed"
         title="Crea primero una comunidad"
       >
         Subir documento
@@ -120,16 +120,16 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={submit}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-md space-y-4"
+            className="glass rounded-xl p-6 w-full max-w-md space-y-4"
           >
-            <h2 className="text-white text-lg font-semibold">Subir documento</h2>
+            <h2 className="text-ink text-lg font-semibold">Subir documento</h2>
 
             <Field label="Comunidad">
               <select
                 value={communityId}
                 onChange={(e) => setCommunityId(e.target.value)}
                 required
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink"
               >
                 {communities.map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
@@ -144,7 +144,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Acta junta marzo 2026"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -153,7 +153,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={2}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -162,7 +162,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink"
                 >
                   {CATEGORIES.map((c) => (
                     <option key={c.value} value={c.value}>{c.label}</option>
@@ -174,7 +174,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
                 <select
                   value={isPublic ? '1' : '0'}
                   onChange={(e) => setIsPublic(e.target.value === '1')}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink"
                 >
                   <option value="1">Todos los vecinos</option>
                   <option value="0">Solo admin/presidente</option>
@@ -188,7 +188,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
                 type="file"
                 required
                 accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.png"
-                className="w-full text-sm text-zinc-400 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:bg-zinc-800 file:text-white file:text-xs"
+                className="w-full text-sm text-ink-soft file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:glass-strong file:text-ink file:text-xs"
               />
             </Field>
 
@@ -197,7 +197,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
                 type="button"
                 onClick={() => setOpen(false)}
                 disabled={pending}
-                className="text-sm px-4 py-2 rounded text-zinc-400 hover:text-white"
+                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
               >
                 Cancelar
               </button>
@@ -219,7 +219,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1">{label}</span>
       {children}
     </label>
   )

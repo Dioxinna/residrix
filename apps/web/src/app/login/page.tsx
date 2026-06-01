@@ -27,37 +27,37 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-600 mb-4">
             <span className="text-white font-bold text-xl">R</span>
           </div>
-          <h1 className="text-2xl font-bold text-white">Residrix</h1>
-          <p className="text-zinc-400 text-sm mt-1">Panel de administración</p>
+          <h1 className="text-2xl font-bold text-ink">Residrix</h1>
+          <p className="text-ink-soft text-sm mt-1">Panel de administración</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 space-y-4">
+        <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 border border-[color:var(--glass-border)] space-y-4">
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Email</label>
+            <label className="block text-sm font-medium text-ink-soft mb-1.5">Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@despacho.es"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Contraseña</label>
+            <label className="block text-sm font-medium text-ink-soft mb-1.5">Contraseña</label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
             />
           </div>
           <button
@@ -68,7 +68,7 @@ export default function LoginPage() {
             {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
           </button>
 
-          <p className="text-center text-xs text-zinc-500">
+          <p className="text-center text-xs text-ink-faint">
             ¿Aún no tienes cuenta?{' '}
             <Link href="/signup" className="text-indigo-400 hover:text-indigo-300">
               Regístrate

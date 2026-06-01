@@ -31,7 +31,7 @@ export default async function InformesPage() {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -45,8 +45,8 @@ export default async function InformesPage() {
   if (!communities || communities.length === 0) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-2xl font-semibold text-white mb-2">Informes</h1>
-        <p className="text-zinc-400 mb-6">
+        <h1 className="text-2xl font-semibold text-ink mb-2">Informes</h1>
+        <p className="text-ink-soft mb-6">
           Necesitas al menos una comunidad para generar informes.
         </p>
         <Link
@@ -65,16 +65,16 @@ export default async function InformesPage() {
         <div className="w-9 h-9 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center">
           <BarChart3 size={18} className="text-amber-400" strokeWidth={1.75} />
         </div>
-        <h1 className="text-2xl font-semibold text-white">Informes mensuales</h1>
+        <h1 className="text-2xl font-semibold text-ink">Informes mensuales</h1>
       </div>
-      <p className="text-sm text-zinc-400 mb-8">
+      <p className="text-sm text-ink-soft mb-8">
         Resumen ejecutivo del mes por comunidad: incidencias, gastos, comparativas vs mes anterior. Guarda como
         PDF y envíalo al presidente.
       </p>
 
       <InformePicker communities={communities} />
 
-      <p className="text-xs text-zinc-600 mt-6">
+      <p className="text-xs text-ink-faint mt-6">
         El envío automático mensual por email llegará en una próxima versión. Por ahora generas el informe
         cuando lo necesites.
       </p>

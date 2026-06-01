@@ -62,7 +62,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -204,28 +204,28 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
         />
 
         {/* HEADER */}
-        <header className="border-b border-zinc-800 pb-5 mb-6">
+        <header className="border-b border-[color:var(--glass-border)] pb-5 mb-6">
           <div className="flex items-start justify-between flex-wrap gap-3">
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-zinc-500 print-muted mb-1">
+              <p className="text-[10px] uppercase tracking-widest text-ink-faint print-muted mb-1">
                 Informe mensual
               </p>
-              <h1 className="text-2xl font-bold text-white">{community.name}</h1>
-              <p className="text-sm text-zinc-400 print-muted mt-0.5">
+              <h1 className="text-2xl font-bold text-ink">{community.name}</h1>
+              <p className="text-sm text-ink-soft print-muted mt-0.5">
                 {community.address}, {community.postal_code} {community.city}
                 {community.units_count > 0 && ` · ${community.units_count} unidades`}
               </p>
             </div>
             <div className="text-right">
-              <p className="text-sm text-white font-semibold">{firm?.name}</p>
-              {firm?.email && <p className="text-xs text-zinc-500 print-muted">{firm.email}</p>}
-              {firm?.phone && <p className="text-xs text-zinc-500 print-muted">{firm.phone}</p>}
+              <p className="text-sm text-ink font-semibold">{firm?.name}</p>
+              {firm?.email && <p className="text-xs text-ink-faint print-muted">{firm.email}</p>}
+              {firm?.phone && <p className="text-xs text-ink-faint print-muted">{firm.phone}</p>}
             </div>
           </div>
-          <p className="text-sm text-zinc-300 mt-3 capitalize">
-            Periodo: <strong className="text-white">{monthLabel(month)}</strong>
+          <p className="text-sm text-ink-soft mt-3 capitalize">
+            Periodo: <strong className="text-ink">{monthLabel(month)}</strong>
           </p>
-          <p className="text-xs text-zinc-500 print-muted">
+          <p className="text-xs text-ink-faint print-muted">
             Emitido el {issuedAt} por {profile.full_name}
           </p>
         </header>
@@ -268,10 +268,10 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
 
         {/* INCIDENCIAS */}
         <section className="mb-8">
-          <h2 className="text-sm font-semibold text-white uppercase tracking-wide mb-3">Incidencias</h2>
+          <h2 className="text-sm font-semibold text-ink uppercase tracking-wide mb-3">Incidencias</h2>
 
           {incTotal === 0 ? (
-            <p className="text-sm text-zinc-500 italic">Sin incidencias registradas este mes.</p>
+            <p className="text-sm text-ink-faint italic">Sin incidencias registradas este mes.</p>
           ) : (
             <div className="grid md:grid-cols-2 gap-4">
               <BreakdownTable
@@ -296,12 +296,12 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
         {/* TOP 5 INCIDENCIAS */}
         {topIncidences.length > 0 && (
           <section className="mb-8">
-            <h2 className="text-sm font-semibold text-white uppercase tracking-wide mb-3">
+            <h2 className="text-sm font-semibold text-ink uppercase tracking-wide mb-3">
               Incidencias destacadas
             </h2>
-            <table className="w-full text-sm border border-zinc-800 rounded overflow-hidden">
-              <thead className="bg-zinc-950/50">
-                <tr className="text-left text-zinc-500 text-xs uppercase tracking-wide">
+            <table className="w-full text-sm border border-[color:var(--glass-border)] rounded overflow-hidden">
+              <thead className="glass">
+                <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
                   <th className="px-3 py-2 font-medium">Fecha</th>
                   <th className="px-3 py-2 font-medium">Título</th>
                   <th className="px-3 py-2 font-medium">Categoría</th>
@@ -312,11 +312,11 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
               <tbody className="divide-y divide-zinc-800">
                 {topIncidences.map((i) => (
                   <tr key={i.id}>
-                    <td className="px-3 py-2 text-zinc-400 text-xs whitespace-nowrap">
+                    <td className="px-3 py-2 text-ink-soft text-xs whitespace-nowrap">
                       {formatDateEs((i.created_at as string).slice(0, 10))}
                     </td>
-                    <td className="px-3 py-2 text-white">{i.title}</td>
-                    <td className="px-3 py-2 text-zinc-400 text-xs">
+                    <td className="px-3 py-2 text-ink">{i.title}</td>
+                    <td className="px-3 py-2 text-ink-soft text-xs">
                       {INCIDENCE_CATEGORY_LABEL[i.category] ?? i.category}
                     </td>
                     <td className="px-3 py-2 text-xs">
@@ -338,7 +338,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
 
         {/* GASTOS */}
         <section className="mb-8">
-          <h2 className="text-sm font-semibold text-white uppercase tracking-wide mb-3">Gastos</h2>
+          <h2 className="text-sm font-semibold text-ink uppercase tracking-wide mb-3">Gastos</h2>
 
           <div className="grid grid-cols-3 gap-3 mb-4">
             <MiniStat label="Total" value={formatEuros(expTotal)} accent />
@@ -351,11 +351,11 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
           </div>
 
           {expCatRows.length === 0 ? (
-            <p className="text-sm text-zinc-500 italic">Sin gastos registrados este mes.</p>
+            <p className="text-sm text-ink-faint italic">Sin gastos registrados este mes.</p>
           ) : (
-            <table className="w-full text-sm border border-zinc-800 rounded overflow-hidden">
-              <thead className="bg-zinc-950/50">
-                <tr className="text-left text-zinc-500 text-xs uppercase tracking-wide">
+            <table className="w-full text-sm border border-[color:var(--glass-border)] rounded overflow-hidden">
+              <thead className="glass">
+                <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
                   <th className="px-4 py-2 font-medium">Categoría</th>
                   <th className="px-4 py-2 font-medium text-right">Nº</th>
                   <th className="px-4 py-2 font-medium text-right">Total</th>
@@ -365,12 +365,12 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
               <tbody className="divide-y divide-zinc-800">
                 {expCatRows.map((r) => (
                   <tr key={r.category}>
-                    <td className="px-4 py-2 text-white">
+                    <td className="px-4 py-2 text-ink">
                       {EXPENSE_CATEGORY_LABEL[r.category as ExpenseCategory] ?? 'Otros'}
                     </td>
-                    <td className="px-4 py-2 text-right text-zinc-400 tabular-nums">{r.count}</td>
-                    <td className="px-4 py-2 text-right text-white tabular-nums">{formatEuros(r.total)}</td>
-                    <td className="px-4 py-2 text-right text-zinc-400 tabular-nums">
+                    <td className="px-4 py-2 text-right text-ink-soft tabular-nums">{r.count}</td>
+                    <td className="px-4 py-2 text-right text-ink tabular-nums">{formatEuros(r.total)}</td>
+                    <td className="px-4 py-2 text-right text-ink-soft tabular-nums">
                       {expTotal === 0 ? '—' : `${((r.total / expTotal) * 100).toFixed(1)}%`}
                     </td>
                   </tr>
@@ -381,7 +381,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
         </section>
 
         {/* FOOTER */}
-        <footer className="border-t border-zinc-800 pt-4 text-xs text-zinc-500 print-muted">
+        <footer className="border-t border-[color:var(--glass-border)] pt-4 text-xs text-ink-faint print-muted">
           <p>
             Informe generado automáticamente por Residrix a partir de los datos de incidencias y gastos
             registrados. Los importes son los introducidos por la administración; las incidencias reflejan
@@ -418,12 +418,12 @@ function Stat({
   return (
     <div
       className={`rounded-xl border px-4 py-3 ${
-        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'bg-zinc-900 border-zinc-800'
+        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'glass border-[color:var(--glass-border)]'
       }`}
     >
-      <p className="text-[10px] uppercase tracking-wide text-zinc-500 print-muted mb-1">{label}</p>
-      <p className={`text-lg font-semibold tabular-nums ${tone ?? 'text-white'}`}>{value}</p>
-      {sub && <p className="text-xs text-zinc-500 print-muted mt-0.5">{sub}</p>}
+      <p className="text-[10px] uppercase tracking-wide text-ink-faint print-muted mb-1">{label}</p>
+      <p className={`text-lg font-semibold tabular-nums ${tone ?? 'text-ink'}`}>{value}</p>
+      {sub && <p className="text-xs text-ink-faint print-muted mt-0.5">{sub}</p>}
     </div>
   )
 }
@@ -442,11 +442,11 @@ function MiniStat({
   return (
     <div
       className={`rounded-lg border px-3 py-2 ${
-        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'bg-zinc-900 border-zinc-800'
+        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'glass border-[color:var(--glass-border)]'
       }`}
     >
-      <p className="text-[10px] uppercase tracking-wide text-zinc-500 print-muted">{label}</p>
-      <p className={`text-base font-semibold tabular-nums ${tone ?? 'text-white'}`}>{value}</p>
+      <p className="text-[10px] uppercase tracking-wide text-ink-faint print-muted">{label}</p>
+      <p className={`text-base font-semibold tabular-nums ${tone ?? 'text-ink'}`}>{value}</p>
     </div>
   )
 }
@@ -461,17 +461,17 @@ function BreakdownTable({
   total: number
 }) {
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
-      <p className="px-4 py-2 text-xs uppercase tracking-wide text-zinc-500 print-muted bg-zinc-950/50 border-b border-zinc-800">
+    <div className="glass rounded-lg overflow-hidden">
+      <p className="px-4 py-2 text-xs uppercase tracking-wide text-ink-faint print-muted glass border-b border-[color:var(--glass-border)]">
         {title}
       </p>
       <table className="w-full text-sm">
         <tbody className="divide-y divide-zinc-800">
           {rows.map((r) => (
             <tr key={r.label}>
-              <td className="px-4 py-1.5 text-white">{r.label}</td>
-              <td className="px-4 py-1.5 text-right text-zinc-400 tabular-nums">{r.count}</td>
-              <td className="px-4 py-1.5 text-right text-zinc-500 tabular-nums w-16">
+              <td className="px-4 py-1.5 text-ink">{r.label}</td>
+              <td className="px-4 py-1.5 text-right text-ink-soft tabular-nums">{r.count}</td>
+              <td className="px-4 py-1.5 text-right text-ink-faint tabular-nums w-16">
                 {total === 0 ? '—' : `${((r.count / total) * 100).toFixed(0)}%`}
               </td>
             </tr>

@@ -95,9 +95,9 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+    <div className="glass rounded-lg overflow-hidden">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-950 text-zinc-500 text-xs uppercase tracking-wide">
+        <thead className="bg-[color:var(--c-surface)] text-ink-faint text-xs uppercase tracking-wide">
           <tr>
             <th className="text-left px-4 py-3 font-medium">Nombre</th>
             <th className="text-left px-4 py-3 font-medium">Comunidad</th>
@@ -112,16 +112,16 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
           {documents.map((doc) => {
             const isPending = pendingId === doc.id || pending
             return (
-              <tr key={doc.id} className="text-zinc-300">
+              <tr key={doc.id} className="text-ink-soft">
                 <td className="px-4 py-3">
-                  <div className="text-white">{doc.name}</div>
+                  <div className="text-ink">{doc.name}</div>
                   {doc.description && (
-                    <div className="text-zinc-500 text-xs mt-0.5">{doc.description}</div>
+                    <div className="text-ink-faint text-xs mt-0.5">{doc.description}</div>
                   )}
                 </td>
                 <td className="px-4 py-3">{communityName(doc.communities)}</td>
                 <td className="px-4 py-3">{CATEGORY_LABEL[doc.category] ?? doc.category}</td>
-                <td className="px-4 py-3 text-zinc-500 text-xs">{formatSize(doc.file_size)}</td>
+                <td className="px-4 py-3 text-ink-faint text-xs">{formatSize(doc.file_size)}</td>
                 <td className="px-4 py-3 text-xs">
                   {doc.is_public ? (
                     <span className="text-emerald-400">Vecinos</span>
@@ -129,7 +129,7 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
                     <span className="text-amber-400">Privado</span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-zinc-500 text-xs">
+                <td className="px-4 py-3 text-ink-faint text-xs">
                   {doc.created_at
                     ? formatDistanceToNow(new Date(doc.created_at), { addSuffix: true, locale: es })
                     : '—'}

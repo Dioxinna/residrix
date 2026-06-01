@@ -53,19 +53,19 @@ export function InviteForm({ communities }: { communities: Community[] }) {
 
   if (communities.length === 0) {
     return (
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-sm text-zinc-400">
+      <div className="glass rounded-lg p-4 text-sm text-ink-soft">
         Crea primero una comunidad para poder invitar vecinos.
       </div>
     )
   }
 
   return (
-    <form onSubmit={submit} className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 grid grid-cols-1 md:grid-cols-5 gap-3">
+    <form onSubmit={submit} className="glass rounded-lg p-4 grid grid-cols-1 md:grid-cols-5 gap-3">
       <Field label="Comunidad" className="md:col-span-2">
         <select
           value={communityId}
           onChange={(e) => setCommunityId(e.target.value)}
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink"
         >
           {communities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
@@ -80,7 +80,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="vecino@ejemplo.com"
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
         />
       </Field>
 
@@ -90,7 +90,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           placeholder="María García"
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
         />
       </Field>
 
@@ -101,7 +101,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
           value={unitNumber}
           onChange={(e) => setUnitNumber(e.target.value)}
           placeholder="3ºB"
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
         />
       </Field>
 
@@ -109,7 +109,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
         <select
           value={role}
           onChange={(e) => setRole(e.target.value as 'neighbor' | 'tenant' | 'president')}
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink"
         >
           <option value="neighbor">Vecino</option>
           <option value="tenant">Inquilino</option>
@@ -141,7 +141,7 @@ function Field({
 }) {
   return (
     <label className={`block ${className ?? ''}`}>
-      <span className="block text-xs text-zinc-400 mb-1">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1">{label}</span>
       {children}
     </label>
   )

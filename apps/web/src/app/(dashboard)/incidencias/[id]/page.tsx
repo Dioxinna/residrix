@@ -60,8 +60,8 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
       <div className="mb-6">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h1 className="text-2xl font-bold text-white">{inc.title}</h1>
-            <p className="text-zinc-400 text-sm mt-1">
+            <h1 className="text-2xl font-bold text-ink">{inc.title}</h1>
+            <p className="text-ink-soft text-sm mt-1">
               {community?.name} · {format(new Date(inc.created_at ?? Date.now()), "d MMM yyyy 'a las' HH:mm", { locale: es })}
             </p>
           </div>
@@ -74,9 +74,9 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-            <h2 className="text-white font-semibold text-sm mb-3">Descripción</h2>
-            <p className="text-zinc-300 text-sm leading-relaxed whitespace-pre-wrap">{inc.description}</p>
+          <section className="glass rounded-xl p-6">
+            <h2 className="text-ink font-semibold text-sm mb-3">Descripción</h2>
+            <p className="text-ink-soft text-sm leading-relaxed whitespace-pre-wrap">{inc.description}</p>
             {inc.photo_url && (
               <div className="mt-4">
                 <img src={inc.photo_url} alt="Foto de la incidencia" className="rounded-lg max-h-64 object-cover" />
@@ -95,7 +95,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                 )}
               </div>
               {inc.ai_summary && (
-                <p className="text-zinc-400 text-xs mb-3 italic">Resumen: {inc.ai_summary}</p>
+                <p className="text-ink-soft text-xs mb-3 italic">Resumen: {inc.ai_summary}</p>
               )}
               <p className="text-indigo-100 text-sm leading-relaxed whitespace-pre-wrap">{inc.ai_response}</p>
               <div className="flex justify-end mt-4">
@@ -105,7 +105,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
           )}
 
           {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
-            <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <section className="glass rounded-xl p-6">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-amber-400 text-xs font-semibold uppercase tracking-wide">
                   Proveedor sugerido: {PROVIDER_LABEL[inc.ai_suggested_provider as ProviderType]}
@@ -113,7 +113,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
               </div>
               {suggestedProviders.length === 0 ? (
                 <div className="flex items-center justify-between gap-3 flex-wrap">
-                  <p className="text-zinc-400 text-sm">
+                  <p className="text-ink-soft text-sm">
                     Aún no tienes proveedores de este tipo. Añade uno para verlo aquí.
                   </p>
                   <a
@@ -128,8 +128,8 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                   {suggestedProviders.map((p) => (
                     <li key={p.id} className="px-6 py-3 flex items-center justify-between gap-3 flex-wrap">
                       <div className="min-w-0">
-                        <p className="text-white text-sm font-medium">{p.name}</p>
-                        {p.contact_name && <p className="text-zinc-500 text-xs">{p.contact_name}</p>}
+                        <p className="text-ink text-sm font-medium">{p.name}</p>
+                        {p.contact_name && <p className="text-ink-faint text-xs">{p.contact_name}</p>}
                       </div>
                       <div className="flex items-center gap-2">
                         {p.phone && (
@@ -160,35 +160,35 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
         </div>
 
         <div className="space-y-4">
-          <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
-            <h3 className="text-white font-semibold text-sm mb-3">Cambiar estado</h3>
+          <section className="glass rounded-xl p-5">
+            <h3 className="text-ink font-semibold text-sm mb-3">Cambiar estado</h3>
             <StatusSelector incidenceId={id} currentStatus={inc.status as IncidenceStatus} />
           </section>
 
-          <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-3">
-            <h3 className="text-white font-semibold text-sm">Vecino</h3>
+          <section className="glass rounded-xl p-5 space-y-3">
+            <h3 className="text-ink font-semibold text-sm">Vecino</h3>
             <div className="text-sm space-y-1">
-              <p className="text-zinc-300">{reporter?.full_name ?? '—'}</p>
-              {reporter?.unit_number && <p className="text-zinc-500">Piso/puerta: {reporter.unit_number}</p>}
-              {reporter?.phone && <p className="text-zinc-500">{reporter.phone}</p>}
+              <p className="text-ink-soft">{reporter?.full_name ?? '—'}</p>
+              {reporter?.unit_number && <p className="text-ink-faint">Piso/puerta: {reporter.unit_number}</p>}
+              {reporter?.phone && <p className="text-ink-faint">{reporter.phone}</p>}
             </div>
           </section>
 
-          <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 space-y-2">
-            <h3 className="text-white font-semibold text-sm">Detalles</h3>
+          <section className="glass rounded-xl p-5 space-y-2">
+            <h3 className="text-ink font-semibold text-sm">Detalles</h3>
             <div className="text-sm space-y-2">
               <div className="flex justify-between">
-                <span className="text-zinc-500">Categoría</span>
-                <span className="text-zinc-300">{categoryLabels[inc.category as IncidenceCategory]}</span>
+                <span className="text-ink-faint">Categoría</span>
+                <span className="text-ink-soft">{categoryLabels[inc.category as IncidenceCategory]}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-500">Comunidad</span>
-                <span className="text-zinc-300 text-right">{community?.name}</span>
+                <span className="text-ink-faint">Comunidad</span>
+                <span className="text-ink-soft text-right">{community?.name}</span>
               </div>
               {inc.resolved_at && (
                 <div className="flex justify-between">
-                  <span className="text-zinc-500">Resuelta</span>
-                  <span className="text-zinc-300">{format(new Date(inc.resolved_at), 'd MMM yyyy', { locale: es })}</span>
+                  <span className="text-ink-faint">Resuelta</span>
+                  <span className="text-ink-soft">{format(new Date(inc.resolved_at), 'd MMM yyyy', { locale: es })}</span>
                 </div>
               )}
             </div>

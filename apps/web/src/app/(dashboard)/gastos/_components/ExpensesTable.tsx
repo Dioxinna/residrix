@@ -51,18 +51,18 @@ export function ExpensesTable({
 
   if (expenses.length === 0) {
     return (
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-16 text-center">
-        <p className="text-zinc-400 text-sm mb-2">No hay gastos registrados este mes.</p>
-        <p className="text-zinc-500 text-xs">Pulsa "Nuevo gasto" para empezar.</p>
+      <div className="glass rounded-xl px-6 py-16 text-center">
+        <p className="text-ink-soft text-sm mb-2">No hay gastos registrados este mes.</p>
+        <p className="text-ink-faint text-xs">Pulsa "Nuevo gasto" para empezar.</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+    <div className="glass rounded-xl overflow-hidden">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-950/50 border-b border-zinc-800">
-          <tr className="text-left text-zinc-500 text-xs uppercase tracking-wide">
+        <thead className="glass border-b border-[color:var(--glass-border)]">
+          <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
             <th className="px-6 py-3 font-medium">Fecha</th>
             <th className="px-6 py-3 font-medium">Descripción</th>
             <th className="px-6 py-3 font-medium hidden md:table-cell">Categoría</th>
@@ -74,21 +74,21 @@ export function ExpensesTable({
         </thead>
         <tbody className="divide-y divide-zinc-800">
           {expenses.map((e) => (
-            <tr key={e.id} className="hover:bg-zinc-800/40">
-              <td className="px-6 py-3 text-zinc-400 text-xs whitespace-nowrap">{dateLabel(e.expense_date)}</td>
+            <tr key={e.id} className="hover:glass">
+              <td className="px-6 py-3 text-ink-soft text-xs whitespace-nowrap">{dateLabel(e.expense_date)}</td>
               <td className="px-6 py-3">
-                <p className="text-white">{e.description}</p>
-                {e.notes && <p className="text-zinc-500 text-xs mt-0.5 line-clamp-1">{e.notes}</p>}
+                <p className="text-ink">{e.description}</p>
+                {e.notes && <p className="text-ink-faint text-xs mt-0.5 line-clamp-1">{e.notes}</p>}
               </td>
               <td className="px-6 py-3 hidden md:table-cell">
                 <span className={`text-[10px] uppercase tracking-wide font-bold px-1.5 py-0.5 rounded border ${categoryTone(e.category)}`}>
                   {categoryLabel(e.category)}
                 </span>
               </td>
-              <td className="px-6 py-3 hidden lg:table-cell text-zinc-400 text-xs">
+              <td className="px-6 py-3 hidden lg:table-cell text-ink-soft text-xs">
                 {e.vendor_name ?? '—'}
               </td>
-              <td className="px-6 py-3 text-right text-white font-medium tabular-nums whitespace-nowrap">
+              <td className="px-6 py-3 text-right text-ink font-medium tabular-nums whitespace-nowrap">
                 {formatEuros(e.amount_cents)}
               </td>
               <td className="px-6 py-3">
@@ -123,7 +123,7 @@ export function ExpensesTable({
                       <button
                         onClick={() => setConfirmId(null)}
                         disabled={deleting}
-                        className="text-xs text-zinc-500 hover:text-zinc-400"
+                        className="text-xs text-ink-faint hover:text-ink-soft"
                       >
                         Cancelar
                       </button>
@@ -131,7 +131,7 @@ export function ExpensesTable({
                   ) : (
                     <button
                       onClick={() => setConfirmId(e.id)}
-                      className="text-zinc-500 hover:text-red-400 transition-colors"
+                      className="text-ink-faint hover:text-red-400 transition-colors"
                       aria-label="Borrar gasto"
                     >
                       <Trash2 size={14} strokeWidth={1.75} />

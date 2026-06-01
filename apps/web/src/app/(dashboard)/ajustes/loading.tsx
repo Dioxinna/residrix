@@ -9,7 +9,7 @@ export default function Loading() {
           <div key={s}>
             <Skeleton className="h-4 w-32 mb-2" />
             <Skeleton className="h-3 w-64 mb-3" />
-            <div className="bg-zinc-900 border border-zinc-800 rounded-lg divide-y divide-zinc-800">
+            <div className="glass rounded-lg divide-y divide-zinc-800">
               {Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="px-4 py-3 flex items-center justify-between">
                   <div className="flex-1">

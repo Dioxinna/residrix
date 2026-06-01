@@ -13,11 +13,11 @@ const STATUS_LABEL: Record<string, { label: string; tone: string }> = {
   active: { label: 'Activa', tone: 'text-emerald-400 bg-emerald-500/10' },
   trialing: { label: 'En prueba', tone: 'text-indigo-400 bg-indigo-500/10' },
   past_due: { label: 'Pago pendiente', tone: 'text-amber-400 bg-amber-500/10' },
-  canceled: { label: 'Cancelada', tone: 'text-zinc-500 bg-zinc-500/10' },
+  canceled: { label: 'Cancelada', tone: 'text-ink-faint bg-zinc-500/10' },
   incomplete: { label: 'Incompleta', tone: 'text-amber-400 bg-amber-500/10' },
-  incomplete_expired: { label: 'Expirada', tone: 'text-zinc-500 bg-zinc-500/10' },
+  incomplete_expired: { label: 'Expirada', tone: 'text-ink-faint bg-zinc-500/10' },
   unpaid: { label: 'Impagada', tone: 'text-red-400 bg-red-500/10' },
-  paused: { label: 'Pausada', tone: 'text-zinc-500 bg-zinc-500/10' },
+  paused: { label: 'Pausada', tone: 'text-ink-faint bg-zinc-500/10' },
 }
 
 interface PageProps {
@@ -38,7 +38,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -70,15 +70,15 @@ export default async function BillingPage({ searchParams }: PageProps) {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
-      <h1 className="text-2xl font-semibold text-white mb-1">Facturación</h1>
-      <p className="text-sm text-zinc-400 mb-8">
+      <h1 className="text-2xl font-semibold text-ink mb-1">Facturación</h1>
+      <p className="text-sm text-ink-soft mb-8">
         Tu primera comunidad es gratis. Elige plan cuando quieras añadir más.
       </p>
 
       {upgradeFeature && (
         <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-indigo-200">
-          <strong className="text-white">{FEATURE_LABEL[upgradeFeature]}</strong> está incluida en el plan{' '}
-          <strong className="text-white">{TIER_NAME[FEATURE_MIN_TIER[upgradeFeature]]}</strong>. Súbete para usarla.
+          <strong className="text-ink">{FEATURE_LABEL[upgradeFeature]}</strong> está incluida en el plan{' '}
+          <strong className="text-ink">{TIER_NAME[FEATURE_MIN_TIER[upgradeFeature]]}</strong>. Súbete para usarla.
         </div>
       )}
       {params.status === 'success' && (
@@ -87,39 +87,39 @@ export default async function BillingPage({ searchParams }: PageProps) {
         </div>
       )}
       {params.status === 'cancel' && (
-        <div className="bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 mb-6 text-sm text-zinc-400">
+        <div className="glass-strong border border-[color:var(--glass-border)] rounded-lg px-4 py-3 mb-6 text-sm text-ink-soft">
           Has cancelado el pago. Puedes retomarlo cuando quieras.
         </div>
       )}
 
-      <section className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 mb-8">
+      <section className="glass rounded-xl p-6 mb-8">
         <div className="flex items-start justify-between mb-4">
           <div>
-            <p className="text-xs text-zinc-500 uppercase tracking-wide mb-1">Estado actual</p>
+            <p className="text-xs text-ink-faint uppercase tracking-wide mb-1">Estado actual</p>
             <div className="flex items-center gap-3">
               {statusBadge ? (
                 <span className={`text-xs font-semibold px-2 py-0.5 rounded ${statusBadge.tone}`}>
                   {statusBadge.label}
                 </span>
               ) : (
-                <span className="text-xs font-semibold px-2 py-0.5 rounded text-zinc-400 bg-zinc-800">
+                <span className="text-xs font-semibold px-2 py-0.5 rounded text-ink-soft glass-strong">
                   Sin suscripción
                 </span>
               )}
               {isActive && (
-                <span className="text-sm text-white font-medium">
+                <span className="text-sm text-ink font-medium">
                   Plan {TIERS[currentTier].name}
                 </span>
               )}
               {periodEnd && isActive && (
-                <span className="text-xs text-zinc-500">· Próxima factura {periodEnd}</span>
+                <span className="text-xs text-ink-faint">· Próxima factura {periodEnd}</span>
               )}
             </div>
           </div>
           {firm?.stripe_customer_id && <PortalButton />}
         </div>
 
-        <div className="grid grid-cols-3 gap-4 pt-4 border-t border-zinc-800">
+        <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[color:var(--glass-border)]">
           <Stat label="Comunidades en plan" value={isActive ? `${quantity}` : 'Gratis (1)'} />
           <Stat label="Usadas" value={`${used}`} />
           <Stat
@@ -130,10 +130,10 @@ export default async function BillingPage({ searchParams }: PageProps) {
         </div>
       </section>
 
-      <h2 className="text-white font-semibold text-lg mb-1">
+      <h2 className="text-ink font-semibold text-lg mb-1">
         {isActive ? 'Cambia de plan' : 'Elige un plan'}
       </h2>
-      <p className="text-sm text-zinc-500 mb-4">
+      <p className="text-sm text-ink-faint mb-4">
         El precio es por comunidad/mes. Tu primera comunidad sigue siendo gratis hasta que te suscribas.
       </p>
 
@@ -143,7 +143,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
         suggestedQuantity={suggestedQuantity}
       />
 
-      <p className="mt-8 text-xs text-zinc-500">
+      <p className="mt-8 text-xs text-ink-faint">
         Pagos seguros con Stripe. Puedes cancelar o cambiar de plan en cualquier momento desde el portal de cliente.
       </p>
     </div>
@@ -153,8 +153,8 @@ export default async function BillingPage({ searchParams }: PageProps) {
 function Stat({ label, value, tone }: { label: string; value: string; tone?: string }) {
   return (
     <div>
-      <p className="text-xs text-zinc-500 mb-1">{label}</p>
-      <p className={`text-lg font-semibold ${tone ?? 'text-white'}`}>{value}</p>
+      <p className="text-xs text-ink-faint mb-1">{label}</p>
+      <p className={`text-lg font-semibold ${tone ?? 'text-ink'}`}>{value}</p>
     </div>
   )
 }

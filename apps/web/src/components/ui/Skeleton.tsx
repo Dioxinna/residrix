@@ -1,11 +1,11 @@
 export function Skeleton({ className = '' }: { className?: string }) {
-  return <div className={`animate-pulse bg-zinc-800/70 rounded ${className}`} />
+  return <div className={`animate-pulse glass-strong/70 rounded ${className}`} />
 }
 
 export function TableSkeleton({ rows = 5 }: { rows?: number }) {
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
-      <div className="bg-zinc-950 px-4 py-3 flex gap-4 border-b border-zinc-800">
+    <div className="glass rounded-lg overflow-hidden">
+      <div className="bg-[color:var(--c-surface)] px-4 py-3 flex gap-4 border-b border-[color:var(--glass-border)]">
         <Skeleton className="h-3 w-24" />
         <Skeleton className="h-3 w-32" />
         <Skeleton className="h-3 w-20" />
@@ -38,7 +38,7 @@ export function StatsSkeleton({ count = 4 }: { count?: number }) {
   return (
     <div className={`grid grid-cols-2 lg:grid-cols-${count} gap-4 mb-8`}>
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+        <div key={i} className="glass rounded-xl p-5">
           <Skeleton className="h-3 w-24 mb-3" />
           <Skeleton className="h-8 w-16" />
         </div>

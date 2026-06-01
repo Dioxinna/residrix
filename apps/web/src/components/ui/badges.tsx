@@ -13,7 +13,7 @@ const statusConfig: Record<IncidenceStatus, { label: string; className: string }
   in_progress:      { label: 'En progreso',      className: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
   pending_neighbor: { label: 'Pdte. vecino',     className: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' },
   resolved:         { label: 'Resuelta',         className: 'bg-green-500/20 text-green-400 border-green-500/30' },
-  closed:           { label: 'Cerrada',          className: 'bg-zinc-500/20 text-zinc-400 border-zinc-500/30' },
+  closed:           { label: 'Cerrada',          className: 'bg-zinc-500/20 text-ink-soft border-zinc-500/30' },
 }
 
 interface BadgeProps {

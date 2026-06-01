@@ -17,7 +17,7 @@ export default async function VecinosPage() {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -36,16 +36,16 @@ export default async function VecinosPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
-      <h1 className="text-2xl font-semibold text-white mb-1">Vecinos</h1>
-      <p className="text-sm text-zinc-400 mb-8">Envía códigos de invitación para que los vecinos se registren.</p>
+      <h1 className="text-2xl font-semibold text-ink mb-1">Vecinos</h1>
+      <p className="text-sm text-ink-soft mb-8">Envía códigos de invitación para que los vecinos se registren.</p>
 
       <section className="mb-10">
-        <h2 className="text-sm font-semibold text-white mb-3">Nueva invitación</h2>
+        <h2 className="text-sm font-semibold text-ink mb-3">Nueva invitación</h2>
         <InviteForm communities={communities ?? []} />
       </section>
 
       <section>
-        <h2 className="text-sm font-semibold text-white mb-3">Invitaciones recientes</h2>
+        <h2 className="text-sm font-semibold text-ink mb-3">Invitaciones recientes</h2>
         <InvitationsTable invitations={invitations ?? []} />
       </section>
     </div>

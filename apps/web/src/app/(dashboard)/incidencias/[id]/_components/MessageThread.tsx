@@ -68,41 +68,41 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
   }
 
   return (
-    <section className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
-      <div className="px-6 py-4 border-b border-zinc-800">
-        <h2 className="text-white font-semibold text-sm">Mensajes ({messages.length})</h2>
+    <section className="glass rounded-xl overflow-hidden">
+      <div className="px-6 py-4 border-b border-[color:var(--glass-border)]">
+        <h2 className="text-ink font-semibold text-sm">Mensajes ({messages.length})</h2>
       </div>
 
       <div className="divide-y divide-zinc-800 max-h-96 overflow-y-auto">
         {messages.length === 0 && (
-          <p className="px-6 py-8 text-center text-zinc-500 text-sm">No hay mensajes aún</p>
+          <p className="px-6 py-8 text-center text-ink-faint text-sm">No hay mensajes aún</p>
         )}
         {messages.map((msg) => (
           <div key={msg.id} className={cn('px-6 py-4', msg.is_internal && 'bg-amber-950/20')}>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-white text-xs font-medium">{msg.profiles?.full_name ?? 'Sistema'}</span>
+              <span className="text-ink text-xs font-medium">{msg.profiles?.full_name ?? 'Sistema'}</span>
               {msg.is_internal && (
                 <span className="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs px-1.5 py-0.5 rounded">
                   Nota interna
                 </span>
               )}
-              <span className="text-zinc-600 text-xs ml-auto">
+              <span className="text-ink-faint text-xs ml-auto">
                 {formatDistanceToNow(new Date(msg.created_at), { addSuffix: true, locale: es })}
               </span>
             </div>
-            <p className="text-zinc-300 text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+            <p className="text-ink-soft text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
           </div>
         ))}
         <div ref={bottomRef} />
       </div>
 
-      <div className="px-6 py-4 border-t border-zinc-800 space-y-3">
+      <div className="px-6 py-4 border-t border-[color:var(--glass-border)] space-y-3">
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Escribe un mensaje al vecino..."
           rows={3}
-          className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none"
+          className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none"
         />
         {aiResponse && !content && (
           <button onClick={() => setContent(aiResponse)} className="text-indigo-400 text-xs hover:text-indigo-300 transition-colors">

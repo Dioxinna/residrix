@@ -43,8 +43,8 @@ export default async function DashboardPage() {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-        <p className="text-zinc-400 text-sm mt-1">Resumen de actividad de tus comunidades</p>
+        <h1 className="text-2xl font-bold text-ink">Dashboard</h1>
+        <p className="text-ink-soft text-sm mt-1">Resumen de actividad de tus comunidades</p>
       </div>
 
       <OnboardingChecklist
@@ -55,29 +55,29 @@ export default async function DashboardPage() {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map(({ label, value, color }) => (
-          <div key={label} className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
-            <p className="text-zinc-400 text-sm">{label}</p>
+          <div key={label} className="glass rounded-xl p-5">
+            <p className="text-ink-soft text-sm">{label}</p>
             <p className={`text-3xl font-bold mt-1 ${color}`}>{value}</p>
           </div>
         ))}
       </div>
 
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl">
-        <div className="px-6 py-4 border-b border-zinc-800 flex items-center justify-between">
-          <h2 className="text-white font-semibold text-sm">Últimas incidencias</h2>
+      <div className="glass rounded-xl">
+        <div className="px-6 py-4 border-b border-[color:var(--glass-border)] flex items-center justify-between">
+          <h2 className="text-ink font-semibold text-sm">Últimas incidencias</h2>
           <Link href="/incidencias" className="text-indigo-400 text-xs hover:text-indigo-300 transition-colors">
             Ver todas →
           </Link>
         </div>
         <div className="divide-y divide-zinc-800">
           {recent.length === 0 && (
-            <p className="px-6 py-8 text-center text-zinc-500 text-sm">No hay incidencias aún</p>
+            <p className="px-6 py-8 text-center text-ink-faint text-sm">No hay incidencias aún</p>
           )}
           {recent.map((inc) => (
-            <Link key={inc.id} href={`/incidencias/${inc.id}`} className="flex items-center gap-4 px-6 py-4 hover:bg-zinc-800/50 transition-colors">
+            <Link key={inc.id} href={`/incidencias/${inc.id}`} className="flex items-center gap-4 px-6 py-4 hover:glass transition-colors">
               <div className="flex-1 min-w-0">
-                <p className="text-white text-sm font-medium truncate">{inc.title}</p>
-                <p className="text-zinc-500 text-xs mt-0.5">
+                <p className="text-ink text-sm font-medium truncate">{inc.title}</p>
+                <p className="text-ink-faint text-xs mt-0.5">
                   {(inc.communities as { name: string } | null)?.name ?? '—'} ·{' '}
                   {formatDistanceToNow(new Date(inc.created_at ?? Date.now()), { addSuffix: true, locale: es })}
                 </p>

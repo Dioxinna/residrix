@@ -78,9 +78,9 @@ export function NotificationPreferencesForm({ initial }: { initial: Notification
 function Section({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-sm font-semibold text-white mb-1">{title}</h2>
-      <p className="text-xs text-zinc-500 mb-3">{subtitle}</p>
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg divide-y divide-zinc-800">
+      <h2 className="text-sm font-semibold text-ink mb-1">{title}</h2>
+      <p className="text-xs text-ink-faint mb-3">{subtitle}</p>
+      <div className="glass rounded-lg divide-y divide-zinc-800">
         {children}
       </div>
     </section>
@@ -98,8 +98,8 @@ function ToggleRow({ label, description, checked, onChange }: ToggleRowProps) {
   return (
     <label className="flex items-center justify-between gap-4 px-4 py-3 cursor-pointer">
       <div className="flex-1">
-        <p className="text-sm text-white">{label}</p>
-        <p className="text-xs text-zinc-500 mt-0.5">{description}</p>
+        <p className="text-sm text-ink">{label}</p>
+        <p className="text-xs text-ink-faint mt-0.5">{description}</p>
       </div>
       <button
         type="button"

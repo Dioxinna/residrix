@@ -61,17 +61,17 @@ export function TierCards({
   return (
     <>
       {currentTier === null && (
-        <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 mb-4 flex items-center gap-3 flex-wrap">
-          <label className="text-sm text-zinc-400">Cuántas comunidades quieres gestionar:</label>
+        <div className="glass rounded-lg p-4 mb-4 flex items-center gap-3 flex-wrap">
+          <label className="text-sm text-ink-soft">Cuántas comunidades quieres gestionar:</label>
           <input
             type="number"
             min={1}
             value={quantity}
             onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value, 10) || 1))}
             disabled={pending}
-            className="w-20 bg-zinc-950 border border-zinc-800 rounded px-3 py-1.5 text-sm text-white"
+            className="w-20 glass rounded px-3 py-1.5 text-sm text-ink"
           />
-          <span className="text-xs text-zinc-500">Puedes cambiar la cantidad luego desde el portal.</span>
+          <span className="text-xs text-ink-faint">Puedes cambiar la cantidad luego desde el portal.</span>
         </div>
       )}
 
@@ -92,7 +92,7 @@ export function TierCards({
               className={`relative rounded-xl border p-5 flex flex-col ${
                 isCurrent
                   ? 'bg-indigo-500/5 border-indigo-500/40'
-                  : 'bg-zinc-900 border-zinc-800'
+                  : 'glass border-[color:var(--glass-border)]'
               }`}
             >
               {isCurrent && (
@@ -101,15 +101,15 @@ export function TierCards({
                 </span>
               )}
 
-              <h3 className="text-white text-lg font-semibold">{tier.name}</h3>
-              <p className="text-zinc-500 text-xs mb-4">{tier.tagline}</p>
+              <h3 className="text-ink text-lg font-semibold">{tier.name}</h3>
+              <p className="text-ink-faint text-xs mb-4">{tier.tagline}</p>
 
               <div className="mb-5">
-                <span className="text-3xl font-bold text-white">{tier.pricePerCommunity} €</span>
-                <span className="text-sm text-zinc-500"> /comunidad/mes</span>
+                <span className="text-3xl font-bold text-ink">{tier.pricePerCommunity} €</span>
+                <span className="text-sm text-ink-faint"> /comunidad/mes</span>
               </div>
 
-              <ul className="space-y-2 mb-5 text-sm text-zinc-300 flex-1">
+              <ul className="space-y-2 mb-5 text-sm text-ink-soft flex-1">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2">
                     <span className="text-indigo-400 mt-0.5">✓</span>
@@ -123,7 +123,7 @@ export function TierCards({
                 disabled={pending || isCurrent}
                 className={`w-full text-sm font-medium px-4 py-2 rounded ${
                   isCurrent
-                    ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                    ? 'glass-strong text-ink-faint cursor-not-allowed'
                     : 'bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white'
                 }`}
               >

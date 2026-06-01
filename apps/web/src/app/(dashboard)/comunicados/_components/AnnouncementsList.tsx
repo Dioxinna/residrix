@@ -87,7 +87,7 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
         return (
           <article
             key={ann.id}
-            className="relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden"
+            className="relative glass rounded-lg overflow-hidden"
           >
             <div className={`absolute left-0 top-0 bottom-0 w-1 ${styles.bar}`} />
             <div className="pl-5 pr-4 py-4">
@@ -97,9 +97,9 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
                     <span className={`inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded border ${styles.tag}`}>
                       {styles.label}
                     </span>
-                    <span className="text-zinc-500 text-xs">{name(ann.communities)}</span>
+                    <span className="text-ink-faint text-xs">{name(ann.communities)}</span>
                   </div>
-                  <h3 className="text-white text-base font-semibold">{ann.title}</h3>
+                  <h3 className="text-ink text-base font-semibold">{ann.title}</h3>
                 </div>
                 <button
                   type="button"
@@ -110,8 +110,8 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
                   Borrar
                 </button>
               </div>
-              <p className="text-zinc-300 text-sm whitespace-pre-wrap leading-relaxed">{ann.body}</p>
-              <p className="text-zinc-600 text-xs mt-3">
+              <p className="text-ink-soft text-sm whitespace-pre-wrap leading-relaxed">{ann.body}</p>
+              <p className="text-ink-faint text-xs mt-3">
                 Publicado por {author(ann.profiles)}
                 {ann.created_at && (
                   <> · {formatDistanceToNow(new Date(ann.created_at), { addSuffix: true, locale: es })}</>

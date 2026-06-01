@@ -101,9 +101,9 @@ export function CommunityDialog(props: Props) {
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={submit}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-md space-y-4"
+            className="glass rounded-xl p-6 w-full max-w-md space-y-4"
           >
-            <h2 className="text-white text-lg font-semibold">
+            <h2 className="text-ink text-lg font-semibold">
               {isCreate ? 'Nueva comunidad' : 'Editar comunidad'}
             </h2>
 
@@ -114,7 +114,7 @@ export function CommunityDialog(props: Props) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Edificio Mar Azul"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -125,7 +125,7 @@ export function CommunityDialog(props: Props) {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Calle Mayor 123"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -137,7 +137,7 @@ export function CommunityDialog(props: Props) {
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   placeholder="Madrid"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
                 />
               </Field>
 
@@ -150,7 +150,7 @@ export function CommunityDialog(props: Props) {
                   value={postal}
                   onChange={(e) => setPostal(e.target.value)}
                   placeholder="28001"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
                 />
               </Field>
             </div>
@@ -161,7 +161,7 @@ export function CommunityDialog(props: Props) {
                 min={0}
                 value={units}
                 onChange={(e) => setUnits(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink"
               />
             </Field>
 
@@ -170,7 +170,7 @@ export function CommunityDialog(props: Props) {
                 type="button"
                 onClick={() => setOpen(false)}
                 disabled={pending}
-                className="text-sm px-4 py-2 rounded text-zinc-400 hover:text-white"
+                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
               >
                 Cancelar
               </button>
@@ -192,7 +192,7 @@ export function CommunityDialog(props: Props) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1">{label}</span>
       {children}
     </label>
   )

@@ -45,7 +45,7 @@ export default async function GastosPage({ searchParams }: PageProps) {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -59,8 +59,8 @@ export default async function GastosPage({ searchParams }: PageProps) {
   if (!communities || communities.length === 0) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-2xl font-semibold text-white mb-2">Gastos</h1>
-        <p className="text-zinc-400 mb-6">
+        <h1 className="text-2xl font-semibold text-ink mb-2">Gastos</h1>
+        <p className="text-ink-soft mb-6">
           Crea una comunidad primero para registrar gastos.
         </p>
         <Link
@@ -123,7 +123,7 @@ export default async function GastosPage({ searchParams }: PageProps) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-1 flex-wrap gap-3">
-        <h1 className="text-2xl font-semibold text-white">Gastos</h1>
+        <h1 className="text-2xl font-semibold text-ink">Gastos</h1>
         <ExpenseDialog
           mode="create"
           trigger="Nuevo gasto"
@@ -131,7 +131,7 @@ export default async function GastosPage({ searchParams }: PageProps) {
           firmId={profile.firm_id}
         />
       </div>
-      <p className="text-sm text-zinc-400 mb-6">
+      <p className="text-sm text-ink-soft mb-6">
         Lleva el registro mensual de gastos por comunidad. Será la base de las Liquidaciones (Pro).
       </p>
 
@@ -185,7 +185,7 @@ function CommunityFilter({
 }) {
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs text-zinc-500 uppercase tracking-wide">Comunidad</span>
+      <span className="text-xs text-ink-faint uppercase tracking-wide">Comunidad</span>
       <div className="flex flex-wrap gap-1.5">
         {communities.map((c) => {
           const active = c.id === selectedId
@@ -197,7 +197,7 @@ function CommunityFilter({
               className={`text-xs px-2.5 py-1 rounded border ${
                 active
                   ? 'bg-indigo-500/15 border-indigo-500/40 text-white'
-                  : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
+                  : 'glass border-[color:var(--glass-border)] text-ink-soft hover:text-ink hover:border-[color:var(--glass-border)]'
               }`}
             >
               {c.name}
@@ -225,12 +225,12 @@ function Stat({
   return (
     <div
       className={`rounded-xl border px-4 py-3 ${
-        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'bg-zinc-900 border-zinc-800'
+        accent ? 'bg-indigo-500/5 border-indigo-500/30' : 'glass border-[color:var(--glass-border)]'
       }`}
     >
-      <p className="text-[10px] uppercase tracking-wide text-zinc-500 mb-1">{label}</p>
-      <p className={`text-lg font-semibold ${tone ?? 'text-white'}`}>{value}</p>
-      {sub && <p className="text-xs text-zinc-500 mt-0.5">{sub}</p>}
+      <p className="text-[10px] uppercase tracking-wide text-ink-faint mb-1">{label}</p>
+      <p className={`text-lg font-semibold ${tone ?? 'text-ink'}`}>{value}</p>
+      {sub && <p className="text-xs text-ink-faint mt-0.5">{sub}</p>}
     </div>
   )
 }

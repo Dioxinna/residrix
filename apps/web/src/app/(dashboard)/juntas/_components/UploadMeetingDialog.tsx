@@ -103,10 +103,10 @@ export function UploadMeetingDialog({
           <form
             onClick={(e) => e.stopPropagation()}
             onSubmit={submit}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 w-full max-w-md space-y-4"
+            className="glass rounded-xl p-6 w-full max-w-md space-y-4"
           >
-            <h2 className="text-white text-lg font-semibold">Subir audio de junta</h2>
-            <p className="text-xs text-zinc-500 -mt-2">
+            <h2 className="text-ink text-lg font-semibold">Subir audio de junta</h2>
+            <p className="text-xs text-ink-faint -mt-2">
               Formatos: mp3, m4a, mp4, wav, webm, ogg, flac. Máx 25 MB.
             </p>
 
@@ -115,7 +115,7 @@ export function UploadMeetingDialog({
                 value={communityId}
                 onChange={(e) => setCommunityId(e.target.value)}
                 disabled={pending}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink"
               >
                 {communities.map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>
@@ -131,7 +131,7 @@ export function UploadMeetingDialog({
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Junta extraordinaria marzo 2026"
                 disabled={pending}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white placeholder:text-zinc-600"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
               />
             </Field>
 
@@ -142,7 +142,7 @@ export function UploadMeetingDialog({
                 value={meetingDate}
                 onChange={(e) => setMeetingDate(e.target.value)}
                 disabled={pending}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+                className="w-full glass rounded px-3 py-2 text-sm text-ink"
               />
             </Field>
 
@@ -154,10 +154,10 @@ export function UploadMeetingDialog({
                 accept="audio/*,.mp3,.m4a,.mp4,.wav,.webm,.ogg,.flac"
                 onChange={onFileChange}
                 disabled={pending}
-                className="w-full text-xs text-zinc-400 file:mr-3 file:rounded file:border-0 file:bg-indigo-600 file:hover:bg-indigo-500 file:text-white file:text-xs file:font-medium file:px-3 file:py-1.5"
+                className="w-full text-xs text-white-soft file:mr-3 file:rounded file:border-0 file:bg-indigo-600 file:hover:bg-indigo-500 file:text-white file:text-xs file:font-medium file:px-3 file:py-1.5"
               />
               {fileName && fileSize !== null && (
-                <p className="text-xs text-zinc-500 mt-1.5">
+                <p className="text-xs text-ink-faint mt-1.5">
                   {fileName} · {(fileSize / 1024 / 1024).toFixed(2)} MB
                 </p>
               )}
@@ -168,7 +168,7 @@ export function UploadMeetingDialog({
                 type="button"
                 onClick={() => setOpen(false)}
                 disabled={pending}
-                className="text-sm px-4 py-2 rounded text-zinc-400 hover:text-white"
+                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
               >
                 Cancelar
               </button>
@@ -190,7 +190,7 @@ export function UploadMeetingDialog({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1">{label}</span>
       {children}
     </label>
   )

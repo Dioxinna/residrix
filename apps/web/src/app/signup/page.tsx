@@ -53,19 +53,19 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4 py-10">
+    <div className="min-h-screen flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-600 mb-4">
             <span className="text-white font-bold text-xl">R</span>
           </div>
-          <h1 className="text-2xl font-bold text-white">Residrix</h1>
-          <p className="text-zinc-400 text-sm mt-1">Crea tu cuenta de despacho</p>
+          <h1 className="text-2xl font-bold text-ink">Residrix</h1>
+          <p className="text-ink-soft text-sm mt-1">Crea tu cuenta de despacho</p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 space-y-4"
+          className="glass rounded-2xl p-6 border border-[color:var(--glass-border)] space-y-4"
         >
           <Section title="Tu despacho">
             <Field label="Nombre del despacho">
@@ -75,7 +75,7 @@ export default function SignupPage() {
                 value={firmName}
                 onChange={(e) => setFirmName(e.target.value)}
                 placeholder="Administraciones García"
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
               />
             </Field>
             <Field label="Teléfono (opcional)">
@@ -84,7 +84,7 @@ export default function SignupPage() {
                 value={firmPhone}
                 onChange={(e) => setFirmPhone(e.target.value)}
                 placeholder="+34 600 000 000"
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
               />
             </Field>
           </Section>
@@ -97,7 +97,7 @@ export default function SignupPage() {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Ana García"
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
               />
             </Field>
             <Field label="Email">
@@ -107,7 +107,7 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@despacho.es"
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
               />
             </Field>
             <Field label="Contraseña (mínimo 8 caracteres)">
@@ -118,7 +118,7 @@ export default function SignupPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
               />
             </Field>
           </Section>
@@ -131,7 +131,7 @@ export default function SignupPage() {
             {pending ? 'Creando cuenta…' : 'Crear cuenta'}
           </button>
 
-          <p className="text-center text-xs text-zinc-500">
+          <p className="text-center text-xs text-ink-faint">
             ¿Ya tienes cuenta?{' '}
             <Link href="/login" className="text-indigo-400 hover:text-indigo-300">
               Inicia sesión
@@ -146,7 +146,7 @@ export default function SignupPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-3">
-      <h2 className="text-xs text-zinc-500 uppercase tracking-wide font-medium">{title}</h2>
+      <h2 className="text-xs text-ink-faint uppercase tracking-wide font-medium">{title}</h2>
       {children}
     </div>
   )
@@ -155,7 +155,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-sm font-medium text-zinc-300 mb-1.5">{label}</span>
+      <span className="block text-sm font-medium text-ink-soft mb-1.5">{label}</span>
       {children}
     </label>
   )

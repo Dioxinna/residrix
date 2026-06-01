@@ -30,12 +30,12 @@ export function InformePicker({
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 space-y-5">
+    <div className="glass rounded-xl p-6 space-y-5">
       <Field label="Comunidad">
         <select
           value={communityId}
           onChange={(e) => setCommunityId(e.target.value)}
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink"
         >
           {communities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
@@ -47,7 +47,7 @@ export function InformePicker({
         <select
           value={month}
           onChange={(e) => setMonth(e.target.value)}
-          className="w-full bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-sm text-white capitalize"
+          className="w-full glass rounded px-3 py-2 text-sm text-ink capitalize"
         >
           {monthOptions.map((m) => (
             <option key={m} value={m}>{monthLabel(m)}</option>
@@ -68,7 +68,7 @@ export function InformePicker({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-xs text-zinc-400 mb-1.5 uppercase tracking-wide">{label}</span>
+      <span className="block text-xs text-ink-soft mb-1.5 uppercase tracking-wide">{label}</span>
       {children}
     </label>
   )

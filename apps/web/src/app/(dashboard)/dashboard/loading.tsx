@@ -5,8 +5,8 @@ export default function Loading() {
     <div className="p-8">
       <PageHeaderSkeleton />
       <StatsSkeleton />
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl">
-        <div className="px-6 py-4 border-b border-zinc-800">
+      <div className="glass rounded-xl">
+        <div className="px-6 py-4 border-b border-[color:var(--glass-border)]">
           <Skeleton className="h-4 w-40" />
         </div>
         <div className="divide-y divide-zinc-800">

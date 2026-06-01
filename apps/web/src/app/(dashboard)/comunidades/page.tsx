@@ -18,7 +18,7 @@ export default async function ComunidadesPage() {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -97,10 +97,10 @@ export default async function ComunidadesPage() {
         </div>
       )}
       <div className="flex items-center justify-between mb-1">
-        <h1 className="text-2xl font-semibold text-white">Comunidades</h1>
+        <h1 className="text-2xl font-semibold text-ink">Comunidades</h1>
         <CommunityDialog firmId={profile.firm_id} mode="create" trigger="Nueva comunidad" />
       </div>
-      <p className="text-sm text-zinc-400 mb-8">
+      <p className="text-sm text-ink-soft mb-8">
         Gestiona las comunidades de tu despacho. Cada comunidad tiene sus propias incidencias, comunicados y documentos.
       </p>
 

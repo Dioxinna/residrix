@@ -62,9 +62,9 @@ export function CommunitiesTable({
   }
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+    <div className="glass rounded-lg overflow-hidden">
       <table className="w-full text-sm">
-        <thead className="bg-zinc-950 text-zinc-500 text-xs uppercase tracking-wide">
+        <thead className="bg-[color:var(--c-surface)] text-ink-faint text-xs uppercase tracking-wide">
           <tr>
             <th className="text-left px-4 py-3 font-medium">Nombre</th>
             <th className="text-left px-4 py-3 font-medium">Dirección</th>
@@ -78,17 +78,17 @@ export function CommunitiesTable({
           {communities.map((c) => {
             const isPending = pendingId === c.id
             return (
-              <tr key={c.id} className="text-zinc-300">
-                <td className="px-4 py-3 text-white font-medium">{c.name}</td>
-                <td className="px-4 py-3 text-zinc-400">
+              <tr key={c.id} className="text-ink-soft">
+                <td className="px-4 py-3 text-ink font-medium">{c.name}</td>
+                <td className="px-4 py-3 text-ink-soft">
                   <div>{c.address}</div>
-                  <div className="text-xs text-zinc-600">{c.postal_code} {c.city}</div>
+                  <div className="text-xs text-ink-faint">{c.postal_code} {c.city}</div>
                 </td>
-                <td className="px-4 py-3 text-zinc-400">{c.units_count}</td>
+                <td className="px-4 py-3 text-ink-soft">{c.units_count}</td>
                 <td className="px-4 py-3">{c.stats.vecinos}</td>
                 <td className="px-4 py-3">
-                  <span className="text-white">{c.stats.incidencesOpen}</span>
-                  <span className="text-zinc-500"> / {c.stats.incidencesTotal}</span>
+                  <span className="text-ink">{c.stats.incidencesOpen}</span>
+                  <span className="text-ink-faint"> / {c.stats.incidencesTotal}</span>
                 </td>
                 <td className="px-4 py-3 text-right space-x-3">
                   <CommunityDialog

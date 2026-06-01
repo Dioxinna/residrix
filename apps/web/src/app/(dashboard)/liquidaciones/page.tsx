@@ -30,7 +30,7 @@ export default async function LiquidacionesPage() {
   if (!profile || profile.role !== 'admin' || !profile.firm_id) {
     return (
       <div className="px-6 py-10">
-        <p className="text-zinc-400 text-sm">Esta página es solo para administradores.</p>
+        <p className="text-ink-soft text-sm">Esta página es solo para administradores.</p>
       </div>
     )
   }
@@ -44,8 +44,8 @@ export default async function LiquidacionesPage() {
   if (!communities || communities.length === 0) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-2xl font-semibold text-white mb-2">Liquidaciones</h1>
-        <p className="text-zinc-400 mb-6">
+        <h1 className="text-2xl font-semibold text-ink mb-2">Liquidaciones</h1>
+        <p className="text-ink-soft mb-6">
           Crea al menos una comunidad y registra algún gasto para poder generar liquidaciones.
         </p>
         <Link
@@ -60,8 +60,8 @@ export default async function LiquidacionesPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
-      <h1 className="text-2xl font-semibold text-white mb-1">Liquidaciones</h1>
-      <p className="text-sm text-zinc-400 mb-8">
+      <h1 className="text-2xl font-semibold text-ink mb-1">Liquidaciones</h1>
+      <p className="text-sm text-ink-soft mb-8">
         Genera el informe de gastos de una comunidad para el periodo que quieras. Guárdalo en PDF o CSV
         y envíaselo a los vecinos.
       </p>
