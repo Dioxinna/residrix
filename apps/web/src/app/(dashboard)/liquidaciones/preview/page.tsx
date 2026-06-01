@@ -137,8 +137,8 @@ export default async function LiquidacionPreviewPage({ searchParams }: PageProps
         {/* TOTALES */}
         <section className="grid grid-cols-3 gap-3 mb-8">
           <Stat label="Total del periodo" value={formatEuros(totalCents)} accent />
-          <Stat label="Pagado" value={formatEuros(paidCents)} tone="text-emerald-300" />
-          <Stat label="Pendiente" value={formatEuros(unpaidCents)} tone={unpaidCents > 0 ? 'text-amber-300' : undefined} />
+          <Stat label="Pagado" value={formatEuros(paidCents)} tone="text-emerald-700 dark:text-emerald-300" />
+          <Stat label="Pendiente" value={formatEuros(unpaidCents)} tone={unpaidCents > 0 ? 'text-amber-700 dark:text-amber-300' : undefined} />
         </section>
 
         {/* BREAKDOWN POR CATEGORÍA */}

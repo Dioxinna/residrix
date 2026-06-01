@@ -38,12 +38,12 @@ const SEVERITY_STYLES: Record<string, { label: string; tag: string; bar: string 
   },
   warning: {
     label: 'Aviso',
-    tag: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+    tag: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30',
     bar: 'bg-amber-500',
   },
   urgent: {
     label: 'Urgente',
-    tag: 'bg-red-500/15 text-red-300 border-red-500/30',
+    tag: 'bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/30',
     bar: 'bg-red-500',
   },
 }

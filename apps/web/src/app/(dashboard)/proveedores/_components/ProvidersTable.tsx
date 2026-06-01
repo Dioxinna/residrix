@@ -81,7 +81,7 @@ export function ProvidersTable({
                   {p.phone && (
                     <a
                       href={`tel:${p.phone}`}
-                      className="inline-flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs font-medium px-2 py-1 rounded border border-emerald-500/30"
+                      className="inline-flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-medium px-2 py-1 rounded border border-emerald-500/30"
                     >
                       <Phone size={12} /> Llamar
                     </a>

@@ -62,7 +62,7 @@ export function GroupCard({
               {incidences.length} incidencia{incidences.length === 1 ? '' : 's'}
             </span>
             {providerType && (
-              <span className="text-[10px] uppercase tracking-wide font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
+              <span className="text-[10px] uppercase tracking-wide font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
                 Sugerido: {PROVIDER_LABEL[providerType]}
               </span>
             )}

@@ -149,7 +149,7 @@ export default async function GastosPage({ searchParams }: PageProps) {
         <Stat
           label="Pendiente de pago"
           value={formatEuros(unpaidTotal)}
-          tone={unpaidTotal > 0 ? 'text-amber-300' : undefined}
+          tone={unpaidTotal > 0 ? 'text-amber-700 dark:text-amber-300' : undefined}
           sub={paidTotal > 0 ? `${formatEuros(paidTotal)} pagado` : undefined}
         />
         <Stat
@@ -160,7 +160,7 @@ export default async function GastosPage({ searchParams }: PageProps) {
               ? 'Sin gastos previos'
               : `${delta >= 0 ? '+' : ''}${delta.toFixed(0)}%`
           }
-          tone={delta === null ? undefined : delta > 0 ? 'text-red-300' : 'text-emerald-300'}
+          tone={delta === null ? undefined : delta > 0 ? 'text-red-700 dark:text-red-300' : 'text-emerald-700 dark:text-emerald-300'}
         />
         <Stat label="Total año en curso" value={formatEuros(ytdTotal)} />
       </div>

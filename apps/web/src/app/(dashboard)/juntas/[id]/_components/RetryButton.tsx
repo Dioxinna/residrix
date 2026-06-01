@@ -26,7 +26,7 @@ export function RetryButton({ meetingId }: { meetingId: string }) {
     <button
       onClick={retry}
       disabled={pending}
-      className="inline-flex items-center gap-1.5 bg-red-500/15 hover:bg-red-500/25 disabled:opacity-50 text-red-200 text-xs font-medium px-2.5 py-1 rounded border border-red-500/30"
+      className="inline-flex items-center gap-1.5 bg-red-500/15 hover:bg-red-500/25 disabled:opacity-50 text-red-700 dark:text-red-200 text-xs font-medium px-2.5 py-1 rounded border border-red-500/30"
     >
       <RefreshCw size={12} className={pending ? 'animate-spin' : ''} />
       Reintentar

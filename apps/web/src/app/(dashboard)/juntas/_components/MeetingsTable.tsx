@@ -28,8 +28,8 @@ const STATUS_STYLES: Record<string, { label: string; tone: string }> = {
   transcribing: { label: 'Transcribiendo', tone: 'text-brand-soft bg-indigo-500/10 border-indigo-500/30' },
   transcribed: { label: 'Transcrita', tone: 'text-brand-soft bg-indigo-500/10 border-indigo-500/30' },
   summarizing: { label: 'Resumiendo', tone: 'text-brand-soft bg-indigo-500/10 border-indigo-500/30' },
-  completed: { label: 'Lista', tone: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/30' },
-  failed: { label: 'Falló', tone: 'text-red-300 bg-red-500/10 border-red-500/30' },
+  completed: { label: 'Lista', tone: 'text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 border-emerald-500/30' },
+  failed: { label: 'Falló', tone: 'text-red-700 dark:text-red-300 bg-red-500/10 border-red-500/30' },
 }
 
 export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {

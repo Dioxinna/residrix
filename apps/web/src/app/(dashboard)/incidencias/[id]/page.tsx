@@ -89,7 +89,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
               <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
                 <span className="text-indigo-400 text-xs font-semibold uppercase tracking-wide">✦ Respuesta IA sugerida</span>
                 {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
-                  <span className="text-[10px] uppercase tracking-wide font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] uppercase tracking-wide font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
                     Llamar: {PROVIDER_LABEL[inc.ai_suggested_provider as ProviderType]}
                   </span>
                 )}
@@ -135,7 +135,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                         {p.phone && (
                           <a
                             href={`tel:${p.phone}`}
-                            className="inline-flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs font-medium px-2 py-1 rounded border border-emerald-500/30"
+                            className="inline-flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-medium px-2 py-1 rounded border border-emerald-500/30"
                           >
                             ☎ {p.phone}
                           </a>

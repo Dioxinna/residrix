@@ -82,7 +82,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
         </div>
       )}
       {params.status === 'success' && (
-        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-emerald-300">
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-emerald-700 dark:text-emerald-300">
           Pago completado. Si los datos no aparecen aún, recarga en unos segundos.
         </div>
       )}

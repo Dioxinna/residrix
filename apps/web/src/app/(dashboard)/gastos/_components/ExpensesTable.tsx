@@ -93,11 +93,11 @@ export function ExpensesTable({
               </td>
               <td className="px-6 py-3">
                 {e.paid_at ? (
-                  <span className="text-[10px] uppercase tracking-wide font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] uppercase tracking-wide font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-1.5 py-0.5 rounded">
                     Pagado
                   </span>
                 ) : (
-                  <span className="text-[10px] uppercase tracking-wide font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] uppercase tracking-wide font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
                     Pendiente
                   </span>
                 )}

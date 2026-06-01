@@ -84,13 +84,13 @@ export default async function ComunidadesPage() {
     <div className="max-w-6xl mx-auto px-6 py-10">
       {atLimit && (
         <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-3 mb-6 flex items-center justify-between">
-          <div className="text-sm text-amber-200">
+          <div className="text-sm text-amber-700 dark:text-amber-200">
             Has alcanzado el límite de {allowed} comunidad{allowed === 1 ? '' : 'es'} de tu plan.{' '}
             {subActive ? 'Aumenta la cantidad para añadir más.' : 'Suscríbete para añadir más.'}
           </div>
           <Link
             href="/billing"
-            className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 text-sm font-medium px-3 py-1.5 rounded"
+            className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-700 dark:text-amber-200 text-sm font-medium px-3 py-1.5 rounded"
           >
             Ir a facturación →
           </Link>

@@ -121,9 +121,9 @@ export function CreateAnnouncementDialog({
                     className={`flex-1 text-sm px-3 py-2 rounded border ${
                       severity === s.value
                         ? s.value === 'urgent'
-                          ? 'bg-red-500/15 border-red-500/40 text-red-300'
+                          ? 'bg-red-500/15 border-red-500/40 text-red-700 dark:text-red-300'
                           : s.value === 'warning'
-                          ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
+                          ? 'bg-amber-500/15 border-amber-500/40 text-amber-700 dark:text-amber-300'
                           : 'bg-indigo-500/15 border-indigo-500/40 text-brand-soft'
                         : 'border-[color:var(--glass-border)] text-ink-soft hover:text-ink'
                     }`}

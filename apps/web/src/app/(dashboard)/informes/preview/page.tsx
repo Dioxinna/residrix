@@ -240,14 +240,14 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
                 ? prevIncCount === 0 ? 'Sin precedente' : undefined
                 : `${incDelta >= 0 ? '+' : ''}${incDelta.toFixed(0)}% vs ${monthLabel(prevMonth)}`
             }
-            tone={incDelta === null ? undefined : incDelta > 0 ? 'text-amber-300' : 'text-emerald-300'}
+            tone={incDelta === null ? undefined : incDelta > 0 ? 'text-amber-700 dark:text-amber-300' : 'text-emerald-700 dark:text-emerald-300'}
             accent
           />
           <Stat
             label="Resueltas"
             value={`${incResolved.length} / ${incTotal}`}
             sub={incTotal === 0 ? '—' : `${((incResolved.length / incTotal) * 100).toFixed(0)}% del total`}
-            tone="text-emerald-300"
+            tone="text-emerald-700 dark:text-emerald-300"
           />
           <Stat
             label="Tiempo medio resolución"
@@ -262,7 +262,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
                 ? prevExpTotal === 0 ? 'Sin precedente' : undefined
                 : `${expDelta >= 0 ? '+' : ''}${expDelta.toFixed(0)}% vs ${monthLabel(prevMonth)}`
             }
-            tone={expDelta === null ? undefined : expDelta > 0 ? 'text-amber-300' : 'text-emerald-300'}
+            tone={expDelta === null ? undefined : expDelta > 0 ? 'text-amber-700 dark:text-amber-300' : 'text-emerald-700 dark:text-emerald-300'}
           />
         </section>
 
@@ -342,11 +342,11 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
 
           <div className="grid grid-cols-3 gap-3 mb-4">
             <MiniStat label="Total" value={formatEuros(expTotal)} accent />
-            <MiniStat label="Pagado" value={formatEuros(expPaid)} tone="text-emerald-300" />
+            <MiniStat label="Pagado" value={formatEuros(expPaid)} tone="text-emerald-700 dark:text-emerald-300" />
             <MiniStat
               label="Pendiente"
               value={formatEuros(expUnpaid)}
-              tone={expUnpaid > 0 ? 'text-amber-300' : undefined}
+              tone={expUnpaid > 0 ? 'text-amber-700 dark:text-amber-300' : undefined}
             />
           </div>
 
