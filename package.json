@@ -13,6 +13,7 @@
     "mobile": "turbo run dev --filter=@residrix/mobile",
     "build": "turbo run build",
     "type-check": "turbo run type-check",
+    "test": "turbo run test",
     "vercel:env:sync": "bash scripts/vercel-sync-env.sh"
   },
   "devDependencies": {
