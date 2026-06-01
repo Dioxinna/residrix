@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { getCurrentFirmTier } from '@/lib/auth/feature-gate'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
@@ -18,11 +19,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="flex h-screen overflow-hidden p-2.5 gap-2.5">
       <aside className="glass-strong w-60 flex-shrink-0 flex flex-col rounded-[var(--radius-glass)] overflow-hidden">
         <div className="px-5 py-5 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-brand flex items-center justify-center depth">
-              <span className="text-white font-bold text-sm">R</span>
-            </div>
-            <span className="text-ink font-semibold text-sm">Residrix</span>
+          <Link href="/dashboard" className="flex items-center gap-2">
+            <Image src="/brand/icon.png" alt="Residrix" width={28} height={28} priority className="w-7 h-7 object-contain" />
+            <span className="text-ink font-semibold text-base">Residrix</span>
           </Link>
           <ThemeToggle className="w-7 h-7" />
         </div>

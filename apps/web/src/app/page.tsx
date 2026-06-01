@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   AlertTriangle, Megaphone, FileText, Smartphone, Bell, ShieldCheck,
   Sparkles, type LucideIcon,
@@ -35,11 +36,9 @@ function Nav() {
       <div className="max-w-6xl mx-auto px-4 pt-4">
         <div className="glass rounded-full px-5 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-brand flex items-center justify-center depth">
-                <span className="text-white font-bold">R</span>
-              </div>
-              <span className="text-ink font-semibold tracking-tight">Residrix</span>
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/brand/icon.png" alt="Residrix" width={32} height={32} priority className="w-8 h-8 object-contain" />
+              <span className="text-ink font-semibold tracking-tight text-lg">Residrix</span>
             </Link>
             <ThemeToggle />
           </div>
@@ -348,9 +347,7 @@ function Footer() {
         <div className="hairline mb-8" />
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-brand flex items-center justify-center">
-              <span className="text-white font-bold text-xs">R</span>
-            </div>
+            <Image src="/brand/icon.png" alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" />
             <span className="text-ink-faint text-sm">© {new Date().getFullYear()} Residrix</span>
           </div>
           <div className="flex items-center gap-5 text-sm text-ink-faint">

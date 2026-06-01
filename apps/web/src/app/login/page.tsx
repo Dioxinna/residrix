@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
@@ -30,11 +31,8 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-600 mb-4">
-            <span className="text-white font-bold text-xl">R</span>
-          </div>
-          <h1 className="text-2xl font-bold text-ink">Residrix</h1>
-          <p className="text-ink-soft text-sm mt-1">Panel de administración</p>
+          <Image src="/brand/logo.png" alt="Residrix" width={220} height={220} priority className="mx-auto h-28 w-auto object-contain mb-2" />
+          <p className="text-ink-soft text-sm">Panel de administración</p>
         </div>
 
         <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 border border-[color:var(--glass-border)] space-y-4">
