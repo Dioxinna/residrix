@@ -44,8 +44,16 @@
     ],
     "extra": {
       "eas": {
-        "projectId": ""
-      }
+        "projectId": "e50b9ade-9173-404c-bd68-831107fb3419"
+      },
+      "router": {}
+    },
+    "owner": "dioxinna",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e50b9ade-9173-404c-bd68-831107fb3419"
     }
   }
 }
