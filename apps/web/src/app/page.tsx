@@ -1,7 +1,12 @@
 import Link from 'next/link'
+import {
+  AlertTriangle, Megaphone, FileText, Smartphone, Bell, ShieldCheck,
+  Sparkles, BarChart3, type LucideIcon,
+} from 'lucide-react'
 import { TIERS, TIER_ORDER } from '@/lib/stripe'
 import { GlassCard, GlassButton, Eyebrow } from '@/components/ui/glass'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { BrowserMockup, PhoneMockup } from '@/components/ui/mockups'
 
 export const metadata = {
   title: 'Residrix — Software para administradores de fincas',
@@ -14,6 +19,8 @@ export default function LandingPage() {
     <div className="min-h-screen text-ink">
       <Nav />
       <Hero />
+      <DesktopShowcase />
+      <MobileShowcase />
       <HowItWorks />
       <Features />
       <Pricing />
@@ -109,14 +116,87 @@ function HowItWorks() {
   )
 }
 
+function DesktopShowcase() {
+  return (
+    <section className="max-w-6xl mx-auto px-6 py-20">
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="order-2 lg:order-1">
+          <BrowserMockup />
+        </div>
+        <div className="order-1 lg:order-2">
+          <Eyebrow className="mb-5">
+            <BarChart3 size={13} /> Panel de despacho
+          </Eyebrow>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Tu despacho, bajo control
+          </h2>
+          <p className="text-ink-soft leading-relaxed mb-6">
+            Gestiona todas tus comunidades desde un único panel. Incidencias clasificadas por IA,
+            gastos, liquidaciones, comunicados e informes mensuales. Sin Excel, sin WhatsApp,
+            sin perder nada.
+          </p>
+          <ul className="space-y-3">
+            {[
+              'Incidencias priorizadas y agrupadas por la IA',
+              'Gastos y liquidaciones por comunidad',
+              'Informes mensuales automáticos en PDF',
+            ].map((t) => (
+              <li key={t} className="flex items-center gap-3 text-sm text-ink">
+                <span className="w-5 h-5 rounded-full bg-brand/15 text-brand flex items-center justify-center text-[11px] flex-shrink-0">✓</span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function MobileShowcase() {
+  return (
+    <section className="py-20">
+      <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <Eyebrow className="mb-5">
+            <Smartphone size={13} /> App para vecinos
+          </Eyebrow>
+          <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Tus vecinos, en su bolsillo
+          </h2>
+          <p className="text-ink-soft leading-relaxed mb-6">
+            App nativa iOS y Android. Los vecinos reportan incidencias con foto, reciben comunicados
+            al instante, consultan actas y documentos. Tú dejas de recibir llamadas a deshoras.
+          </p>
+          <ul className="space-y-3">
+            {[
+              'Reportar incidencias con foto en segundos',
+              'Notificaciones push de cada novedad',
+              'Documentos y actas siempre a mano',
+            ].map((t) => (
+              <li key={t} className="flex items-center gap-3 text-sm text-ink">
+                <span className="w-5 h-5 rounded-full bg-brand/15 text-brand flex items-center justify-center text-[11px] flex-shrink-0">✓</span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex justify-center">
+          <PhoneMockup />
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Features() {
-  const features = [
-    { icon: '⚠️', title: 'Incidencias con IA', body: 'Cada incidencia se clasifica automáticamente por urgencia y categoría. La IA sugiere primeras respuestas.' },
-    { icon: '📢', title: 'Comunicados en tiempo real', body: 'Avisa a toda una comunidad con un click. Push + email a todos los vecinos según sus preferencias.' },
-    { icon: '📄', title: 'Documentación compartida', body: 'Sube actas, presupuestos y normativa. Los vecinos los ven en su app. Tú controlas qué es público.' },
-    { icon: '📱', title: 'App nativa para vecinos', body: 'iOS y Android. Reportan incidencias con foto, ven comunicados, consultan documentos. Sin sobrecarga.' },
-    { icon: '🔔', title: 'Notificaciones inteligentes', body: 'Push y email para cada evento clave. Cada usuario decide qué quiere recibir y cómo.' },
-    { icon: '🔒', title: 'Multi-comunidad seguro', body: 'Cada comunidad ve solo lo suyo. RLS de Supabase. Cumple con el GDPR de un extremo a otro.' },
+  const features: { icon: LucideIcon; title: string; body: string }[] = [
+    { icon: Sparkles, title: 'Incidencias con IA', body: 'Cada incidencia se clasifica automáticamente por urgencia y categoría. La IA sugiere primeras respuestas.' },
+    { icon: Megaphone, title: 'Comunicados en tiempo real', body: 'Avisa a toda una comunidad con un click. Push + email a todos los vecinos según sus preferencias.' },
+    { icon: FileText, title: 'Documentación compartida', body: 'Sube actas, presupuestos y normativa. Los vecinos los ven en su app. Tú controlas qué es público.' },
+    { icon: AlertTriangle, title: 'Incidencias con foto', body: 'Los vecinos reportan con imagen desde la app. Llegan organizadas por urgencia a tu panel.' },
+    { icon: Bell, title: 'Notificaciones inteligentes', body: 'Push y email para cada evento clave. Cada usuario decide qué quiere recibir y cómo.' },
+    { icon: ShieldCheck, title: 'Multi-comunidad seguro', body: 'Cada comunidad ve solo lo suyo. RLS de Supabase. Cumple con el GDPR de un extremo a otro.' },
   ]
   return (
     <section className="max-w-6xl mx-auto px-6 py-24">
@@ -127,15 +207,18 @@ function Features() {
         Reemplaza el WhatsApp, los emails sueltos y los Excel. Una sola herramienta para todo.
       </p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {features.map((f) => (
-          <GlassCard key={f.title} lift className="p-6 group">
-            <div className="w-12 h-12 rounded-2xl glass-strong flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-              {f.icon}
-            </div>
-            <h3 className="text-ink font-semibold mb-2">{f.title}</h3>
-            <p className="text-ink-soft text-sm leading-relaxed">{f.body}</p>
-          </GlassCard>
-        ))}
+        {features.map((f) => {
+          const Icon = f.icon
+          return (
+            <GlassCard key={f.title} lift className="p-6 group">
+              <div className="w-12 h-12 rounded-2xl glass-strong flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Icon size={20} className="text-brand" strokeWidth={1.75} />
+              </div>
+              <h3 className="text-ink font-semibold mb-2">{f.title}</h3>
+              <p className="text-ink-soft text-sm leading-relaxed">{f.body}</p>
+            </GlassCard>
+          )
+        })}
       </div>
     </section>
   )
