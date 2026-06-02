@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+import { Modal } from '@/components/ui/Modal'
 
 export interface CommunityRow {
   id: string
@@ -86,105 +87,97 @@ export function CommunityDialog(props: Props) {
         onClick={() => setOpen(true)}
         className={
           isCreate
-            ? 'bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded'
-            : 'text-violet-400 hover:text-brand-soft text-sm'
+            ? 'bg-brand hover:bg-brand-soft text-white text-sm font-medium px-4 py-2 rounded'
+            : 'inline-flex items-center min-h-9 px-2 text-brand hover:text-brand-soft text-sm'
         }
       >
         {props.trigger}
       </button>
 
-      {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
-          onClick={() => !pending && setOpen(false)}
-        >
-          <form
-            onClick={(e) => e.stopPropagation()}
-            onSubmit={submit}
-            className="glass rounded-xl p-6 w-full max-w-md space-y-4"
-          >
-            <h2 className="text-ink text-lg font-semibold">
-              {isCreate ? 'Nueva comunidad' : 'Editar comunidad'}
-            </h2>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title={isCreate ? 'Nueva comunidad' : 'Editar comunidad'}
+        busy={pending}
+      >
+        <form onSubmit={submit} className="space-y-4">
+          <Field label="Nombre">
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Edificio Mar Azul"
+              className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500"
+            />
+          </Field>
 
-            <Field label="Nombre">
+          <Field label="Dirección">
+            <input
+              type="text"
+              required
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Calle Mayor 123"
+              className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500"
+            />
+          </Field>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Field label="Ciudad">
               <input
                 type="text"
                 required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Edificio Mar Azul"
-                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Madrid"
+                className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
             </Field>
 
-            <Field label="Dirección">
+            <Field label="Código postal">
               <input
                 type="text"
                 required
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Calle Mayor 123"
-                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
+                inputMode="numeric"
+                maxLength={5}
+                value={postal}
+                onChange={(e) => setPostal(e.target.value)}
+                placeholder="28001"
+                className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
             </Field>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Ciudad">
-                <input
-                  type="text"
-                  required
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  placeholder="Madrid"
-                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
-                />
-              </Field>
+          <Field label="Número de unidades">
+            <input
+              type="number"
+              min={0}
+              value={units}
+              onChange={(e) => setUnits(e.target.value)}
+              className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-violet-500"
+            />
+          </Field>
 
-              <Field label="Código postal">
-                <input
-                  type="text"
-                  required
-                  inputMode="numeric"
-                  maxLength={5}
-                  value={postal}
-                  onChange={(e) => setPostal(e.target.value)}
-                  placeholder="28001"
-                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
-                />
-              </Field>
-            </div>
-
-            <Field label="Número de unidades">
-              <input
-                type="number"
-                min={0}
-                value={units}
-                onChange={(e) => setUnits(e.target.value)}
-                className="w-full glass rounded px-3 py-2 text-sm text-ink"
-              />
-            </Field>
-
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                disabled={pending}
-                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                disabled={pending}
-                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
-              >
-                {pending ? 'Guardando…' : isCreate ? 'Crear' : 'Guardar'}
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+          <div className="flex justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              disabled={pending}
+              className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={pending}
+              className="bg-brand hover:bg-brand-soft disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+            >
+              {pending ? 'Guardando…' : isCreate ? 'Crear' : 'Guardar'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </>
   )
 }

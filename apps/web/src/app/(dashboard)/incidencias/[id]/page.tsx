@@ -74,7 +74,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          <section className="glass rounded-xl p-6">
+          <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-6">
             <h2 className="text-ink font-semibold text-sm mb-3">Descripción</h2>
             <p className="text-ink-soft text-sm leading-relaxed whitespace-pre-wrap">{inc.description}</p>
             {inc.photo_url && (
@@ -87,7 +87,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
           {inc.ai_response && (
             <section className="bg-brand/8 border border-brand/25 rounded-xl p-6">
               <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
-                <span className="text-violet-400 text-xs font-semibold uppercase tracking-wide">✦ Respuesta IA sugerida</span>
+                <span className="text-brand text-xs font-semibold uppercase tracking-wide">✦ Respuesta IA sugerida</span>
                 {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
                   <span className="text-[10px] uppercase tracking-wide font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
                     Llamar: {PROVIDER_LABEL[inc.ai_suggested_provider as ProviderType]}
@@ -105,9 +105,9 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
           )}
 
           {inc.ai_suggested_provider && inc.ai_suggested_provider in PROVIDER_LABEL && (
-            <section className="glass rounded-xl p-6">
+            <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-6">
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-amber-400 text-xs font-semibold uppercase tracking-wide">
+                <span className="text-amber-700 dark:text-amber-300 text-xs font-semibold uppercase tracking-wide">
                   Proveedor sugerido: {PROVIDER_LABEL[inc.ai_suggested_provider as ProviderType]}
                 </span>
               </div>
@@ -118,7 +118,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                   </p>
                   <a
                     href="/proveedores"
-                    className="bg-violet-600 hover:bg-violet-500 text-white text-xs font-medium px-3 py-1.5 rounded"
+                    className="bg-brand hover:bg-brand-soft text-white text-xs font-medium px-3 py-1.5 rounded"
                   >
                     Ir a Proveedores →
                   </a>
@@ -135,7 +135,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                         {p.phone && (
                           <a
                             href={`tel:${p.phone}`}
-                            className="inline-flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-medium px-2 py-1 rounded border border-emerald-500/30"
+                            className="inline-flex items-center gap-1 min-h-9 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-medium px-3 py-1 rounded border border-emerald-500/30"
                           >
                             ☎ {p.phone}
                           </a>
@@ -143,7 +143,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
                         {p.email && (
                           <a
                             href={`mailto:${p.email}?subject=Incidencia: ${encodeURIComponent(inc.title)}`}
-                            className="inline-flex items-center gap-1 bg-violet-500/10 hover:bg-violet-500/20 text-brand-soft text-xs font-medium px-2 py-1 rounded border border-violet-500/30"
+                            className="inline-flex items-center gap-1 min-h-9 bg-violet-500/10 hover:bg-violet-500/20 text-brand-soft text-xs font-medium px-3 py-1 rounded border border-violet-500/30"
                           >
                             ✉ Email
                           </a>
@@ -160,12 +160,12 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
         </div>
 
         <div className="space-y-4">
-          <section className="glass rounded-xl p-5">
+          <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-5">
             <h3 className="text-ink font-semibold text-sm mb-3">Cambiar estado</h3>
             <StatusSelector incidenceId={id} currentStatus={inc.status as IncidenceStatus} />
           </section>
 
-          <section className="glass rounded-xl p-5 space-y-3">
+          <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-5 space-y-3">
             <h3 className="text-ink font-semibold text-sm">Vecino</h3>
             <div className="text-sm space-y-1">
               <p className="text-ink-soft">{reporter?.full_name ?? '—'}</p>
@@ -174,7 +174,7 @@ export default async function IncidenciaDetailPage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="glass rounded-xl p-5 space-y-2">
+          <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-5 space-y-2">
             <h3 className="text-ink font-semibold text-sm">Detalles</h3>
             <div className="text-sm space-y-2">
               <div className="flex justify-between">

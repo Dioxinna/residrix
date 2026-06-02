@@ -58,13 +58,13 @@ export function PreviewActions({
         <button
           onClick={downloadCsv}
           disabled={downloading}
-          className="inline-flex items-center gap-1.5 glass hover:border-[color:var(--glass-border)] text-ink text-sm font-medium px-3 py-1.5 rounded disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] hover:bg-[color:var(--glass-border)] text-ink text-sm font-medium px-3 py-1.5 rounded disabled:opacity-50"
         >
           <Download size={14} /> {downloading ? 'Generando…' : 'CSV'}
         </button>
         <button
           onClick={() => window.print()}
-          className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-3 py-1.5 rounded"
+          className="inline-flex items-center gap-1.5 bg-brand hover:bg-brand-soft text-white text-sm font-medium px-3 py-1.5 rounded"
         >
           <Printer size={14} /> Imprimir / Guardar PDF
         </button>

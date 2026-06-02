@@ -53,7 +53,7 @@ export default async function IncidenciasPage({ searchParams }: PageProps) {
 
       <IncidenciasFilters />
 
-      <div className="glass rounded-xl overflow-hidden mt-4">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl overflow-x-auto mt-4">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[color:var(--glass-border)] text-ink-soft text-xs uppercase tracking-wide">
@@ -74,9 +74,9 @@ export default async function IncidenciasPage({ searchParams }: PageProps) {
               </tr>
             )}
             {incidences?.map((inc) => (
-              <tr key={inc.id} className="hover:glass transition-colors">
+              <tr key={inc.id} className="hover:bg-[color:var(--glass-border)] transition-colors">
                 <td className="px-6 py-4">
-                  <Link href={`/incidencias/${inc.id}`} className="text-ink hover:text-violet-400 font-medium transition-colors line-clamp-1">
+                  <Link href={`/incidencias/${inc.id}`} className="text-ink hover:text-brand font-medium transition-colors line-clamp-1">
                     {inc.title}
                   </Link>
                   <p className="text-ink-faint text-xs mt-0.5">

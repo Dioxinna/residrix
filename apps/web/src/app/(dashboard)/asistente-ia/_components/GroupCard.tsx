@@ -45,7 +45,7 @@ export function GroupCard({
   const visible = expanded ? incidences : incidences.slice(0, 2)
 
   return (
-    <section className="glass rounded-xl overflow-hidden">
+    <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl overflow-hidden">
       <header className="px-6 py-4 border-b border-[color:var(--glass-border)] flex items-start justify-between gap-4 flex-wrap">
         <div className="min-w-0">
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
@@ -54,7 +54,7 @@ export function GroupCard({
                 {groupKey}
               </span>
             ) : (
-              <span className="text-[10px] uppercase tracking-wide font-bold text-ink-soft glass-strong px-1.5 py-0.5 rounded">
+              <span className="text-[10px] uppercase tracking-wide font-bold text-ink-soft bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] px-1.5 py-0.5 rounded">
                 Sin agrupar
               </span>
             )}
@@ -142,14 +142,14 @@ function IncidenceRow({ inc }: { inc: GroupedIncidence }) {
           <p className="text-ink text-sm leading-relaxed whitespace-pre-wrap">{inc.ai_response}</p>
           <div className="flex items-center justify-end gap-2 mt-3">
             {accepted ? (
-              <span className="inline-flex items-center gap-1 text-xs text-emerald-400 font-medium">
+              <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
                 <Check size={14} /> Enviada al vecino
               </span>
             ) : (
               <button
                 onClick={acceptResponse}
                 disabled={pending}
-                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
+                className="bg-brand hover:bg-brand-soft disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
               >
                 {pending ? 'Enviando…' : 'Aceptar y enviar al vecino'}
               </button>

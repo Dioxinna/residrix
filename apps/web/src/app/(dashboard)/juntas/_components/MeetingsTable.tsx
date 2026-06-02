@@ -24,10 +24,10 @@ function durationLabel(seconds: number | null): string {
 }
 
 const STATUS_STYLES: Record<string, { label: string; tone: string }> = {
-  pending: { label: 'En cola', tone: 'text-ink-soft bg-zinc-700/40 border-zinc-600/40' },
-  transcribing: { label: 'Transcribiendo', tone: 'text-brand-soft bg-violet-500/10 border-violet-500/30' },
-  transcribed: { label: 'Transcrita', tone: 'text-brand-soft bg-violet-500/10 border-violet-500/30' },
-  summarizing: { label: 'Resumiendo', tone: 'text-brand-soft bg-violet-500/10 border-violet-500/30' },
+  pending: { label: 'En cola', tone: 'text-ink-soft bg-[color:var(--glass-border)] border-[color:var(--glass-border)]' },
+  transcribing: { label: 'Transcribiendo', tone: 'text-brand bg-violet-500/10 border-violet-500/30' },
+  transcribed: { label: 'Transcrita', tone: 'text-brand bg-violet-500/10 border-violet-500/30' },
+  summarizing: { label: 'Resumiendo', tone: 'text-brand bg-violet-500/10 border-violet-500/30' },
   completed: { label: 'Lista', tone: 'text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 border-emerald-500/30' },
   failed: { label: 'Falló', tone: 'text-red-700 dark:text-red-300 bg-red-500/10 border-red-500/30' },
 }
@@ -35,7 +35,7 @@ const STATUS_STYLES: Record<string, { label: string; tone: string }> = {
 export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
   if (meetings.length === 0) {
     return (
-      <div className="glass rounded-xl px-6 py-16 text-center">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl px-6 py-16 text-center">
         <p className="text-ink-soft text-sm mb-1">Aún no has subido ninguna junta.</p>
         <p className="text-ink-faint text-xs">Pulsa "Subir audio" para empezar.</p>
       </div>
@@ -43,9 +43,9 @@ export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
   }
 
   return (
-    <div className="glass rounded-xl overflow-hidden">
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="glass border-b border-[color:var(--glass-border)]">
+        <thead className="bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
           <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
             <th className="px-6 py-3 font-medium">Fecha</th>
             <th className="px-6 py-3 font-medium">Junta</th>
@@ -59,12 +59,12 @@ export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
           {meetings.map((m) => {
             const style = STATUS_STYLES[m.status] ?? STATUS_STYLES.pending
             return (
-              <tr key={m.id} className="hover:glass">
+              <tr key={m.id} className="hover:bg-[color:var(--glass-border)]">
                 <td className="px-6 py-3 text-ink-soft text-xs whitespace-nowrap">{dateLabel(m.meeting_date)}</td>
                 <td className="px-6 py-3">
                   <p className="text-ink">{m.title}</p>
                   {m.error_message && m.status === 'failed' && (
-                    <p className="text-red-400 text-xs mt-0.5 line-clamp-1">{m.error_message}</p>
+                    <p className="text-red-600 dark:text-red-400 text-xs mt-0.5 line-clamp-1">{m.error_message}</p>
                   )}
                 </td>
                 <td className="px-6 py-3 hidden md:table-cell text-ink-soft text-xs">
@@ -81,7 +81,7 @@ export function MeetingsTable({ meetings }: { meetings: MeetingRow[] }) {
                 <td className="px-6 py-3 text-right">
                   <Link
                     href={`/juntas/${m.id}`}
-                    className="text-violet-400 hover:text-brand-soft text-sm"
+                    className="inline-flex items-center min-h-9 px-2 text-brand hover:text-brand-soft text-sm"
                   >
                     Abrir →
                   </Link>

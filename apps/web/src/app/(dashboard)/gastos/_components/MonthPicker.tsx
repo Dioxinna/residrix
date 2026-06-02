@@ -20,7 +20,7 @@ export function MonthPicker({
   const prev = shift(selectedMonth, -1)
   const next = shift(selectedMonth, 1)
   return (
-    <div className="inline-flex items-center gap-1 glass rounded">
+    <div className="inline-flex items-center gap-1 bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded">
       <Link
         href={`/gastos?community=${selectedCommunityId}&month=${prev}`}
         scroll={false}

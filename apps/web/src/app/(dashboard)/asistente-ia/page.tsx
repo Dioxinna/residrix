@@ -53,7 +53,7 @@ export default async function AsistenteIaPage() {
     <div className="max-w-5xl mx-auto px-6 py-10">
       <div className="flex items-center gap-3 mb-2">
         <div className="w-9 h-9 rounded-lg bg-violet-500/15 border border-violet-500/30 flex items-center justify-center">
-          <Sparkles size={18} className="text-violet-400" strokeWidth={1.75} />
+          <Sparkles size={18} className="text-brand" strokeWidth={1.75} />
         </div>
         <h1 className="text-2xl font-semibold text-ink">Asistente IA</h1>
       </div>
@@ -65,7 +65,7 @@ export default async function AsistenteIaPage() {
       </p>
 
       {groups.length === 0 && (
-        <div className="glass rounded-xl px-6 py-16 text-center">
+        <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl px-6 py-16 text-center">
           <p className="text-ink-soft text-sm">No hay incidencias abiertas que revisar.</p>
         </div>
       )}

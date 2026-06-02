@@ -65,7 +65,7 @@ export default async function GastosPage({ searchParams }: PageProps) {
         </p>
         <Link
           href="/comunidades"
-          className="inline-block bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
+          className="inline-block bg-brand hover:bg-brand-soft text-white text-sm font-medium px-4 py-2 rounded"
         >
           Ir a Comunidades →
         </Link>
@@ -197,7 +197,7 @@ function CommunityFilter({
               className={`text-xs px-2.5 py-1 rounded border ${
                 active
                   ? 'bg-brand/15 border-brand/40 text-ink'
-                  : 'glass border-[color:var(--glass-border)] text-ink-soft hover:text-ink hover:border-[color:var(--glass-border)]'
+                  : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)] text-ink-soft hover:text-ink hover:border-[color:var(--glass-border)]'
               }`}
             >
               {c.name}
@@ -225,7 +225,7 @@ function Stat({
   return (
     <div
       className={`rounded-xl border px-4 py-3 ${
-        accent ? 'bg-violet-500/5 border-violet-500/30' : 'glass border-[color:var(--glass-border)]'
+        accent ? 'bg-brand/5 border-brand/30' : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)]'
       }`}
     >
       <p className="text-[10px] uppercase tracking-wide text-ink-faint mb-1">{label}</p>

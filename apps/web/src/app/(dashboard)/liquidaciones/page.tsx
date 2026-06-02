@@ -50,7 +50,7 @@ export default async function LiquidacionesPage() {
         </p>
         <Link
           href="/comunidades"
-          className="inline-block bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
+          className="inline-block bg-brand hover:bg-brand-soft text-white text-sm font-medium px-4 py-2 rounded"
         >
           Ir a Comunidades →
         </Link>

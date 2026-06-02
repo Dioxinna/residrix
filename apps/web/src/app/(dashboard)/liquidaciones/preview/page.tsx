@@ -148,7 +148,7 @@ export default async function LiquidacionPreviewPage({ searchParams }: PageProps
             <p className="text-sm text-ink-faint italic">Sin gastos en este periodo.</p>
           ) : (
             <table className="w-full text-sm border border-[color:var(--glass-border)] rounded overflow-hidden">
-              <thead className="glass">
+              <thead className="bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
                 <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
                   <th className="px-4 py-2 font-medium">Categoría</th>
                   <th className="px-4 py-2 font-medium text-right">Nº gastos</th>
@@ -170,7 +170,7 @@ export default async function LiquidacionPreviewPage({ searchParams }: PageProps
                   </tr>
                 ))}
               </tbody>
-              <tfoot className="glass border-t border-[color:var(--glass-border)]">
+              <tfoot className="bg-[color:var(--c-surface)] border-t border-[color:var(--glass-border)]">
                 <tr>
                   <td className="px-4 py-2 text-ink font-semibold uppercase text-xs tracking-wide">Total</td>
                   <td className="px-4 py-2 text-right text-ink-soft tabular-nums">{rows.length}</td>
@@ -187,7 +187,7 @@ export default async function LiquidacionPreviewPage({ searchParams }: PageProps
           <section className="mb-8">
             <h2 className="text-sm font-semibold text-ink uppercase tracking-wide mb-3">Detalle</h2>
             <table className="w-full text-sm border border-[color:var(--glass-border)] rounded overflow-hidden">
-              <thead className="glass">
+              <thead className="bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
                 <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
                   <th className="px-3 py-2 font-medium">Fecha</th>
                   <th className="px-3 py-2 font-medium">Descripción</th>
@@ -208,9 +208,9 @@ export default async function LiquidacionPreviewPage({ searchParams }: PageProps
                     <td className="px-3 py-2 text-ink-soft text-xs">{e.vendor_name ?? '—'}</td>
                     <td className="px-3 py-2 text-xs">
                       {e.paid_at ? (
-                        <span className="text-emerald-400">Pagado</span>
+                        <span className="text-emerald-700 dark:text-emerald-300">Pagado</span>
                       ) : (
-                        <span className="text-amber-400">Pendiente</span>
+                        <span className="text-amber-700 dark:text-amber-300">Pendiente</span>
                       )}
                     </td>
                     <td className="px-3 py-2 text-right text-ink tabular-nums whitespace-nowrap">
@@ -239,7 +239,7 @@ function Stat({ label, value, tone, accent }: { label: string; value: string; to
   return (
     <div
       className={`rounded-xl border px-4 py-3 ${
-        accent ? 'bg-violet-500/5 border-violet-500/30' : 'glass border-[color:var(--glass-border)]'
+        accent ? 'bg-violet-500/5 border-violet-500/30' : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)]'
       }`}
     >
       <p className="text-[10px] uppercase tracking-wide text-ink-faint print-muted mb-1">{label}</p>

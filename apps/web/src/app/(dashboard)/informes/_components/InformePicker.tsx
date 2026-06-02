@@ -30,12 +30,12 @@ export function InformePicker({
   }
 
   return (
-    <div className="glass rounded-xl p-6 space-y-5">
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-6 space-y-5">
       <Field label="Comunidad">
         <select
           value={communityId}
           onChange={(e) => setCommunityId(e.target.value)}
-          className="w-full glass rounded px-3 py-2 text-sm text-ink"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-violet-500"
         >
           {communities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
@@ -47,7 +47,7 @@ export function InformePicker({
         <select
           value={month}
           onChange={(e) => setMonth(e.target.value)}
-          className="w-full glass rounded px-3 py-2 text-sm text-ink capitalize"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink capitalize focus:outline-none focus:ring-2 focus:ring-violet-500"
         >
           {monthOptions.map((m) => (
             <option key={m} value={m}>{monthLabel(m)}</option>
@@ -57,7 +57,7 @@ export function InformePicker({
 
       <button
         onClick={submit}
-        className="w-full bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2.5 rounded"
+        className="w-full bg-brand hover:bg-brand-soft text-white text-sm font-medium px-4 py-2.5 rounded"
       >
         Generar informe →
       </button>

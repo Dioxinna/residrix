@@ -61,7 +61,7 @@ export function TierCards({
   return (
     <>
       {currentTier === null && (
-        <div className="glass rounded-lg p-4 mb-4 flex items-center gap-3 flex-wrap">
+        <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg p-4 mb-4 flex items-center gap-3 flex-wrap">
           <label className="text-sm text-ink-soft">Cuántas comunidades quieres gestionar:</label>
           <input
             type="number"
@@ -69,7 +69,7 @@ export function TierCards({
             value={quantity}
             onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value, 10) || 1))}
             disabled={pending}
-            className="w-20 glass rounded px-3 py-1.5 text-sm text-ink"
+            className="w-20 bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-1.5 text-sm text-ink focus-visible:outline-2 focus-visible:outline-[color:var(--c-violet)]"
           />
           <span className="text-xs text-ink-faint">Puedes cambiar la cantidad luego desde el portal.</span>
         </div>
@@ -91,12 +91,12 @@ export function TierCards({
               key={tier.key}
               className={`relative rounded-xl border p-5 flex flex-col ${
                 isCurrent
-                  ? 'bg-violet-500/5 border-violet-500/40'
-                  : 'glass border-[color:var(--glass-border)]'
+                  ? 'bg-violet-500/5 border-brand ring-2 ring-brand'
+                  : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)]'
               }`}
             >
               {isCurrent && (
-                <span className="absolute -top-2.5 left-5 bg-violet-600 text-white text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">
+                <span className="absolute -top-2.5 left-5 bg-brand text-white text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded">
                   Tu plan
                 </span>
               )}
@@ -112,7 +112,7 @@ export function TierCards({
               <ul className="space-y-2 mb-5 text-sm text-ink-soft flex-1">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2">
-                    <span className="text-violet-400 mt-0.5">✓</span>
+                    <span className="text-brand mt-0.5">✓</span>
                     <span>{f}</span>
                   </li>
                 ))}
@@ -123,8 +123,8 @@ export function TierCards({
                 disabled={pending || isCurrent}
                 className={`w-full text-sm font-medium px-4 py-2 rounded ${
                   isCurrent
-                    ? 'glass-strong text-ink-faint cursor-not-allowed'
-                    : 'bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white'
+                    ? 'bg-[color:var(--glass-border)] text-ink-faint cursor-not-allowed'
+                    : 'bg-brand hover:bg-brand-soft disabled:opacity-50 text-white'
                 }`}
               >
                 {isBusy ? '…' : cta}

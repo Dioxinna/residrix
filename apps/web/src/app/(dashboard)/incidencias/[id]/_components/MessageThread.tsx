@@ -68,7 +68,7 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
   }
 
   return (
-    <section className="glass rounded-xl overflow-hidden">
+    <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl overflow-hidden">
       <div className="px-6 py-4 border-b border-[color:var(--glass-border)]">
         <h2 className="text-ink font-semibold text-sm">Mensajes ({messages.length})</h2>
       </div>
@@ -78,11 +78,11 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
           <p className="px-6 py-8 text-center text-ink-faint text-sm">No hay mensajes aún</p>
         )}
         {messages.map((msg) => (
-          <div key={msg.id} className={cn('px-6 py-4', msg.is_internal && 'bg-amber-950/20')}>
+          <div key={msg.id} className={cn('px-6 py-4', msg.is_internal && 'bg-amber-500/10')}>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-ink text-xs font-medium">{msg.profiles?.full_name ?? 'Sistema'}</span>
               {msg.is_internal && (
-                <span className="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs px-1.5 py-0.5 rounded">
+                <span className="bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs px-1.5 py-0.5 rounded">
                   Nota interna
                 </span>
               )}
@@ -102,10 +102,10 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
           onChange={(e) => setContent(e.target.value)}
           placeholder="Escribe un mensaje al vecino..."
           rows={3}
-          className="w-full glass-strong border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm resize-none"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg px-3 py-2.5 text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500 text-sm resize-none"
         />
         {aiResponse && !content && (
-          <button onClick={() => setContent(aiResponse)} className="text-violet-400 text-xs hover:text-brand-soft transition-colors">
+          <button onClick={() => setContent(aiResponse)} className="text-brand text-xs hover:text-brand-soft transition-colors">
             ✦ Usar respuesta IA
           </button>
         )}
@@ -113,14 +113,14 @@ export function MessageThread({ incidenceId, initialMessages, aiResponse }: Prop
           <button
             onClick={() => sendMessage(false)}
             disabled={sending || !content.trim()}
-            className="flex-1 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg py-2 transition-colors"
+            className="flex-1 bg-brand hover:bg-brand-soft disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg py-2 transition-colors"
           >
             Enviar al vecino
           </button>
           <button
             onClick={() => sendMessage(true)}
             disabled={sending || !content.trim()}
-            className="px-4 bg-amber-900/50 hover:bg-amber-900/70 disabled:opacity-50 disabled:cursor-not-allowed text-amber-400 text-sm font-medium rounded-lg py-2 border border-amber-800/50 transition-colors"
+            className="px-4 bg-amber-500/15 hover:bg-amber-500/25 disabled:opacity-50 disabled:cursor-not-allowed text-amber-700 dark:text-amber-300 text-sm font-medium rounded-lg py-2 border border-amber-500/30 transition-colors"
           >
             Nota interna
           </button>

@@ -300,7 +300,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
               Incidencias destacadas
             </h2>
             <table className="w-full text-sm border border-[color:var(--glass-border)] rounded overflow-hidden">
-              <thead className="glass">
+              <thead className="bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
                 <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
                   <th className="px-3 py-2 font-medium">Fecha</th>
                   <th className="px-3 py-2 font-medium">Título</th>
@@ -324,9 +324,9 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
                     </td>
                     <td className="px-3 py-2 text-xs">
                       {TERMINAL_STATUS.has(i.status) ? (
-                        <span className="text-emerald-400">Cerrada</span>
+                        <span className="text-emerald-700 dark:text-emerald-300">Cerrada</span>
                       ) : (
-                        <span className="text-amber-400">Abierta</span>
+                        <span className="text-amber-700 dark:text-amber-300">Abierta</span>
                       )}
                     </td>
                   </tr>
@@ -354,7 +354,7 @@ export default async function InformePreviewPage({ searchParams }: PageProps) {
             <p className="text-sm text-ink-faint italic">Sin gastos registrados este mes.</p>
           ) : (
             <table className="w-full text-sm border border-[color:var(--glass-border)] rounded overflow-hidden">
-              <thead className="glass">
+              <thead className="bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
                 <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
                   <th className="px-4 py-2 font-medium">Categoría</th>
                   <th className="px-4 py-2 font-medium text-right">Nº</th>
@@ -418,7 +418,7 @@ function Stat({
   return (
     <div
       className={`rounded-xl border px-4 py-3 ${
-        accent ? 'bg-violet-500/5 border-violet-500/30' : 'glass border-[color:var(--glass-border)]'
+        accent ? 'bg-violet-500/5 border-violet-500/30' : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)]'
       }`}
     >
       <p className="text-[10px] uppercase tracking-wide text-ink-faint print-muted mb-1">{label}</p>
@@ -442,7 +442,7 @@ function MiniStat({
   return (
     <div
       className={`rounded-lg border px-3 py-2 ${
-        accent ? 'bg-violet-500/5 border-violet-500/30' : 'glass border-[color:var(--glass-border)]'
+        accent ? 'bg-violet-500/5 border-violet-500/30' : 'bg-[color:var(--c-surface)] border-[color:var(--glass-border)]'
       }`}
     >
       <p className="text-[10px] uppercase tracking-wide text-ink-faint print-muted">{label}</p>
@@ -461,8 +461,8 @@ function BreakdownTable({
   total: number
 }) {
   return (
-    <div className="glass rounded-lg overflow-hidden">
-      <p className="px-4 py-2 text-xs uppercase tracking-wide text-ink-faint print-muted glass border-b border-[color:var(--glass-border)]">
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg overflow-hidden">
+      <p className="px-4 py-2 text-xs uppercase tracking-wide text-ink-faint print-muted bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
         {title}
       </p>
       <table className="w-full text-sm">

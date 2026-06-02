@@ -18,7 +18,7 @@ export function AcceptAIResponseButton({
 
   if (accepted) {
     return (
-      <span className="inline-flex items-center gap-1 text-xs text-emerald-400 font-medium">
+      <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
         <Check size={14} /> Respuesta enviada al vecino
       </span>
     )
@@ -46,7 +46,7 @@ export function AcceptAIResponseButton({
     <button
       onClick={accept}
       disabled={pending}
-      className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
+      className="bg-brand hover:bg-brand-soft disabled:opacity-50 text-white text-xs font-medium px-3 py-1.5 rounded"
     >
       {pending ? 'Enviando…' : 'Aceptar y enviar al vecino'}
     </button>

@@ -4,6 +4,7 @@ import { useState, useTransition, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+import { Modal } from '@/components/ui/Modal'
 
 interface Community {
   id: string
@@ -95,7 +96,7 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
     return (
       <button
         disabled
-        className="glass-strong text-ink-faint text-sm px-4 py-2 rounded cursor-not-allowed"
+        className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] text-ink-faint text-sm px-4 py-2 rounded cursor-not-allowed"
         title="Crea primero una comunidad"
       >
         Subir documento
@@ -107,114 +108,111 @@ export function UploadDocumentDialog({ communities }: { communities: Community[]
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
+        className="bg-brand hover:bg-brand-soft text-white text-sm font-medium px-4 py-2 rounded"
       >
         Subir documento
       </button>
 
-      {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
-          onClick={() => !pending && setOpen(false)}
-        >
-          <form
-            onClick={(e) => e.stopPropagation()}
-            onSubmit={submit}
-            className="glass rounded-xl p-6 w-full max-w-md space-y-4"
-          >
-            <h2 className="text-ink text-lg font-semibold">Subir documento</h2>
+      <Modal
+        open={open}
+        onClose={() => !pending && setOpen(false)}
+        title="Subir documento"
+        busy={pending}
+      >
+        <form onSubmit={submit} className="space-y-4">
+          <Field label="Comunidad">
+            <select
+              value={communityId}
+              onChange={(e) => setCommunityId(e.target.value)}
+              required
+              className={INPUT_CLASS}
+            >
+              {communities.map((c) => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
+          </Field>
 
-            <Field label="Comunidad">
+          <Field label="Nombre">
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Acta junta marzo 2026"
+              className={INPUT_CLASS}
+            />
+          </Field>
+
+          <Field label="Descripción (opcional)">
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={2}
+              className={INPUT_CLASS}
+            />
+          </Field>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Field label="Categoría">
               <select
-                value={communityId}
-                onChange={(e) => setCommunityId(e.target.value)}
-                required
-                className="w-full glass rounded px-3 py-2 text-sm text-ink"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className={INPUT_CLASS}
               >
-                {communities.map((c) => (
-                  <option key={c.id} value={c.id}>{c.name}</option>
+                {CATEGORIES.map((c) => (
+                  <option key={c.value} value={c.value}>{c.label}</option>
                 ))}
               </select>
             </Field>
 
-            <Field label="Nombre">
-              <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Acta junta marzo 2026"
-                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
-              />
-            </Field>
-
-            <Field label="Descripción (opcional)">
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={2}
-                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
-              />
-            </Field>
-
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Categoría">
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full glass rounded px-3 py-2 text-sm text-ink"
-                >
-                  {CATEGORIES.map((c) => (
-                    <option key={c.value} value={c.value}>{c.label}</option>
-                  ))}
-                </select>
-              </Field>
-
-              <Field label="Visibilidad">
-                <select
-                  value={isPublic ? '1' : '0'}
-                  onChange={(e) => setIsPublic(e.target.value === '1')}
-                  className="w-full glass rounded px-3 py-2 text-sm text-ink"
-                >
-                  <option value="1">Todos los vecinos</option>
-                  <option value="0">Solo admin/presidente</option>
-                </select>
-              </Field>
-            </div>
-
-            <Field label="Archivo (máx 20 MB)">
-              <input
-                ref={fileRef}
-                type="file"
-                required
-                accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.png"
-                className="w-full text-sm text-ink-soft file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:glass-strong file:text-ink file:text-xs"
-              />
-            </Field>
-
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                disabled={pending}
-                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
+            <Field label="Visibilidad">
+              <select
+                value={isPublic ? '1' : '0'}
+                onChange={(e) => setIsPublic(e.target.value === '1')}
+                className={INPUT_CLASS}
               >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                disabled={pending}
-                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
-              >
-                {pending ? 'Subiendo…' : 'Subir'}
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+                <option value="1">Todos los vecinos</option>
+                <option value="0">Solo admin/presidente</option>
+              </select>
+            </Field>
+          </div>
+
+          <Field label="Archivo (máx 20 MB)">
+            <input
+              ref={fileRef}
+              type="file"
+              required
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.png"
+              className="w-full text-sm text-ink-soft file:mr-3 file:py-1.5 file:px-3 file:rounded file:border file:border-[color:var(--glass-border)] file:bg-[color:var(--c-surface)] file:text-ink file:text-xs focus-visible:outline-2 focus-visible:outline-[color:var(--c-violet)]"
+            />
+          </Field>
+
+          <div className="flex justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              disabled={pending}
+              className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={pending}
+              className="bg-brand hover:bg-brand-soft disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+            >
+              {pending ? 'Subiendo…' : 'Subir'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </>
   )
 }
+
+const INPUT_CLASS =
+  'w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-[color:var(--c-violet)]'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

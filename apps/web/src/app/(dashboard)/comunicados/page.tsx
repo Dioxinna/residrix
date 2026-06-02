@@ -57,7 +57,7 @@ export default async function ComunicadosPage({ searchParams }: PageProps) {
         <select
           name="community"
           defaultValue={filters.community ?? ''}
-          className="glass rounded px-3 py-2 text-sm text-ink"
+          className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-violet-500"
         >
           <option value="">Todas las comunidades</option>
           {(communities ?? []).map((c) => (
@@ -66,7 +66,7 @@ export default async function ComunicadosPage({ searchParams }: PageProps) {
         </select>
         <button
           type="submit"
-          className="glass-strong hover:bg-zinc-700 text-ink text-sm px-4 py-2 rounded"
+          className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] hover:bg-[color:var(--glass-border)] text-ink text-sm px-4 py-2 rounded"
         >
           Filtrar
         </button>

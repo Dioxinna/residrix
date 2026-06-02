@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+import { Modal } from '@/components/ui/Modal'
 import { PROVIDER_LABEL, type ProviderType } from '@/lib/ai/types'
 
 export interface ProviderRow {
@@ -100,115 +101,110 @@ export function ProviderDialog(props: Props) {
         onClick={() => setOpen(true)}
         className={
           isCreate
-            ? 'bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded'
-            : 'text-violet-400 hover:text-brand-soft text-sm'
+            ? 'bg-brand hover:bg-brand-soft text-white text-sm font-medium px-4 py-2 rounded'
+            : 'inline-flex items-center min-h-9 px-2 text-brand hover:text-brand-soft text-sm'
         }
       >
         {props.trigger}
       </button>
 
-      {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
-          onClick={() => !pending && setOpen(false)}
-        >
-          <form
-            onClick={(e) => e.stopPropagation()}
-            onSubmit={submit}
-            className="glass rounded-xl p-6 w-full max-w-md space-y-4"
-          >
-            <h2 className="text-ink text-lg font-semibold">
-              {isCreate ? 'Nuevo proveedor' : 'Editar proveedor'}
-            </h2>
+      <Modal
+        open={open}
+        onClose={() => !pending && setOpen(false)}
+        title={isCreate ? 'Nuevo proveedor' : 'Editar proveedor'}
+        busy={pending}
+      >
+        <form onSubmit={submit} className="space-y-4">
+          <Field label="Nombre o empresa">
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Fontanería García SL"
+              className={INPUT_CLASS}
+            />
+          </Field>
 
-            <Field label="Nombre o empresa">
+          <Field label="Tipo de servicio">
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className={INPUT_CLASS}
+            >
+              {TYPE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+          </Field>
+
+          <Field label="Persona de contacto">
+            <input
+              type="text"
+              value={contactName}
+              onChange={(e) => setContactName(e.target.value)}
+              placeholder="Juan García"
+              className={INPUT_CLASS}
+            />
+          </Field>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Field label="Teléfono">
               <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Fontanería García SL"
-                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="600 000 000"
+                className={INPUT_CLASS}
               />
             </Field>
 
-            <Field label="Tipo de servicio">
-              <select
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-                className="w-full glass rounded px-3 py-2 text-sm text-ink"
-              >
-                {TYPE_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
-              </select>
-            </Field>
-
-            <Field label="Persona de contacto">
+            <Field label="Email">
               <input
-                type="text"
-                value={contactName}
-                onChange={(e) => setContactName(e.target.value)}
-                placeholder="Juan García"
-                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="contacto@empresa.com"
+                className={INPUT_CLASS}
               />
             </Field>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Teléfono">
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="600 000 000"
-                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
-                />
-              </Field>
+          <Field label="Notas (opcional)">
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Tarifas, horarios, observaciones"
+              rows={2}
+              className={`${INPUT_CLASS} resize-none`}
+            />
+          </Field>
 
-              <Field label="Email">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="contacto@empresa.com"
-                  className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
-                />
-              </Field>
-            </div>
-
-            <Field label="Notas (opcional)">
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Tarifas, horarios, observaciones"
-                rows={2}
-                className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint resize-none"
-              />
-            </Field>
-
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                disabled={pending}
-                className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                disabled={pending}
-                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
-              >
-                {pending ? 'Guardando…' : isCreate ? 'Crear' : 'Guardar'}
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+          <div className="flex justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              disabled={pending}
+              className="text-sm px-4 py-2 rounded text-ink-soft hover:text-ink"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={pending}
+              className="bg-brand hover:bg-brand-soft disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+            >
+              {pending ? 'Guardando…' : isCreate ? 'Crear' : 'Guardar'}
+            </button>
+          </div>
+        </form>
+      </Modal>
     </>
   )
 }
+
+const INPUT_CLASS =
+  'w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus-visible:outline-2 focus-visible:outline-[color:var(--c-violet)]'
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

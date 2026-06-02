@@ -10,14 +10,14 @@ function isFeatureKey(value: string | undefined): value is FeatureKey {
 }
 
 const STATUS_LABEL: Record<string, { label: string; tone: string }> = {
-  active: { label: 'Activa', tone: 'text-emerald-400 bg-emerald-500/10' },
-  trialing: { label: 'En prueba', tone: 'text-violet-400 bg-violet-500/10' },
-  past_due: { label: 'Pago pendiente', tone: 'text-amber-400 bg-amber-500/10' },
-  canceled: { label: 'Cancelada', tone: 'text-ink-faint bg-zinc-500/10' },
-  incomplete: { label: 'Incompleta', tone: 'text-amber-400 bg-amber-500/10' },
-  incomplete_expired: { label: 'Expirada', tone: 'text-ink-faint bg-zinc-500/10' },
-  unpaid: { label: 'Impagada', tone: 'text-red-400 bg-red-500/10' },
-  paused: { label: 'Pausada', tone: 'text-ink-faint bg-zinc-500/10' },
+  active: { label: 'Activa', tone: 'text-emerald-700 dark:text-emerald-300 bg-emerald-500/10' },
+  trialing: { label: 'En prueba', tone: 'text-brand bg-violet-500/10' },
+  past_due: { label: 'Pago pendiente', tone: 'text-amber-700 dark:text-amber-300 bg-amber-500/10' },
+  canceled: { label: 'Cancelada', tone: 'text-ink-faint bg-[color:var(--glass-border)]' },
+  incomplete: { label: 'Incompleta', tone: 'text-amber-700 dark:text-amber-300 bg-amber-500/10' },
+  incomplete_expired: { label: 'Expirada', tone: 'text-ink-faint bg-[color:var(--glass-border)]' },
+  unpaid: { label: 'Impagada', tone: 'text-red-600 dark:text-red-400 bg-red-500/10' },
+  paused: { label: 'Pausada', tone: 'text-ink-faint bg-[color:var(--glass-border)]' },
 }
 
 interface PageProps {
@@ -76,7 +76,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
       </p>
 
       {upgradeFeature && (
-        <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-brand-soft">
+        <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-3 mb-6 text-sm text-brand">
           <strong className="text-ink">{FEATURE_LABEL[upgradeFeature]}</strong> está incluida en el plan{' '}
           <strong className="text-ink">{TIER_NAME[FEATURE_MIN_TIER[upgradeFeature]]}</strong>. Súbete para usarla.
         </div>
@@ -87,12 +87,12 @@ export default async function BillingPage({ searchParams }: PageProps) {
         </div>
       )}
       {params.status === 'cancel' && (
-        <div className="glass-strong border border-[color:var(--glass-border)] rounded-lg px-4 py-3 mb-6 text-sm text-ink-soft">
+        <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg px-4 py-3 mb-6 text-sm text-ink-soft">
           Has cancelado el pago. Puedes retomarlo cuando quieras.
         </div>
       )}
 
-      <section className="glass rounded-xl p-6 mb-8">
+      <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-6 mb-8">
         <div className="flex items-start justify-between mb-4">
           <div>
             <p className="text-xs text-ink-faint uppercase tracking-wide mb-1">Estado actual</p>
@@ -102,7 +102,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
                   {statusBadge.label}
                 </span>
               ) : (
-                <span className="text-xs font-semibold px-2 py-0.5 rounded text-ink-soft glass-strong">
+                <span className="text-xs font-semibold px-2 py-0.5 rounded text-ink-soft bg-[color:var(--glass-border)]">
                   Sin suscripción
                 </span>
               )}
@@ -125,7 +125,7 @@ export default async function BillingPage({ searchParams }: PageProps) {
           <Stat
             label="Disponibles"
             value={`${remaining}`}
-            tone={remaining === 0 ? 'text-amber-400' : undefined}
+            tone={remaining === 0 ? 'text-amber-600 dark:text-amber-400' : undefined}
           />
         </div>
       </section>

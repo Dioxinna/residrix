@@ -51,7 +51,7 @@ export function ExpensesTable({
 
   if (expenses.length === 0) {
     return (
-      <div className="glass rounded-xl px-6 py-16 text-center">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl px-6 py-16 text-center">
         <p className="text-ink-soft text-sm mb-2">No hay gastos registrados este mes.</p>
         <p className="text-ink-faint text-xs">Pulsa "Nuevo gasto" para empezar.</p>
       </div>
@@ -59,9 +59,9 @@ export function ExpensesTable({
   }
 
   return (
-    <div className="glass rounded-xl overflow-hidden">
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="glass border-b border-[color:var(--glass-border)]">
+        <thead className="bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
           <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
             <th className="px-6 py-3 font-medium">Fecha</th>
             <th className="px-6 py-3 font-medium">Descripción</th>
@@ -74,7 +74,7 @@ export function ExpensesTable({
         </thead>
         <tbody className="divide-y divide-[color:var(--glass-border)]">
           {expenses.map((e) => (
-            <tr key={e.id} className="hover:glass">
+            <tr key={e.id} className="hover:bg-[color:var(--glass-border)]">
               <td className="px-6 py-3 text-ink-soft text-xs whitespace-nowrap">{dateLabel(e.expense_date)}</td>
               <td className="px-6 py-3">
                 <p className="text-ink">{e.description}</p>
@@ -116,14 +116,14 @@ export function ExpensesTable({
                       <button
                         onClick={() => remove(e.id)}
                         disabled={deleting}
-                        className="text-xs text-red-400 hover:text-red-300 disabled:opacity-50"
+                        className="inline-flex items-center min-h-9 px-2 text-xs text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 disabled:opacity-50"
                       >
                         Confirmar
                       </button>
                       <button
                         onClick={() => setConfirmId(null)}
                         disabled={deleting}
-                        className="text-xs text-ink-faint hover:text-ink-soft"
+                        className="inline-flex items-center min-h-9 px-2 text-xs text-ink-faint hover:text-ink-soft"
                       >
                         Cancelar
                       </button>
@@ -131,7 +131,7 @@ export function ExpensesTable({
                   ) : (
                     <button
                       onClick={() => setConfirmId(e.id)}
-                      className="text-ink-faint hover:text-red-400 transition-colors"
+                      className="inline-flex items-center justify-center min-h-9 min-w-9 text-ink-faint hover:text-red-600 dark:hover:text-red-400 transition-colors"
                       aria-label="Borrar gasto"
                     >
                       <Trash2 size={14} strokeWidth={1.75} />

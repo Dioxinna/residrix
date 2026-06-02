@@ -80,7 +80,7 @@ function Section({ title, subtitle, children }: { title: string; subtitle: strin
     <section>
       <h2 className="text-sm font-semibold text-ink mb-1">{title}</h2>
       <p className="text-xs text-ink-faint mb-3">{subtitle}</p>
-      <div className="glass rounded-lg divide-y divide-[color:var(--glass-border)]">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg divide-y divide-[color:var(--glass-border)]">
         {children}
       </div>
     </section>
@@ -106,8 +106,8 @@ function ToggleRow({ label, description, checked, onChange }: ToggleRowProps) {
         role="switch"
         aria-checked={checked}
         onClick={onChange}
-        className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full transition-colors ${
-          checked ? 'bg-violet-600' : 'bg-zinc-700'
+        className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--c-violet)] ${
+          checked ? 'bg-brand' : 'bg-[color:var(--glass-border)]'
         }`}
       >
         <span

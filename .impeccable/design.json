@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-02T00:00:00.000Z",
+  "title": "Design System: Residrix",
+  "extensions": {
+    "colorMeta": {
+      "brand": { "role": "primary", "displayName": "Violeta Marca", "canonical": "oklch(54% 0.25 295)", "tonalRamp": ["oklch(20% 0.10 295)", "oklch(30% 0.15 295)", "oklch(40% 0.20 295)", "oklch(48% 0.24 295)", "oklch(54% 0.25 295)", "oklch(65% 0.22 295)", "oklch(78% 0.15 295)", "oklch(92% 0.06 295)"] },
+      "brand-soft": { "role": "primary", "displayName": "Violeta Profundo", "canonical": "oklch(48% 0.24 293)", "tonalRamp": ["oklch(22% 0.11 293)", "oklch(32% 0.16 293)", "oklch(42% 0.21 293)", "oklch(48% 0.24 293)", "oklch(58% 0.23 293)", "oklch(70% 0.18 293)", "oklch(83% 0.11 293)", "oklch(94% 0.05 293)"] },
+      "violet": { "role": "primary", "displayName": "Violeta Luz", "canonical": "oklch(63% 0.23 305)", "tonalRamp": ["oklch(25% 0.10 305)", "oklch(36% 0.16 305)", "oklch(46% 0.21 305)", "oklch(55% 0.24 305)", "oklch(63% 0.23 305)", "oklch(74% 0.18 305)", "oklch(85% 0.11 305)", "oklch(95% 0.05 305)"] },
+      "cyan": { "role": "secondary", "displayName": "Cian", "canonical": "oklch(70% 0.13 215)", "tonalRamp": ["oklch(25% 0.06 215)", "oklch(35% 0.09 215)", "oklch(45% 0.11 215)", "oklch(55% 0.12 215)", "oklch(70% 0.13 215)", "oklch(80% 0.10 215)", "oklch(88% 0.07 215)", "oklch(95% 0.03 215)"] },
+      "ink": { "role": "neutral", "displayName": "Tinta", "canonical": "oklch(20% 0.012 285)", "tonalRamp": ["oklch(20% 0.012 285)", "oklch(32% 0.012 285)", "oklch(44% 0.012 285)", "oklch(58% 0.012 285)", "oklch(66% 0.015 285)", "oklch(80% 0.010 285)", "oklch(93% 0.012 285)", "oklch(98% 0.005 285)"] },
+      "ink-soft": { "role": "neutral", "displayName": "Tinta Suave", "canonical": "oklch(44% 0.012 285)", "tonalRamp": ["oklch(20% 0.012 285)", "oklch(32% 0.012 285)", "oklch(44% 0.012 285)", "oklch(58% 0.012 285)", "oklch(66% 0.015 285)", "oklch(80% 0.010 285)", "oklch(93% 0.012 285)", "oklch(98% 0.005 285)"] },
+      "ink-faint": { "role": "neutral", "displayName": "Tinta Tenue", "canonical": "oklch(66% 0.015 285)", "tonalRamp": ["oklch(20% 0.012 285)", "oklch(32% 0.012 285)", "oklch(44% 0.012 285)", "oklch(58% 0.012 285)", "oklch(66% 0.015 285)", "oklch(80% 0.010 285)", "oklch(93% 0.012 285)", "oklch(98% 0.005 285)"] },
+      "base": { "role": "neutral", "displayName": "Base", "canonical": "oklch(94% 0.02 280)", "tonalRamp": ["oklch(20% 0.012 285)", "oklch(32% 0.012 285)", "oklch(44% 0.012 285)", "oklch(58% 0.012 285)", "oklch(80% 0.010 285)", "oklch(94% 0.02 280)", "oklch(97% 0.012 280)", "oklch(99% 0.006 280)"] },
+      "surface": { "role": "neutral", "displayName": "Superficie", "canonical": "oklch(100% 0 0)", "tonalRamp": ["oklch(20% 0.012 285)", "oklch(40% 0.012 285)", "oklch(58% 0.012 285)", "oklch(80% 0.010 285)", "oklch(90% 0.008 285)", "oklch(96% 0.006 285)", "oklch(99% 0.003 285)", "oklch(100% 0 0)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titulares de héroe en landing y splashes de onboarding. Space Grotesk. Nunca en labels o datos del panel." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección y cabeceras de página del panel." },
+      "title": { "displayName": "Title", "purpose": "Títulos de card, cabeceras de fila, nombres en listas. Inter 600." },
+      "body": { "displayName": "Body", "purpose": "Texto general y prosa. Inter 400. Prosa a 65–75ch." },
+      "label": { "displayName": "Label", "purpose": "Labels de formulario, texto de badge, ayudas. Uppercase solo en micro-labels ≤4 palabras." }
+    },
+    "shadows": [
+      { "name": "glass", "value": "inset 0 1px 0 0 rgba(255,255,255,0.95), 0 12px 40px -12px rgba(80,70,160,0.18)", "purpose": "Superficie frosted estándar: cards, inputs, nav activo." },
+      { "name": "glass-strong", "value": "inset 0 1px 0 0 rgba(255,255,255,0.95), 0 20px 60px -16px rgba(80,70,160,0.18)", "purpose": "Paneles más opacos e inputs que necesitan más frost." },
+      { "name": "depth", "value": "inset 0 1px 0 0 rgba(255,255,255,0.35), 0 1px 2px rgba(0,0,0,0.18), 0 14px 30px -10px rgba(124,58,237,0.5), 0 30px 60px -24px rgba(80,70,160,0.18)", "purpose": "Elevación física fuerte: mockups de héroe, botón primario en reposo." },
+      { "name": "glow-brand", "value": "0 0 0 1px rgba(124,58,237,0.35), 0 10px 45px -6px rgba(124,58,237,0.55)", "purpose": "Halo de marca en hover de acciones primarias y cards con lift." },
+      { "name": "glow-soft", "value": "0 10px 55px -10px rgba(124,58,237,0.4)", "purpose": "Halo de marca difuso y discreto en reposo." }
+    ],
+    "motion": [
+      { "name": "ease-lift", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Easing exponencial out para hover/lift y entrada rise." },
+      { "name": "lift", "value": "transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease", "purpose": "Transición de elevación en hover de botones y cards." },
+      { "name": "rise-in", "value": "rise-in 0.9s cubic-bezier(0.22,1,0.36,1) both", "purpose": "Entrada kinética en carga (solo superficies de marca)." },
+      { "name": "aurora-drift", "value": "22s–30s ease-in-out infinite alternate", "purpose": "Deriva lenta de los blobs de la aurora de fondo." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción primaria: violeta marca sólido con profundidad y halo en hover.",
+      "html": "<button class=\"ds-btn-primary\">Crear comunidad</button>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--c-brand,#7c3aed); color:#fff; border:none; border-radius:9999px; padding:12px 24px; font-size:0.875rem; font-weight:500; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.35), 0 14px 30px -10px rgba(124,58,237,0.5), 0 30px 60px -24px rgba(80,70,160,0.18); transition: transform .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s ease; cursor:pointer; } .ds-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(124,58,237,0.35), 0 10px 45px -6px rgba(124,58,237,0.55); } .ds-btn-primary:focus-visible { outline:2px solid #a855f7; outline-offset:2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Acción secundaria: superficie glass con texto tinta.",
+      "html": "<button class=\"ds-btn-ghost\">Cancelar</button>",
+      "css": ".ds-btn-ghost { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:rgba(255,255,255,0.55); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border:1px solid rgba(255,255,255,0.85); color:var(--c-ink,#15151c); border-radius:9999px; padding:12px 24px; font-size:0.875rem; font-weight:500; transition: transform .3s cubic-bezier(0.22,1,0.36,1), background .3s ease; cursor:pointer; } .ds-btn-ghost:hover { transform: translateY(-2px); background:rgba(255,255,255,0.72); } .ds-btn-ghost:focus-visible { outline:2px solid #a855f7; outline-offset:2px; }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Superficie frosted estándar con highlight interior y sombra tintada de violeta.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Incidencias abiertas</h3><p class=\"ds-card-body\">3 sin asignar en Comunidad Las Acacias.</p></div>",
+      "css": ".ds-card { background:rgba(255,255,255,0.55); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border:1px solid rgba(255,255,255,0.85); border-radius:20px; padding:24px; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.95), 0 12px 40px -12px rgba(80,70,160,0.18); color:var(--c-ink,#15151c); } .ds-card-title { margin:0 0 4px; font-size:1rem; font-weight:600; } .ds-card-body { margin:0; font-size:0.875rem; line-height:1.6; color:var(--c-ink-soft,#4b4b57); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de formulario glass-strong con anillo de foco violeta.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Nombre de la comunidad\" />",
+      "css": ".ds-input { width:100%; box-sizing:border-box; background:rgba(255,255,255,0.72); backdrop-filter: blur(32px) saturate(190%); -webkit-backdrop-filter: blur(32px) saturate(190%); border:1px solid rgba(255,255,255,0.85); border-radius:8px; padding:10px 12px; font-size:0.875rem; color:var(--c-ink,#15151c); } .ds-input::placeholder { color:#6b6b78; } .ds-input:focus { outline:none; box-shadow:0 0 0 2px #a855f7; }"
+    },
+    {
+      "name": "Sidebar Nav Link (active)",
+      "kind": "nav",
+      "refersTo": "nav-link-active",
+      "description": "Item de navegación lateral: estado activo glass con icono violeta.",
+      "html": "<a class=\"ds-nav-link\" aria-current=\"page\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#7c3aed\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"9\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\"/></svg><span>Dashboard</span></a>",
+      "css": ".ds-nav-link { display:flex; align-items:center; gap:12px; padding:8px 12px; border-radius:12px; font-size:0.875rem; color:var(--c-ink-soft,#4b4b57); text-decoration:none; transition: color .2s ease, background .2s ease; } .ds-nav-link span { flex:1; } .ds-nav-link:hover { color:var(--c-ink,#15151c); background:rgba(255,255,255,0.55); } .ds-nav-link[aria-current=\"page\"] { background:rgba(255,255,255,0.55); color:var(--c-ink,#15151c); font-weight:500; backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border:1px solid rgba(255,255,255,0.85); }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Badge semántico de estado/urgencia: fondo del color al 20%, borde al 30%, texto a contraste AA.",
+      "html": "<span class=\"ds-badge\">En progreso</span>",
+      "css": ".ds-badge { display:inline-flex; align-items:center; padding:2px 8px; border-radius:6px; font-size:0.75rem; font-weight:500; border:1px solid rgba(168,85,247,0.3); background:rgba(168,85,247,0.2); color:#7e22ce; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Cristal sobre Violeta",
+    "overview": "Superficies de cristal esmerilado flotando sobre una niebla viva de violeta y cian. La base es light: una aurora animada se mueve lentamente bajo un grano sutil, y encima se posan paneles glass translúcidos con bordes claros y profundidad real. El material es lo primero que se siente. Existe un modo oscuro espejo. El sistema sirve a dos audiencias (administrador en web denso, vecino en móvil simple) con una misma identidad; el acento violeta marca acción, selección y estado, nunca relleno.",
+    "keyCharacteristics": [
+      "Cristal esmerilado (backdrop-filter: blur) con bordes claros visibles, no glass plano y decorativo.",
+      "Profundidad tangible: sombras tintadas de violeta, glow-brand reservado a acciones e hover.",
+      "Aurora violeta/cian animada como fondo único, detrás de todo, con grano sutil.",
+      "Base light por defecto + modo oscuro espejo vía next-themes (.dark).",
+      "Acento violeta como única voz de acción/estado; nunca decoración.",
+      "Nítido y con cuerpo: cada componente se siente material, no plano."
+    ],
+    "rules": [
+      { "name": "La Regla de Una Sola Voz", "body": "El violeta marca es acción, selección y estado de marca; nunca decoración. Si aparece en una superficie que no se puede pulsar ni indica estado, está mal.", "section": "colors" },
+      { "name": "La Regla del Cristal Translúcido", "body": "Las superficies glass usan vars de transparencia, no colores sólidos opacos. El sólido solo entra cuando la opacidad total es necesaria.", "section": "colors" },
+      { "name": "La Regla Inter-en-la-Tarea", "body": "Dentro del panel y la app, Space Grotesk no toca labels, botones ni datos. El display es para superficies de marca; la herramienta es 100% Inter.", "section": "typography" },
+      { "name": "La Regla de Escala Fija en Producto", "body": "Los titulares fluidos clamp() son para landing/marca. En el panel, escala en rem fijos.", "section": "typography" },
+      { "name": "La Regla Anti-barro", "body": "Prohibido anidar glass sobre glass: el blur acumulado produce un barro gris. Las cards dentro de un panel glass usan superficie sólida o tints, nunca más glass.", "section": "elevation" },
+      { "name": "La Regla del Highlight Interior", "body": "Todo cristal lleva un inset 0 1px 0 claro como borde superior iluminado. Sin él el glass parece una caja translúcida muerta, no un material.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar el violeta marca (#7c3aed) solo para acción, selección y estado (Regla de Una Sola Voz).",
+      "Do mantener texto de cuerpo en tinta a ≥4.5:1, incluido sobre superficies glass tintadas.",
+      "Do dar a cada cristal su highlight interior para que se lea como material.",
+      "Do usar Inter para todo label, botón, dato y cuerpo dentro del panel y la app; reservar Space Grotesk para titulares de marca.",
+      "Do respetar prefers-reduced-motion: aurora, float y rise se desactivan.",
+      "Do verificar el contraste de los badges semánticos en light; bajar el texto a -700 si el -400 sobre /20 no llega a 4.5:1."
+    ],
+    "donts": [
+      "Don't anidar glass sobre glass: produce barro gris.",
+      "Don't parecerse al SaaS genérico AI slop 2026: nada de fondo cream/beige, eyebrows mayúsculas sobre cada sección, grids de cards idénticas, ni plantilla hero-metric.",
+      "Don't caer en software de gestión anticuado: nada de tablas grises densas sin jerarquía ni estética business legacy.",
+      "Don't caer en banca/fintech institucional: nada de navy + dorado frío sin personalidad.",
+      "Don't caer en consumer app juguetona: nada de exceso de color, cartoon ni gamificación.",
+      "Don't usar tinta-tenue (#8a8a99) para texto de cuerpo: no alcanza 4.5:1.",
+      "Don't meter Space Grotesk ni titulares fluidos clamp() en labels, botones o datos del panel.",
+      "Don't repartir el violeta como relleno decorativo en superficies no accionables.",
+      "Don't usar text-gradient fuera del logo/título de marca."
+    ]
+  }
+}

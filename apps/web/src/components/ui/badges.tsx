@@ -1,19 +1,20 @@
 import { cn } from '@/lib/utils'
 import type { IncidenceStatus, IncidenceUrgency } from '@residrix/types'
 
+// Theme-aware: text shades hit AA on the light base (-700) and on dark (-300).
 const urgencyConfig: Record<IncidenceUrgency, { label: string; className: string }> = {
-  critical: { label: 'Crítica',  className: 'bg-red-500/20 text-red-400 border-red-500/30' },
-  high:     { label: 'Alta',     className: 'bg-orange-500/20 text-orange-400 border-orange-500/30' },
-  medium:   { label: 'Media',    className: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' },
-  low:      { label: 'Baja',     className: 'bg-green-500/20 text-green-400 border-green-500/30' },
+  critical: { label: 'Crítica',  className: 'bg-red-500/15 text-red-700 dark:text-red-300 border-red-500/30' },
+  high:     { label: 'Alta',     className: 'bg-orange-500/15 text-orange-700 dark:text-orange-300 border-orange-500/30' },
+  medium:   { label: 'Media',    className: 'bg-yellow-500/15 text-yellow-700 dark:text-yellow-300 border-yellow-500/30' },
+  low:      { label: 'Baja',     className: 'bg-green-500/15 text-green-700 dark:text-green-300 border-green-500/30' },
 }
 
 const statusConfig: Record<IncidenceStatus, { label: string; className: string }> = {
-  open:             { label: 'Abierta',          className: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
-  in_progress:      { label: 'En progreso',      className: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
-  pending_neighbor: { label: 'Pdte. vecino',     className: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' },
-  resolved:         { label: 'Resuelta',         className: 'bg-green-500/20 text-green-400 border-green-500/30' },
-  closed:           { label: 'Cerrada',          className: 'bg-zinc-500/20 text-ink-soft border-zinc-500/30' },
+  open:             { label: 'Abierta',          className: 'bg-blue-500/15 text-blue-700 dark:text-blue-300 border-blue-500/30' },
+  in_progress:      { label: 'En progreso',      className: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30' },
+  pending_neighbor: { label: 'Pdte. vecino',     className: 'bg-yellow-500/15 text-yellow-700 dark:text-yellow-300 border-yellow-500/30' },
+  resolved:         { label: 'Resuelta',         className: 'bg-green-500/15 text-green-700 dark:text-green-300 border-green-500/30' },
+  closed:           { label: 'Cerrada',          className: 'bg-[color:var(--glass-border)] text-ink-soft border-[color:var(--glass-border)]' },
 }
 
 interface BadgeProps {

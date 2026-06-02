@@ -8,6 +8,7 @@ import { es } from 'date-fns/locale'
 import { FileText } from 'lucide-react'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 
 interface Document {
   id: string
@@ -47,6 +48,7 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
   const supabase = createSupabaseBrowserClient()
   const [pending, startTransition] = useTransition()
   const [pendingId, setPendingId] = useState<string | null>(null)
+  const [target, setTarget] = useState<Document | null>(null)
 
   async function download(doc: Document) {
     setPendingId(doc.id)
@@ -61,8 +63,9 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
     window.open(data.signedUrl, '_blank')
   }
 
-  function remove(doc: Document) {
-    if (!confirm(`¿Borrar "${doc.name}"? Esta acción no se puede deshacer.`)) return
+  function handleConfirmedDelete() {
+    const doc = target
+    if (!doc) return
     setPendingId(doc.id)
     startTransition(async () => {
       const [{ error: rowError }, { error: fileError }] = await Promise.all([
@@ -79,6 +82,7 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
       } else {
         toast.success('Documento borrado')
       }
+      setTarget(null)
       router.refresh()
     })
   }
@@ -95,7 +99,8 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
   }
 
   return (
-    <div className="glass rounded-lg overflow-hidden">
+    <>
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg overflow-x-auto">
       <table className="w-full text-sm">
         <thead className="bg-[color:var(--c-surface)] text-ink-faint text-xs uppercase tracking-wide">
           <tr>
@@ -124,9 +129,9 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
                 <td className="px-4 py-3 text-ink-faint text-xs">{formatSize(doc.file_size)}</td>
                 <td className="px-4 py-3 text-xs">
                   {doc.is_public ? (
-                    <span className="text-emerald-400">Vecinos</span>
+                    <span className="text-emerald-700 dark:text-emerald-300">Vecinos</span>
                   ) : (
-                    <span className="text-amber-400">Privado</span>
+                    <span className="text-amber-700 dark:text-amber-300">Privado</span>
                   )}
                 </td>
                 <td className="px-4 py-3 text-ink-faint text-xs">
@@ -139,15 +144,15 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
                     type="button"
                     disabled={isPending}
                     onClick={() => download(doc)}
-                    className="text-violet-400 hover:text-brand-soft disabled:opacity-50"
+                    className="inline-flex items-center min-h-9 px-2 text-brand hover:text-brand-soft disabled:opacity-50"
                   >
                     Ver
                   </button>
                   <button
                     type="button"
                     disabled={isPending}
-                    onClick={() => remove(doc)}
-                    className="text-red-400 hover:text-red-300 disabled:opacity-50"
+                    onClick={() => setTarget(doc)}
+                    className="inline-flex items-center min-h-9 px-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 disabled:opacity-50"
                   >
                     Borrar
                   </button>
@@ -158,5 +163,16 @@ export function DocumentsList({ documents }: { documents: Document[] }) {
         </tbody>
       </table>
     </div>
+    <ConfirmDialog
+      open={!!target}
+      title="Borrar documento"
+      message={`¿Borrar "${target?.name}"? Esta acción no se puede deshacer.`}
+      confirmLabel="Borrar"
+      destructive
+      busy={pending}
+      onConfirm={handleConfirmedDelete}
+      onCancel={() => setTarget(null)}
+    />
+    </>
   )
 }

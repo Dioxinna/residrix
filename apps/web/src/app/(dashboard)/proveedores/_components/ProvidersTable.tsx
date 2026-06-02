@@ -39,7 +39,7 @@ export function ProvidersTable({
 
   if (providers.length === 0) {
     return (
-      <div className="glass rounded-xl px-6 py-16 text-center">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl px-6 py-16 text-center">
         <p className="text-ink-soft text-sm mb-2">Aún no has añadido ningún proveedor.</p>
         <p className="text-ink-faint text-xs">
           Crea al menos uno por tipo y el Agente IA te lo sugerirá cuando llegue una incidencia que encaje.
@@ -49,9 +49,9 @@ export function ProvidersTable({
   }
 
   return (
-    <div className="glass rounded-xl overflow-hidden">
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="glass border-b border-[color:var(--glass-border)]">
+        <thead className="bg-[color:var(--c-surface)] border-b border-[color:var(--glass-border)]">
           <tr className="text-left text-ink-faint text-xs uppercase tracking-wide">
             <th className="px-6 py-3 font-medium">Nombre</th>
             <th className="px-6 py-3 font-medium">Tipo</th>
@@ -62,13 +62,13 @@ export function ProvidersTable({
         </thead>
         <tbody className="divide-y divide-[color:var(--glass-border)]">
           {providers.map((p) => (
-            <tr key={p.id} className="hover:glass">
+            <tr key={p.id} className="hover:bg-[color:var(--glass-border)]">
               <td className="px-6 py-3">
                 <p className="text-ink font-medium">{p.name}</p>
                 {p.contact_name && <p className="text-ink-faint text-xs">{p.contact_name}</p>}
               </td>
               <td className="px-6 py-3">
-                <span className="text-[10px] uppercase tracking-wide font-bold text-brand-soft bg-violet-500/10 border border-violet-500/30 px-1.5 py-0.5 rounded">
+                <span className="text-[10px] uppercase tracking-wide font-bold text-brand bg-brand/10 border border-brand/30 px-1.5 py-0.5 rounded">
                   {typeLabel(p.provider_type)}
                 </span>
               </td>
@@ -89,7 +89,7 @@ export function ProvidersTable({
                   {p.email && (
                     <a
                       href={`mailto:${p.email}`}
-                      className="inline-flex items-center gap-1 bg-violet-500/10 hover:bg-violet-500/20 text-brand-soft text-xs font-medium px-2 py-1 rounded border border-violet-500/30"
+                      className="inline-flex items-center gap-1 bg-brand/10 hover:bg-brand/20 text-brand text-xs font-medium px-2 py-1 rounded border border-brand/30"
                     >
                       <Mail size={12} /> Email
                     </a>
@@ -104,14 +104,14 @@ export function ProvidersTable({
                       <button
                         onClick={() => remove(p.id)}
                         disabled={deleting}
-                        className="text-xs text-red-400 hover:text-red-300 disabled:opacity-50"
+                        className="inline-flex items-center min-h-9 px-2 text-xs text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 disabled:opacity-50"
                       >
                         Confirmar
                       </button>
                       <button
                         onClick={() => setConfirmId(null)}
                         disabled={deleting}
-                        className="text-xs text-ink-faint hover:text-ink-soft"
+                        className="inline-flex items-center min-h-9 px-2 text-xs text-ink-faint hover:text-ink-soft"
                       >
                         Cancelar
                       </button>
@@ -119,7 +119,7 @@ export function ProvidersTable({
                   ) : (
                     <button
                       onClick={() => setConfirmId(p.id)}
-                      className="text-ink-faint hover:text-red-400 transition-colors"
+                      className="inline-flex items-center justify-center min-h-9 min-w-9 text-ink-faint hover:text-red-600 dark:hover:text-red-400 transition-colors"
                       aria-label="Borrar proveedor"
                     >
                       <Trash2 size={14} strokeWidth={1.75} />

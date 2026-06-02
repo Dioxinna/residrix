@@ -59,7 +59,7 @@ export default async function DocumentosPage({ searchParams }: PageProps) {
         <select
           name="community"
           defaultValue={filters.community ?? ''}
-          className="glass rounded px-3 py-2 text-sm text-ink"
+          className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-[color:var(--c-violet)]"
         >
           <option value="">Todas las comunidades</option>
           {(communities ?? []).map((c) => (
@@ -69,7 +69,7 @@ export default async function DocumentosPage({ searchParams }: PageProps) {
         <select
           name="category"
           defaultValue={filters.category ?? ''}
-          className="glass rounded px-3 py-2 text-sm text-ink"
+          className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-[color:var(--c-violet)]"
         >
           <option value="">Todas las categorías</option>
           {CATEGORIES.map((c) => (
@@ -78,7 +78,7 @@ export default async function DocumentosPage({ searchParams }: PageProps) {
         </select>
         <button
           type="submit"
-          className="glass-strong hover:bg-zinc-700 text-ink text-sm px-4 py-2 rounded"
+          className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] hover:bg-[color:var(--glass-border)] text-ink text-sm px-4 py-2 rounded"
         >
           Filtrar
         </button>

@@ -202,6 +202,19 @@ button:not(:disabled),
   .float, .float-slow, .float-delay, .rise { animation: none; }
 }
 
+/* Respect users who opt out of transparency/blur (also a big GPU win on
+   low-end devices): drop backdrop-filter, fall back to solid surfaces,
+   and hide the animated aurora + grain. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .glass-strong {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--c-surface);
+  }
+  .aurora, .aurora::before, .aurora::after, .aurora-cyan, .noise { display: none; }
+  html, body { background: var(--c-base-2); }
+}
+
 /* -------------------------------------------------------------
    GLASS surfaces — heavier frost, visible edges
    ------------------------------------------------------------- */

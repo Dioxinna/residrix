@@ -95,10 +95,10 @@ export default async function MeetingDetailPage({ params }: PageProps) {
 
       {meeting.status === 'failed' && (
         <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 mb-6 flex items-start gap-3">
-          <AlertTriangle className="text-red-400 mt-0.5 flex-shrink-0" size={18} />
+          <AlertTriangle className="text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" size={18} />
           <div className="flex-1 min-w-0">
             <p className="text-sm text-red-700 dark:text-red-300 font-medium mb-0.5">Falló el procesamiento</p>
-            <p className="text-xs text-red-400/80 break-words">
+            <p className="text-xs text-red-700/80 dark:text-red-400/80 break-words">
               {meeting.error_message ?? 'Error desconocido'}
             </p>
           </div>
@@ -114,15 +114,15 @@ export default async function MeetingDetailPage({ params }: PageProps) {
       )}
 
       {meeting.summary && (
-        <section className="glass rounded-xl p-6 mb-6">
+        <section className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-6 mb-6">
           <p className="text-xs uppercase tracking-wide text-ink-faint mb-3 font-semibold">Acta resumida</p>
           <MarkdownSummary text={meeting.summary} />
         </section>
       )}
 
       {meeting.transcript && (
-        <details className="glass rounded-xl">
-          <summary className="cursor-pointer px-6 py-4 text-sm text-ink-soft font-medium hover:glass">
+        <details className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl">
+          <summary className="cursor-pointer px-6 py-4 text-sm text-ink-soft font-medium hover:bg-[color:var(--glass-border)]">
             Transcripción completa
           </summary>
           <div className="px-6 pb-6 pt-2 text-sm text-ink-soft whitespace-pre-wrap leading-relaxed">
@@ -132,7 +132,7 @@ export default async function MeetingDetailPage({ params }: PageProps) {
       )}
 
       {!meeting.transcript && !meeting.summary && (
-        <div className="glass rounded-xl px-6 py-16 text-center">
+        <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl px-6 py-16 text-center">
           <p className="text-ink-soft text-sm">
             {meeting.status === 'failed'
               ? 'No se pudo procesar el audio.'

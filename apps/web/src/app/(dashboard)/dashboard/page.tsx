@@ -28,10 +28,10 @@ export default async function DashboardPage() {
   ])
 
   const stats = [
-    { label: 'Incidencias abiertas', value: openResult.count ?? 0,      color: 'text-blue-400' },
-    { label: 'Críticas activas',     value: criticalResult.count ?? 0,  color: 'text-red-400' },
-    { label: 'Comunidades',          value: communitiesResult.count ?? 0, color: 'text-violet-400' },
-    { label: 'Resueltas este mes',   value: resolvedResult.count ?? 0,  color: 'text-green-400' },
+    { label: 'Incidencias abiertas', value: openResult.count ?? 0,      color: 'text-blue-600 dark:text-blue-400' },
+    { label: 'Críticas activas',     value: criticalResult.count ?? 0,  color: 'text-red-600 dark:text-red-400' },
+    { label: 'Comunidades',          value: communitiesResult.count ?? 0, color: 'text-brand' },
+    { label: 'Resueltas este mes',   value: resolvedResult.count ?? 0,  color: 'text-green-600 dark:text-green-400' },
   ]
 
   const recent = recentResult.data ?? []
@@ -53,19 +53,21 @@ export default async function DashboardPage() {
         hasAnnouncement={hasAnnouncement}
       />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {stats.map(({ label, value, color }) => (
-          <div key={label} className="glass rounded-xl p-5">
-            <p className="text-ink-soft text-sm">{label}</p>
-            <p className={`text-3xl font-bold mt-1 ${color}`}>{value}</p>
-          </div>
-        ))}
+      <div className="mb-8 overflow-hidden rounded-xl border border-[color:var(--glass-border)] bg-[color:var(--c-surface)]">
+        <div className="grid grid-cols-2 divide-x divide-y divide-[color:var(--glass-border)] lg:grid-cols-4 lg:divide-y-0">
+          {stats.map(({ label, value, color }) => (
+            <div key={label} className="flex items-baseline justify-between gap-3 px-5 py-4">
+              <span className="text-ink-soft text-sm">{label}</span>
+              <span className={`text-2xl font-semibold tabular-nums ${color}`}>{value}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="glass rounded-xl">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl">
         <div className="px-6 py-4 border-b border-[color:var(--glass-border)] flex items-center justify-between">
           <h2 className="text-ink font-semibold text-sm">Últimas incidencias</h2>
-          <Link href="/incidencias" className="text-violet-400 text-xs hover:text-brand-soft transition-colors">
+          <Link href="/incidencias" className="text-brand text-xs hover:text-brand-soft transition-colors">
             Ver todas →
           </Link>
         </div>
@@ -74,7 +76,7 @@ export default async function DashboardPage() {
             <p className="px-6 py-8 text-center text-ink-faint text-sm">No hay incidencias aún</p>
           )}
           {recent.map((inc) => (
-            <Link key={inc.id} href={`/incidencias/${inc.id}`} className="flex items-center gap-4 px-6 py-4 hover:glass transition-colors">
+            <Link key={inc.id} href={`/incidencias/${inc.id}`} className="flex items-center gap-4 px-6 py-4 hover:bg-[color:var(--glass-border)] transition-colors">
               <div className="flex-1 min-w-0">
                 <p className="text-ink text-sm font-medium truncate">{inc.title}</p>
                 <p className="text-ink-faint text-xs mt-0.5">

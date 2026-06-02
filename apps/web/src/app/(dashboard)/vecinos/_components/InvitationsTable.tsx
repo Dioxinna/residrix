@@ -31,7 +31,7 @@ export function InvitationsTable({ invitations }: { invitations: Invitation[] })
   }
 
   return (
-    <div className="glass rounded-lg overflow-hidden">
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg overflow-x-auto">
       <table className="w-full text-sm">
         <thead className="bg-[color:var(--c-surface)] text-ink-faint text-xs uppercase tracking-wide">
           <tr>
@@ -48,10 +48,10 @@ export function InvitationsTable({ invitations }: { invitations: Invitation[] })
             const expired = !used && inv.expires_at && new Date(inv.expires_at) < new Date()
             const statusLabel = used ? 'Usada' : expired ? 'Caducada' : 'Pendiente'
             const statusColor = used
-              ? 'text-emerald-400 bg-emerald-500/10'
+              ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-500/10'
               : expired
-              ? 'text-ink-faint bg-zinc-500/10'
-              : 'text-amber-400 bg-amber-500/10'
+              ? 'text-ink-faint bg-[color:var(--glass-border)]'
+              : 'text-amber-700 dark:text-amber-300 bg-amber-500/10'
             return (
               <tr key={inv.id} className="text-ink-soft">
                 <td className="px-4 py-3">{inv.email ?? '—'}</td>

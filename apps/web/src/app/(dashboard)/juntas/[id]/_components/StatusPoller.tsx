@@ -24,9 +24,9 @@ export function StatusPoller({ status }: { status: string }) {
 
   return (
     <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-3 mb-6 flex items-center gap-3">
-      <Loader2 size={16} className="text-violet-400 animate-spin flex-shrink-0" />
-      <p className="text-sm text-brand-soft">{msg}</p>
-      <span className="ml-auto text-xs text-brand-soft/60">refresca cada 3s</span>
+      <Loader2 size={16} className="text-brand animate-spin flex-shrink-0" />
+      <p className="text-sm text-brand">{msg}</p>
+      <span className="ml-auto text-xs text-ink-faint">refresca cada 3s</span>
     </div>
   )
 }

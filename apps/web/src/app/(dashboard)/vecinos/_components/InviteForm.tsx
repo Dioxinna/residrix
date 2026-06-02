@@ -53,19 +53,19 @@ export function InviteForm({ communities }: { communities: Community[] }) {
 
   if (communities.length === 0) {
     return (
-      <div className="glass rounded-lg p-4 text-sm text-ink-soft">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg p-4 text-sm text-ink-soft">
         Crea primero una comunidad para poder invitar vecinos.
       </div>
     )
   }
 
   return (
-    <form onSubmit={submit} className="glass rounded-lg p-4 grid grid-cols-1 md:grid-cols-5 gap-3">
+    <form onSubmit={submit} className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg p-4 grid grid-cols-1 md:grid-cols-5 gap-3">
       <Field label="Comunidad" className="md:col-span-2">
         <select
           value={communityId}
           onChange={(e) => setCommunityId(e.target.value)}
-          className="w-full glass rounded px-3 py-2 text-sm text-ink"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-violet-500"
         >
           {communities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
@@ -80,7 +80,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="vecino@ejemplo.com"
-          className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500"
         />
       </Field>
 
@@ -90,7 +90,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           placeholder="María García"
-          className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500"
         />
       </Field>
 
@@ -101,7 +101,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
           value={unitNumber}
           onChange={(e) => setUnitNumber(e.target.value)}
           placeholder="3ºB"
-          className="w-full glass rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:ring-2 focus:ring-violet-500"
         />
       </Field>
 
@@ -109,7 +109,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
         <select
           value={role}
           onChange={(e) => setRole(e.target.value as 'neighbor' | 'tenant' | 'president')}
-          className="w-full glass rounded px-3 py-2 text-sm text-ink"
+          className="w-full bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-violet-500"
         >
           <option value="neighbor">Vecino</option>
           <option value="tenant">Inquilino</option>
@@ -121,7 +121,7 @@ export function InviteForm({ communities }: { communities: Community[] }) {
         <button
           type="submit"
           disabled={pending}
-          className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
+          className="bg-brand hover:bg-brand-soft disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded"
         >
           {pending ? 'Enviando…' : 'Enviar invitación'}
         </button>

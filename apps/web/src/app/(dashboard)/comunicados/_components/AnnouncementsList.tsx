@@ -8,6 +8,7 @@ import { es } from 'date-fns/locale'
 import { Megaphone } from 'lucide-react'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 
 interface Announcement {
   id: string
@@ -52,14 +53,17 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
   const router = useRouter()
   const supabase = createSupabaseBrowserClient()
   const [pendingId, setPendingId] = useState<string | null>(null)
+  const [target, setTarget] = useState<Announcement | null>(null)
   const [, startTransition] = useTransition()
 
-  function remove(ann: Announcement) {
-    if (!confirm(`¿Borrar el comunicado "${ann.title}"?`)) return
+  function confirmDelete() {
+    if (!target) return
+    const ann = target
     setPendingId(ann.id)
     startTransition(async () => {
       const { error } = await supabase.from('announcements').delete().eq('id', ann.id)
       setPendingId(null)
+      setTarget(null)
       if (error) {
         toast.error(`No se pudo borrar: ${error.message}`)
         return
@@ -87,7 +91,7 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
         return (
           <article
             key={ann.id}
-            className="relative glass rounded-lg overflow-hidden"
+            className="relative bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg overflow-hidden"
           >
             <div className={`absolute left-0 top-0 bottom-0 w-1 ${styles.bar}`} />
             <div className="pl-5 pr-4 py-4">
@@ -103,9 +107,9 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
                 </div>
                 <button
                   type="button"
-                  onClick={() => remove(ann)}
+                  onClick={() => setTarget(ann)}
                   disabled={pendingId === ann.id}
-                  className="text-red-400 hover:text-red-300 text-sm disabled:opacity-50"
+                  className="inline-flex items-center min-h-9 px-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 text-sm disabled:opacity-50"
                 >
                   Borrar
                 </button>
@@ -121,6 +125,17 @@ export function AnnouncementsList({ announcements }: { announcements: Announceme
           </article>
         )
       })}
+
+      <ConfirmDialog
+        open={!!target}
+        title="Borrar comunicado"
+        message={target ? `¿Borrar el comunicado "${target.title}"?` : ''}
+        confirmLabel="Borrar"
+        destructive
+        busy={!!target && pendingId === target.id}
+        onConfirm={confirmDelete}
+        onCancel={() => setTarget(null)}
+      />
     </div>
   )
 }

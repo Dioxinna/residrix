@@ -7,6 +7,7 @@ import { Building2 } from 'lucide-react'
 import { CommunityDialog, type CommunityRow } from './CommunityDialog'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 
 interface CommunityWithStats extends CommunityRow {
   created_at: string | null
@@ -27,20 +28,25 @@ export function CommunitiesTable({
   const router = useRouter()
   const supabase = createSupabaseBrowserClient()
   const [pendingId, setPendingId] = useState<string | null>(null)
+  const [target, setTarget] = useState<CommunityWithStats | null>(null)
   const [, startTransition] = useTransition()
 
-  function remove(c: CommunityWithStats) {
+  function buildMessage(c: CommunityWithStats) {
     const impactParts = []
     if (c.stats.vecinos > 0) impactParts.push(`${c.stats.vecinos} vecino(s) quedarán huérfanos`)
     if (c.stats.incidencesTotal > 0) impactParts.push(`${c.stats.incidencesTotal} incidencia(s) se borrarán`)
     const impact = impactParts.length > 0 ? `\n\nIMPACTO:\n• ${impactParts.join('\n• ')}\n• Todos los comunicados y documentos asociados se borrarán también` : ''
+    return `¿Borrar "${c.name}"? Esta acción NO se puede deshacer.${impact}`
+  }
 
-    if (!confirm(`¿Borrar "${c.name}"? Esta acción NO se puede deshacer.${impact}`)) return
-
+  function confirmDelete() {
+    if (!target) return
+    const c = target
     setPendingId(c.id)
     startTransition(async () => {
       const { error } = await supabase.from('communities').delete().eq('id', c.id)
       setPendingId(null)
+      setTarget(null)
       if (error) {
         toast.error(`No se pudo borrar: ${error.message}`)
         return
@@ -62,7 +68,7 @@ export function CommunitiesTable({
   }
 
   return (
-    <div className="glass rounded-lg overflow-hidden">
+    <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-lg overflow-x-auto">
       <table className="w-full text-sm">
         <thead className="bg-[color:var(--c-surface)] text-ink-faint text-xs uppercase tracking-wide">
           <tr>
@@ -90,27 +96,40 @@ export function CommunitiesTable({
                   <span className="text-ink">{c.stats.incidencesOpen}</span>
                   <span className="text-ink-faint"> / {c.stats.incidencesTotal}</span>
                 </td>
-                <td className="px-4 py-3 text-right space-x-3">
-                  <CommunityDialog
-                    mode="edit"
-                    community={c}
-                    firmId={firmId}
-                    trigger="Editar"
-                  />
-                  <button
-                    type="button"
-                    disabled={isPending}
-                    onClick={() => remove(c)}
-                    className="text-red-400 hover:text-red-300 text-sm disabled:opacity-50"
-                  >
-                    Borrar
-                  </button>
+                <td className="px-4 py-3 text-right">
+                  <div className="inline-flex items-center gap-2">
+                    <CommunityDialog
+                      mode="edit"
+                      community={c}
+                      firmId={firmId}
+                      trigger="Editar"
+                    />
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => setTarget(c)}
+                      className="inline-flex items-center min-h-9 px-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 text-sm disabled:opacity-50"
+                    >
+                      Borrar
+                    </button>
+                  </div>
                 </td>
               </tr>
             )
           })}
         </tbody>
       </table>
+
+      <ConfirmDialog
+        open={!!target}
+        title="Borrar comunidad"
+        message={target ? buildMessage(target) : ''}
+        confirmLabel="Borrar"
+        destructive
+        busy={!!target && pendingId === target.id}
+        onConfirm={confirmDelete}
+        onCancel={() => setTarget(null)}
+      />
     </div>
   )
 }

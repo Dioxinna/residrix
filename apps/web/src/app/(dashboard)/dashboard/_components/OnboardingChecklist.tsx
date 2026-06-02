@@ -71,10 +71,10 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
   const next = steps.find((s) => !s.done)
 
   return (
-    <section className="mb-8 glass rounded-[var(--radius-glass)] p-6 relative overflow-hidden">
+    <section className="mb-8 bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-[var(--radius-glass)] p-6 relative overflow-hidden">
       <div
         className="absolute inset-0 -z-10 opacity-70"
-        style={{ background: 'radial-gradient(120% 100% at 0% 0%, rgba(99,102,241,0.14), transparent 55%)' }}
+        style={{ background: 'radial-gradient(120% 100% at 0% 0%, rgba(124,58,237,0.14), transparent 55%)' }}
         aria-hidden
       />
       <div className="flex items-start justify-between mb-4">
@@ -134,9 +134,9 @@ export function OnboardingChecklist({ hasCommunity, hasInvitation, hasAnnounceme
               {!step.done && (
                 <Link
                   href={step.href}
-                  className={`flex-shrink-0 text-sm font-medium px-3 py-1.5 rounded flex items-center gap-1.5 ${
+                  className={`flex-shrink-0 text-sm font-medium px-3 py-2 rounded-full flex items-center gap-1.5 ${
                     isNext
-                      ? 'bg-violet-600 hover:bg-violet-500 text-white'
+                      ? 'bg-brand hover:bg-brand-soft text-white'
                       : 'text-ink-soft hover:text-ink border border-[color:var(--glass-border)] hover:border-[color:var(--glass-border)]'
                   }`}
                 >

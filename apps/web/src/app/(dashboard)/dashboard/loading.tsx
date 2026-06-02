@@ -5,7 +5,7 @@ export default function Loading() {
     <div className="p-8">
       <PageHeaderSkeleton />
       <StatsSkeleton />
-      <div className="glass rounded-xl">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl">
         <div className="px-6 py-4 border-b border-[color:var(--glass-border)]">
           <Skeleton className="h-4 w-40" />
         </div>

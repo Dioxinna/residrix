@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
       <PageHeaderSkeleton />
-      <div className="glass rounded-xl p-6 mb-8">
+      <div className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-6 mb-8">
         <Skeleton className="h-3 w-32 mb-3" />
         <Skeleton className="h-5 w-48 mb-6" />
         <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[color:var(--glass-border)]">
@@ -18,7 +18,7 @@ export default function Loading() {
       </div>
       <div className="grid md:grid-cols-3 gap-4">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="glass rounded-xl p-5">
+          <div key={i} className="bg-[color:var(--c-surface)] border border-[color:var(--glass-border)] rounded-xl p-5">
             <Skeleton className="h-5 w-24 mb-2" />
             <Skeleton className="h-3 w-32 mb-4" />
             <Skeleton className="h-8 w-20 mb-5" />

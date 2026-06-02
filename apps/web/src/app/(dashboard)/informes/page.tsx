@@ -51,7 +51,7 @@ export default async function InformesPage() {
         </p>
         <Link
           href="/comunidades"
-          className="inline-block bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-4 py-2 rounded"
+          className="inline-block bg-brand hover:bg-brand-soft text-white text-sm font-medium px-4 py-2 rounded"
         >
           Ir a Comunidades →
         </Link>
@@ -63,7 +63,7 @@ export default async function InformesPage() {
     <div className="max-w-3xl mx-auto px-6 py-10">
       <div className="flex items-center gap-3 mb-2">
         <div className="w-9 h-9 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center">
-          <BarChart3 size={18} className="text-amber-400" strokeWidth={1.75} />
+          <BarChart3 size={18} className="text-amber-600 dark:text-amber-400" strokeWidth={1.75} />
         </div>
         <h1 className="text-2xl font-semibold text-ink">Informes mensuales</h1>
       </div>
